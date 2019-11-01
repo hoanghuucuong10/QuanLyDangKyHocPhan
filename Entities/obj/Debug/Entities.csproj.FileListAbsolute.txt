@@ -1,0 +1,14 @@
+C:\Users\Admin\Desktop\PhatTrienUngDung\DoAn\PhatTrienUngDung\Entities\bin\Debug\Entities.dll
+C:\Users\Admin\Desktop\PhatTrienUngDung\DoAn\PhatTrienUngDung\Entities\bin\Debug\Entities.pdb
+C:\Users\Admin\Desktop\PhatTrienUngDung\DoAn\PhatTrienUngDung\Entities\obj\Debug\Entities.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\PhatTrienUngDung\DoAn\PhatTrienUngDung\Entities\obj\Debug\Entities.dll
+C:\Users\Admin\Desktop\PhatTrienUngDung\DoAn\PhatTrienUngDung\Entities\obj\Debug\Entities.pdb
+C:\Users\Admin\Desktop\PhatTrienUngDung\PhatTrienUngDung\Entities\bin\Debug\Entities.dll
+C:\Users\Admin\Desktop\PhatTrienUngDung\PhatTrienUngDung\Entities\bin\Debug\Entities.pdb
+C:\Users\Admin\Desktop\PhatTrienUngDung\PhatTrienUngDung\Entities\obj\Debug\Entities.dll
+C:\Users\Admin\Desktop\PhatTrienUngDung\PhatTrienUngDung\Entities\obj\Debug\Entities.pdb
+C:\Users\Admin\Desktop\PhatTrienUngDung\PhatTrienUngDung\Entities\obj\Debug\Entities.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\PhatTrienUngDung\DoAn\DoAnPTUD_UngDungQuanLyDangKyHocPhan\Entities\bin\Debug\Entities.dll
+C:\Users\Admin\Desktop\PhatTrienUngDung\DoAn\DoAnPTUD_UngDungQuanLyDangKyHocPhan\Entities\bin\Debug\Entities.pdb
+C:\Users\Admin\Desktop\PhatTrienUngDung\DoAn\DoAnPTUD_UngDungQuanLyDangKyHocPhan\Entities\obj\Debug\Entities.dll
+C:\Users\Admin\Desktop\PhatTrienUngDung\DoAn\DoAnPTUD_UngDungQuanLyDangKyHocPhan\Entities\obj\Debug\Entities.pdb
