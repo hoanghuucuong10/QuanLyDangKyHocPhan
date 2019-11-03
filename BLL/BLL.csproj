@@ -52,11 +52,13 @@
     <Compile Include="DiemBLL.cs" />
     <Compile Include="GiangVienBLL.cs" />
     <Compile Include="HocPhanBLL.cs" />
+    <Compile Include="LichHocBLL.cs" />
     <Compile Include="LoginBLL.cs" />
     <Compile Include="LopHocPhanBLL.cs" />
     <Compile Include="LopNienCheBLL.cs" />
     <Compile Include="NhanVienBLL.cs" />
     <Compile Include="NhomThucHanhBLL.cs" />
+    <Compile Include="NienKhoaBLL.cs" />
     <Compile Include="PhongHocBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SinhVienBLL.cs" />

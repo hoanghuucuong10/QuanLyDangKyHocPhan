@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DangKyHocPhanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DangKyHocPhanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DangKyHocPhan">
           <Key>
             <PropertyRef Name="ID_SinhVien" />
@@ -48,22 +48,15 @@
           <Property Name="TenMonHoc" Type="nvarchar" MaxLength="50" />
           <Property Name="SoTC" Type="int" />
         </EntityType>
-        <EntityType Name="LichHoc">
-          <Key>
-            <PropertyRef Name="ID_LichHoc" />
-          </Key>
-          <Property Name="ID_LichHoc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NgayHoc" Type="nvarchar" MaxLength="20" />
-          <Property Name="TietHoc" Type="nchar" MaxLength="20" />
-          <Property Name="ID_PhongHoc" Type="nchar" MaxLength="10" />
-        </EntityType>
         <EntityType Name="LichHoc_LopHocPhan">
           <Key>
             <PropertyRef Name="ID_LichHoc_LopHP" />
           </Key>
           <Property Name="ID_LichHoc_LopHP" Type="int" Nullable="false" />
           <Property Name="ID_LopHocPhan" Type="nchar" MaxLength="10" />
-          <Property Name="ID_LichHoc" Type="int" />
+          <Property Name="NgayHoc" Type="nvarchar" MaxLength="30" />
+          <Property Name="TietHoc" Type="nvarchar" MaxLength="30" />
+          <Property Name="ID_PhongHoc" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="LichHoc_NhomThucHanh">
           <Key>
@@ -71,7 +64,9 @@
           </Key>
           <Property Name="ID_LichHoc_NhomTH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_NhomThucHanh" Type="nchar" MaxLength="10" />
-          <Property Name="ID_LichHoc" Type="int" />
+          <Property Name="NgayHoc" Type="nvarchar" MaxLength="30" />
+          <Property Name="TietHoc" Type="nvarchar" MaxLength="30" />
+          <Property Name="ID_PhongHoc" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="LopHocPhan">
           <Key>
@@ -83,6 +78,7 @@
           <Property Name="ID_GiangVien" Type="nchar" MaxLength="10" />
           <Property Name="ID_NienKhoa" Type="int" />
           <Property Name="HocKy" Type="int" />
+          <Property Name="SoLuong" Type="int" />
           <Property Name="TrangThai" Type="nchar" MaxLength="40" />
           <Property Name="SoTiet" Type="int" />
           <Property Name="NgayBatDau" Type="date" />
@@ -118,6 +114,7 @@
           <Property Name="ID_LopHocPhan" Type="nchar" MaxLength="10" />
           <Property Name="ID_GiangVien" Type="nchar" MaxLength="10" />
           <Property Name="TenNhom" Type="nchar" MaxLength="10" />
+          <Property Name="SoLuong" Type="int" />
           <Property Name="SoTiet" Type="int" />
           <Property Name="NgayBatDau" Type="date" />
           <Property Name="NgayKetThuc" Type="date" />
@@ -209,18 +206,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LichHoc_LopHocPhan_LichHoc">
-          <End Role="LichHoc" Type="Self.LichHoc" Multiplicity="0..1" />
-          <End Role="LichHoc_LopHocPhan" Type="Self.LichHoc_LopHocPhan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LichHoc">
-              <PropertyRef Name="ID_LichHoc" />
-            </Principal>
-            <Dependent Role="LichHoc_LopHocPhan">
-              <PropertyRef Name="ID_LichHoc" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LichHoc_LopHocPhan_LopHocPhan">
           <End Role="LopHocPhan" Type="Self.LopHocPhan" Multiplicity="0..1" />
           <End Role="LichHoc_LopHocPhan" Type="Self.LichHoc_LopHocPhan" Multiplicity="*" />
@@ -233,15 +218,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LichHoc_NhomThucHanh_LichHoc">
-          <End Role="LichHoc" Type="Self.LichHoc" Multiplicity="0..1" />
-          <End Role="LichHoc_NhomThucHanh" Type="Self.LichHoc_NhomThucHanh" Multiplicity="*" />
+        <Association Name="FK_LichHoc_LopHocPhan_PhongHoc">
+          <End Role="PhongHoc" Type="Self.PhongHoc" Multiplicity="0..1" />
+          <End Role="LichHoc_LopHocPhan" Type="Self.LichHoc_LopHocPhan" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="LichHoc">
-              <PropertyRef Name="ID_LichHoc" />
+            <Principal Role="PhongHoc">
+              <PropertyRef Name="ID_PhongHoc" />
             </Principal>
-            <Dependent Role="LichHoc_NhomThucHanh">
-              <PropertyRef Name="ID_LichHoc" />
+            <Dependent Role="LichHoc_LopHocPhan">
+              <PropertyRef Name="ID_PhongHoc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -257,14 +242,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LichHoc_PhongHoc">
+        <Association Name="FK_LichHoc_NhomThucHanh_PhongHoc">
           <End Role="PhongHoc" Type="Self.PhongHoc" Multiplicity="0..1" />
-          <End Role="LichHoc" Type="Self.LichHoc" Multiplicity="*" />
+          <End Role="LichHoc_NhomThucHanh" Type="Self.LichHoc_NhomThucHanh" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PhongHoc">
               <PropertyRef Name="ID_PhongHoc" />
             </Principal>
-            <Dependent Role="LichHoc">
+            <Dependent Role="LichHoc_NhomThucHanh">
               <PropertyRef Name="ID_PhongHoc" />
             </Dependent>
           </ReferentialConstraint>
@@ -370,7 +355,6 @@
           <EntitySet Name="Diem" EntityType="Self.Diem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GiangVien" EntityType="Self.GiangVien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HocPhan" EntityType="Self.HocPhan" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LichHoc" EntityType="Self.LichHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LichHoc_LopHocPhan" EntityType="Self.LichHoc_LopHocPhan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LichHoc_NhomThucHanh" EntityType="Self.LichHoc_NhomThucHanh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LopHocPhan" EntityType="Self.LopHocPhan" Schema="dbo" store:Type="Tables" />
@@ -400,25 +384,21 @@
             <End Role="SinhVien" EntitySet="SinhVien" />
             <End Role="Diem" EntitySet="Diem" />
           </AssociationSet>
-          <AssociationSet Name="FK_LichHoc_LopHocPhan_LichHoc" Association="Self.FK_LichHoc_LopHocPhan_LichHoc">
-            <End Role="LichHoc" EntitySet="LichHoc" />
-            <End Role="LichHoc_LopHocPhan" EntitySet="LichHoc_LopHocPhan" />
-          </AssociationSet>
           <AssociationSet Name="FK_LichHoc_LopHocPhan_LopHocPhan" Association="Self.FK_LichHoc_LopHocPhan_LopHocPhan">
             <End Role="LopHocPhan" EntitySet="LopHocPhan" />
             <End Role="LichHoc_LopHocPhan" EntitySet="LichHoc_LopHocPhan" />
           </AssociationSet>
-          <AssociationSet Name="FK_LichHoc_NhomThucHanh_LichHoc" Association="Self.FK_LichHoc_NhomThucHanh_LichHoc">
-            <End Role="LichHoc" EntitySet="LichHoc" />
-            <End Role="LichHoc_NhomThucHanh" EntitySet="LichHoc_NhomThucHanh" />
+          <AssociationSet Name="FK_LichHoc_LopHocPhan_PhongHoc" Association="Self.FK_LichHoc_LopHocPhan_PhongHoc">
+            <End Role="PhongHoc" EntitySet="PhongHoc" />
+            <End Role="LichHoc_LopHocPhan" EntitySet="LichHoc_LopHocPhan" />
           </AssociationSet>
           <AssociationSet Name="FK_LichHoc_NhomThucHanh_NhomThucHanh" Association="Self.FK_LichHoc_NhomThucHanh_NhomThucHanh">
             <End Role="NhomThucHanh" EntitySet="NhomThucHanh" />
             <End Role="LichHoc_NhomThucHanh" EntitySet="LichHoc_NhomThucHanh" />
           </AssociationSet>
-          <AssociationSet Name="FK_LichHoc_PhongHoc" Association="Self.FK_LichHoc_PhongHoc">
+          <AssociationSet Name="FK_LichHoc_NhomThucHanh_PhongHoc" Association="Self.FK_LichHoc_NhomThucHanh_PhongHoc">
             <End Role="PhongHoc" EntitySet="PhongHoc" />
-            <End Role="LichHoc" EntitySet="LichHoc" />
+            <End Role="LichHoc_NhomThucHanh" EntitySet="LichHoc_NhomThucHanh" />
           </AssociationSet>
           <AssociationSet Name="FK_LopHocPhan_GiangVien" Association="Self.FK_LopHocPhan_GiangVien">
             <End Role="GiangVien" EntitySet="GiangVien" />
@@ -453,8 +433,7 @@
             <End Role="SinhVien" EntitySet="SinhVien" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DangKyHocPhanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -510,27 +489,17 @@
           <Property Name="SoTC" Type="Int32" />
           <NavigationProperty Name="LopHocPhans" Relationship="Self.FK_LopHocPhan_HocPhan" FromRole="HocPhan" ToRole="LopHocPhan" />
         </EntityType>
-        <EntityType Name="LichHoc">
-          <Key>
-            <PropertyRef Name="ID_LichHoc" />
-          </Key>
-          <Property Name="ID_LichHoc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NgayHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TietHoc" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="ID_PhongHoc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="LichHoc_LopHocPhan" Relationship="Self.FK_LichHoc_LopHocPhan_LichHoc" FromRole="LichHoc" ToRole="LichHoc_LopHocPhan" />
-          <NavigationProperty Name="LichHoc_NhomThucHanh" Relationship="Self.FK_LichHoc_NhomThucHanh_LichHoc" FromRole="LichHoc" ToRole="LichHoc_NhomThucHanh" />
-          <NavigationProperty Name="PhongHoc" Relationship="Self.FK_LichHoc_PhongHoc" FromRole="LichHoc" ToRole="PhongHoc" />
-        </EntityType>
         <EntityType Name="LichHoc_LopHocPhan">
           <Key>
             <PropertyRef Name="ID_LichHoc_LopHP" />
           </Key>
           <Property Name="ID_LichHoc_LopHP" Type="Int32" Nullable="false" />
           <Property Name="ID_LopHocPhan" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ID_LichHoc" Type="Int32" />
-          <NavigationProperty Name="LichHoc" Relationship="Self.FK_LichHoc_LopHocPhan_LichHoc" FromRole="LichHoc_LopHocPhan" ToRole="LichHoc" />
+          <Property Name="NgayHoc" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="TietHoc" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ID_PhongHoc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="LopHocPhan" Relationship="Self.FK_LichHoc_LopHocPhan_LopHocPhan" FromRole="LichHoc_LopHocPhan" ToRole="LopHocPhan" />
+          <NavigationProperty Name="PhongHoc" Relationship="Self.FK_LichHoc_LopHocPhan_PhongHoc" FromRole="LichHoc_LopHocPhan" ToRole="PhongHoc" />
         </EntityType>
         <EntityType Name="LichHoc_NhomThucHanh">
           <Key>
@@ -538,9 +507,11 @@
           </Key>
           <Property Name="ID_LichHoc_NhomTH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_NhomThucHanh" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ID_LichHoc" Type="Int32" />
-          <NavigationProperty Name="LichHoc" Relationship="Self.FK_LichHoc_NhomThucHanh_LichHoc" FromRole="LichHoc_NhomThucHanh" ToRole="LichHoc" />
+          <Property Name="NgayHoc" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="TietHoc" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ID_PhongHoc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="NhomThucHanh" Relationship="Self.FK_LichHoc_NhomThucHanh_NhomThucHanh" FromRole="LichHoc_NhomThucHanh" ToRole="NhomThucHanh" />
+          <NavigationProperty Name="PhongHoc" Relationship="Self.FK_LichHoc_NhomThucHanh_PhongHoc" FromRole="LichHoc_NhomThucHanh" ToRole="PhongHoc" />
         </EntityType>
         <EntityType Name="LopHocPhan">
           <Key>
@@ -564,6 +535,7 @@
           <NavigationProperty Name="NhanVienPDT" Relationship="Self.FK_LopHocPhan_NhanVienPDT" FromRole="LopHocPhan" ToRole="NhanVienPDT" />
           <NavigationProperty Name="NienKhoa" Relationship="Self.FK_LopHocPhan_NienKhoa" FromRole="LopHocPhan" ToRole="NienKhoa" />
           <NavigationProperty Name="NhomThucHanhs" Relationship="Self.FK_NhomThucHanh_LopHocPhan" FromRole="LopHocPhan" ToRole="NhomThucHanh" />
+          <Property Name="SoLuong" Type="Int32" />
         </EntityType>
         <EntityType Name="LopNienChe">
           <Key>
@@ -605,6 +577,7 @@
           <NavigationProperty Name="GiangVien" Relationship="Self.FK_NhomThucHanh_GiangVien" FromRole="NhomThucHanh" ToRole="GiangVien" />
           <NavigationProperty Name="LichHoc_NhomThucHanh" Relationship="Self.FK_LichHoc_NhomThucHanh_NhomThucHanh" FromRole="NhomThucHanh" ToRole="LichHoc_NhomThucHanh" />
           <NavigationProperty Name="LopHocPhan" Relationship="Self.FK_NhomThucHanh_LopHocPhan" FromRole="NhomThucHanh" ToRole="LopHocPhan" />
+          <Property Name="SoLuong" Type="Int32" />
         </EntityType>
         <EntityType Name="NienKhoa">
           <Key>
@@ -620,7 +593,8 @@
           </Key>
           <Property Name="ID_PhongHoc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="TenPhongHoc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="LichHocs" Relationship="Self.FK_LichHoc_PhongHoc" FromRole="PhongHoc" ToRole="LichHoc" />
+          <NavigationProperty Name="LichHoc_LopHocPhan" Relationship="Self.FK_LichHoc_LopHocPhan_PhongHoc" FromRole="PhongHoc" ToRole="LichHoc_LopHocPhan" />
+          <NavigationProperty Name="LichHoc_NhomThucHanh" Relationship="Self.FK_LichHoc_NhomThucHanh_PhongHoc" FromRole="PhongHoc" ToRole="LichHoc_NhomThucHanh" />
         </EntityType>
         <EntityType Name="SinhVien">
           <Key>
@@ -746,42 +720,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LichHoc_LopHocPhan_LichHoc">
-          <End Role="LichHoc" Type="Self.LichHoc" Multiplicity="0..1" />
-          <End Role="LichHoc_LopHocPhan" Type="Self.LichHoc_LopHocPhan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LichHoc">
-              <PropertyRef Name="ID_LichHoc" />
-            </Principal>
-            <Dependent Role="LichHoc_LopHocPhan">
-              <PropertyRef Name="ID_LichHoc" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LichHoc_NhomThucHanh_LichHoc">
-          <End Role="LichHoc" Type="Self.LichHoc" Multiplicity="0..1" />
-          <End Role="LichHoc_NhomThucHanh" Type="Self.LichHoc_NhomThucHanh" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LichHoc">
-              <PropertyRef Name="ID_LichHoc" />
-            </Principal>
-            <Dependent Role="LichHoc_NhomThucHanh">
-              <PropertyRef Name="ID_LichHoc" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LichHoc_PhongHoc">
-          <End Role="PhongHoc" Type="Self.PhongHoc" Multiplicity="0..1" />
-          <End Role="LichHoc" Type="Self.LichHoc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PhongHoc">
-              <PropertyRef Name="ID_PhongHoc" />
-            </Principal>
-            <Dependent Role="LichHoc">
-              <PropertyRef Name="ID_PhongHoc" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LichHoc_LopHocPhan_LopHocPhan">
           <End Role="LopHocPhan" Type="Self.LopHocPhan" Multiplicity="0..1" />
           <End Role="LichHoc_LopHocPhan" Type="Self.LichHoc_LopHocPhan" Multiplicity="*" />
@@ -794,6 +732,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LichHoc_LopHocPhan_PhongHoc">
+          <End Role="PhongHoc" Type="Self.PhongHoc" Multiplicity="0..1" />
+          <End Role="LichHoc_LopHocPhan" Type="Self.LichHoc_LopHocPhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhongHoc">
+              <PropertyRef Name="ID_PhongHoc" />
+            </Principal>
+            <Dependent Role="LichHoc_LopHocPhan">
+              <PropertyRef Name="ID_PhongHoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LichHoc_NhomThucHanh_NhomThucHanh">
           <End Role="NhomThucHanh" Type="Self.NhomThucHanh" Multiplicity="0..1" />
           <End Role="LichHoc_NhomThucHanh" Type="Self.LichHoc_NhomThucHanh" Multiplicity="*" />
@@ -803,6 +753,18 @@
             </Principal>
             <Dependent Role="LichHoc_NhomThucHanh">
               <PropertyRef Name="ID_NhomThucHanh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LichHoc_NhomThucHanh_PhongHoc">
+          <End Role="PhongHoc" Type="Self.PhongHoc" Multiplicity="0..1" />
+          <End Role="LichHoc_NhomThucHanh" Type="Self.LichHoc_NhomThucHanh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhongHoc">
+              <PropertyRef Name="ID_PhongHoc" />
+            </Principal>
+            <Dependent Role="LichHoc_NhomThucHanh">
+              <PropertyRef Name="ID_PhongHoc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -859,7 +821,6 @@
           <EntitySet Name="Diems" EntityType="Self.Diem" />
           <EntitySet Name="GiangViens" EntityType="Self.GiangVien" />
           <EntitySet Name="HocPhans" EntityType="Self.HocPhan" />
-          <EntitySet Name="LichHocs" EntityType="Self.LichHoc" />
           <EntitySet Name="LichHoc_LopHocPhan" EntityType="Self.LichHoc_LopHocPhan" />
           <EntitySet Name="LichHoc_NhomThucHanh" EntityType="Self.LichHoc_NhomThucHanh" />
           <EntitySet Name="LopHocPhans" EntityType="Self.LopHocPhan" />
@@ -905,24 +866,20 @@
             <End Role="HocPhan" EntitySet="HocPhans" />
             <End Role="LopHocPhan" EntitySet="LopHocPhans" />
           </AssociationSet>
-          <AssociationSet Name="FK_LichHoc_LopHocPhan_LichHoc" Association="Self.FK_LichHoc_LopHocPhan_LichHoc">
-            <End Role="LichHoc" EntitySet="LichHocs" />
-            <End Role="LichHoc_LopHocPhan" EntitySet="LichHoc_LopHocPhan" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LichHoc_NhomThucHanh_LichHoc" Association="Self.FK_LichHoc_NhomThucHanh_LichHoc">
-            <End Role="LichHoc" EntitySet="LichHocs" />
-            <End Role="LichHoc_NhomThucHanh" EntitySet="LichHoc_NhomThucHanh" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LichHoc_PhongHoc" Association="Self.FK_LichHoc_PhongHoc">
-            <End Role="PhongHoc" EntitySet="PhongHocs" />
-            <End Role="LichHoc" EntitySet="LichHocs" />
-          </AssociationSet>
           <AssociationSet Name="FK_LichHoc_LopHocPhan_LopHocPhan" Association="Self.FK_LichHoc_LopHocPhan_LopHocPhan">
             <End Role="LopHocPhan" EntitySet="LopHocPhans" />
             <End Role="LichHoc_LopHocPhan" EntitySet="LichHoc_LopHocPhan" />
           </AssociationSet>
+          <AssociationSet Name="FK_LichHoc_LopHocPhan_PhongHoc" Association="Self.FK_LichHoc_LopHocPhan_PhongHoc">
+            <End Role="PhongHoc" EntitySet="PhongHocs" />
+            <End Role="LichHoc_LopHocPhan" EntitySet="LichHoc_LopHocPhan" />
+          </AssociationSet>
           <AssociationSet Name="FK_LichHoc_NhomThucHanh_NhomThucHanh" Association="Self.FK_LichHoc_NhomThucHanh_NhomThucHanh">
             <End Role="NhomThucHanh" EntitySet="NhomThucHanhs" />
+            <End Role="LichHoc_NhomThucHanh" EntitySet="LichHoc_NhomThucHanh" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LichHoc_NhomThucHanh_PhongHoc" Association="Self.FK_LichHoc_NhomThucHanh_PhongHoc">
+            <End Role="PhongHoc" EntitySet="PhongHocs" />
             <End Role="LichHoc_NhomThucHanh" EntitySet="LichHoc_NhomThucHanh" />
           </AssociationSet>
           <AssociationSet Name="FK_LopHocPhan_NhanVienPDT" Association="Self.FK_LopHocPhan_NhanVienPDT">
@@ -993,22 +950,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LichHocs">
-            <EntityTypeMapping TypeName="DangKyHocPhanModel.LichHoc">
-              <MappingFragment StoreEntitySet="LichHoc">
-                <ScalarProperty Name="ID_LichHoc" ColumnName="ID_LichHoc" />
-                <ScalarProperty Name="NgayHoc" ColumnName="NgayHoc" />
-                <ScalarProperty Name="TietHoc" ColumnName="TietHoc" />
-                <ScalarProperty Name="ID_PhongHoc" ColumnName="ID_PhongHoc" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LichHoc_LopHocPhan">
             <EntityTypeMapping TypeName="DangKyHocPhanModel.LichHoc_LopHocPhan">
               <MappingFragment StoreEntitySet="LichHoc_LopHocPhan">
                 <ScalarProperty Name="ID_LichHoc_LopHP" ColumnName="ID_LichHoc_LopHP" />
                 <ScalarProperty Name="ID_LopHocPhan" ColumnName="ID_LopHocPhan" />
-                <ScalarProperty Name="ID_LichHoc" ColumnName="ID_LichHoc" />
+                <ScalarProperty Name="NgayHoc" ColumnName="NgayHoc" />
+                <ScalarProperty Name="TietHoc" ColumnName="TietHoc" />
+                <ScalarProperty Name="ID_PhongHoc" ColumnName="ID_PhongHoc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1017,13 +966,16 @@
               <MappingFragment StoreEntitySet="LichHoc_NhomThucHanh">
                 <ScalarProperty Name="ID_LichHoc_NhomTH" ColumnName="ID_LichHoc_NhomTH" />
                 <ScalarProperty Name="ID_NhomThucHanh" ColumnName="ID_NhomThucHanh" />
-                <ScalarProperty Name="ID_LichHoc" ColumnName="ID_LichHoc" />
+                <ScalarProperty Name="NgayHoc" ColumnName="NgayHoc" />
+                <ScalarProperty Name="TietHoc" ColumnName="TietHoc" />
+                <ScalarProperty Name="ID_PhongHoc" ColumnName="ID_PhongHoc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LopHocPhans">
             <EntityTypeMapping TypeName="DangKyHocPhanModel.LopHocPhan">
               <MappingFragment StoreEntitySet="LopHocPhan">
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
                 <ScalarProperty Name="ID_LopHocPhan" ColumnName="ID_LopHocPhan" />
                 <ScalarProperty Name="ID_HocPhan" ColumnName="ID_HocPhan" />
                 <ScalarProperty Name="ID_NhanVienPDT" ColumnName="ID_NhanVienPDT" />
@@ -1064,6 +1016,7 @@
           <EntitySetMapping Name="NhomThucHanhs">
             <EntityTypeMapping TypeName="DangKyHocPhanModel.NhomThucHanh">
               <MappingFragment StoreEntitySet="NhomThucHanh">
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
                 <ScalarProperty Name="ID_NhomThucHanh" ColumnName="ID_NhomThucHanh" />
                 <ScalarProperty Name="ID_LopHocPhan" ColumnName="ID_LopHocPhan" />
                 <ScalarProperty Name="ID_GiangVien" ColumnName="ID_GiangVien" />

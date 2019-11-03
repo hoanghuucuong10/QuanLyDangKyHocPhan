@@ -4,21 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="61f479e9078f445e997264fcd75b4db1" Name="Diagram1">
-        <EntityTypeShape EntityType="DangKyHocPhanModel.DangKyHocPhan" Width="1.5" PointX="7.5" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DangKyHocPhanModel.Diem" Width="1.5" PointX="10.5" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DangKyHocPhanModel.GiangVien" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DangKyHocPhanModel.HocPhan" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DangKyHocPhanModel.LichHoc" Width="1.5" PointX="8.25" PointY="2.5" IsExpanded="true" />
+      <Diagram DiagramId="ac5100b34c754d37a0ffe13766b6536d" Name="Diagram1">
+        <EntityTypeShape EntityType="DangKyHocPhanModel.DangKyHocPhan" Width="1.5" PointX="7.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DangKyHocPhanModel.Diem" Width="1.5" PointX="10.5" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DangKyHocPhanModel.GiangVien" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DangKyHocPhanModel.HocPhan" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DangKyHocPhanModel.LichHoc_LopHocPhan" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DangKyHocPhanModel.LichHoc_NhomThucHanh" Width="1.5" PointX="10.5" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DangKyHocPhanModel.LopHocPhan" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DangKyHocPhanModel.LopNienChe" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DangKyHocPhanModel.NhanVienPDT" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DangKyHocPhanModel.NhomThucHanh" Width="1.5" PointX="8.25" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DangKyHocPhanModel.NienKhoa" Width="1.5" PointX="0.75" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DangKyHocPhanModel.PhongHoc" Width="1.5" PointX="6" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DangKyHocPhanModel.SinhVien" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DangKyHocPhanModel.LopHocPhan" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DangKyHocPhanModel.LopNienChe" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="DangKyHocPhanModel.NhanVienPDT" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DangKyHocPhanModel.NhomThucHanh" Width="1.5" PointX="8.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DangKyHocPhanModel.NienKhoa" Width="1.5" PointX="0.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="DangKyHocPhanModel.PhongHoc" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="DangKyHocPhanModel.SinhVien" Width="1.5" PointX="5.25" PointY="13.625" IsExpanded="true" />
         <AssociationConnector Association="DangKyHocPhanModel.FK_DangKyHocPhan_LopHocPhan" ManuallyRouted="false" />
         <AssociationConnector Association="DangKyHocPhanModel.FK_DangKyHocPhan_NhomThucHanh" ManuallyRouted="false" />
         <AssociationConnector Association="DangKyHocPhanModel.FK_DangKyHocPhan_SinhVien" ManuallyRouted="false" />
@@ -28,11 +27,10 @@
         <AssociationConnector Association="DangKyHocPhanModel.FK_LopNienChe_LopNienChe" ManuallyRouted="false" />
         <AssociationConnector Association="DangKyHocPhanModel.FK_NhomThucHanh_GiangVien" ManuallyRouted="false" />
         <AssociationConnector Association="DangKyHocPhanModel.FK_LopHocPhan_HocPhan" ManuallyRouted="false" />
-        <AssociationConnector Association="DangKyHocPhanModel.FK_LichHoc_LopHocPhan_LichHoc" ManuallyRouted="false" />
-        <AssociationConnector Association="DangKyHocPhanModel.FK_LichHoc_NhomThucHanh_LichHoc" ManuallyRouted="false" />
-        <AssociationConnector Association="DangKyHocPhanModel.FK_LichHoc_PhongHoc" ManuallyRouted="false" />
         <AssociationConnector Association="DangKyHocPhanModel.FK_LichHoc_LopHocPhan_LopHocPhan" ManuallyRouted="false" />
+        <AssociationConnector Association="DangKyHocPhanModel.FK_LichHoc_LopHocPhan_PhongHoc" ManuallyRouted="false" />
         <AssociationConnector Association="DangKyHocPhanModel.FK_LichHoc_NhomThucHanh_NhomThucHanh" ManuallyRouted="false" />
+        <AssociationConnector Association="DangKyHocPhanModel.FK_LichHoc_NhomThucHanh_PhongHoc" ManuallyRouted="false" />
         <AssociationConnector Association="DangKyHocPhanModel.FK_LopHocPhan_NhanVienPDT" ManuallyRouted="false" />
         <AssociationConnector Association="DangKyHocPhanModel.FK_LopHocPhan_NienKhoa" ManuallyRouted="false" />
         <AssociationConnector Association="DangKyHocPhanModel.FK_NhomThucHanh_LopHocPhan" ManuallyRouted="false" />

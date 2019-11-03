@@ -10,9 +10,11 @@ namespace Entities
     {
         public int ID_LichHoc_LopHP { get; set; }
         public string ID_LopHocPhan { get; set; }
-        public Nullable<int> ID_LichHoc { get; set; }
+        public string NgayHoc { get; set; }
+        public string TietHoc { get; set; }
+        public string ID_PhongHoc { get; set; }
 
-        public eLichHoc LichHoc { get; set; }
         public eLopHocPhan LopHocPhan { get; set; }
+        public ePhongHoc PhongHoc { get; set; }
     }
 }

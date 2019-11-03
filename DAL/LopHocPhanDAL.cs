@@ -14,37 +14,17 @@ namespace DAL
         {
             List<eLopHocPhan> lst = db.LopHocPhans.Select(x => new eLopHocPhan
             {
-                //id_LopHocPhan = x.ID_LopHocPhan,
-                //id_HocPhan = x.ID_HocPhan,
-                //id_NhanVienPDT = x.ID_NhanVienPDT,
-                //id_GiangVien = x.ID_GiangVien,
-                //id_PhongHoc = x.ID_PhongHoc,
-                //tenMonHoc = x.HocPhan.TenMonHoc,
-                //namHoc = x.NamHoc,
-                //hocKy = x.HocKy.Value,
-                //ngayHoc = x.NgayHoc,
-                //tietHoc = x.TietHoc,
-                //tenGiangVien = x.GiangVien.HoVaTen,
-                //tenPhongHoc = x.PhongHoc.TenPhongHoc,
-                //trangThai = x.TrangThai,
-                //soLuong = db.DangKyHocPhans.Where(t => t.ID_LopHocPhan == x.ID_LopHocPhan).Count(),
-                //NgayBD = x.NgayBatDau,
-                //NgayKT = x.NgayKetThuc,
-                //ListNhomTH = db.NhomThucHanhs.Where(t => t.ID_LopHocPhan == x.ID_LopHocPhan).Select(m => new eNhomThucHanh
-                //{
-                //    id_LopThucHanh = m.ID_NhomThucHanh,
-                //    id_LopHocPhan = m.ID_LopHocPhan,
-                //    tenNhom = m.TenNhom.Value,
-                //    id_GiangVien = m.ID_GiangVien,
-                //    id_PhongHoc = m.ID_PhongHoc,
-                //    tenPhong = m.PhongHoc.TenPhongHoc,
-                //    tenGiangVien = m.GiangVien.HoVaTen,
-                //    tietHoc = m.TietHoc,
-                //    ngayHoc = m.NgayHoc,
-                //    NgayBD = m.NgayBatDau,
-                //    NgayKT = m.NgayKetThuc,
-                //    soLuong = db.DangKyHocPhans.Where(l => l.ID_NhomThucHanh == m.ID_NhomThucHanh).Count()
-                //}).ToList()
+                ID_LopHocPhan = x.ID_LopHocPhan,
+                ID_HocPhan = x.ID_HocPhan,
+                ID_NhanVienPDT = x.ID_NhanVienPDT,
+                ID_GiangVien = x.ID_GiangVien,
+                HocKy = x.HocKy.Value,
+                ID_NienKhoa = x.ID_NienKhoa,
+                SoTiet = x.SoTiet,
+                TrangThai = x.TrangThai,
+                NgayBatDau = x.NgayBatDau,
+                NgayKetThuc = x.NgayKetThuc,
+                SoLuong = db.DangKyHocPhans.Where(t => t.ID_LopHocPhan == x.ID_LopHocPhan).Count(),
             }).OrderBy(s => s.ID_LopHocPhan).ToList();
             return lst;
         }
@@ -52,77 +32,36 @@ namespace DAL
         {
             List<eLopHocPhan> lst = db.LopHocPhans.Where(s => s.ID_GiangVien == idGV && s.HocKy.Value == hocKy && s.NienKhoa.NienKhoa1 == namHoc).Select(x => new eLopHocPhan
             {
-                //id_LopHocPhan = x.ID_LopHocPhan,
-                //id_HocPhan = x.ID_HocPhan,
-                //id_NhanVienPDT = x.ID_NhanVienPDT,
-                //id_GiangVien = x.ID_GiangVien,
-                //id_PhongHoc = x.ID_PhongHoc,
-                //tenMonHoc = x.HocPhan.TenMonHoc,
-                //namHoc = x.NamHoc,
-                //hocKy = x.HocKy.Value,
-                //ngayHoc = x.NgayHoc,
-                //tietHoc = x.TietHoc,
-                //tenGiangVien = x.GiangVien.HoVaTen,
-                //tenPhongHoc = x.PhongHoc.TenPhongHoc,
-                //trangThai = x.TrangThai,
-                //NgayBD = x.NgayBatDau,
-                //NgayKT = x.NgayKetThuc,
-                //soLuong = db.DangKyHocPhans.Where(t => t.ID_LopHocPhan == x.ID_LopHocPhan).Count(),
-                //ListNhomTH = db.NhomThucHanhs.Where(t => t.ID_LopHocPhan == x.ID_LopHocPhan).Select(m => new eNhomThucHanh
-                //{
-                //    id_LopThucHanh = m.ID_NhomThucHanh,
-                //    id_LopHocPhan = m.ID_LopHocPhan,
-                //    tenNhom = m.TenNhom.Value,
-                //    id_GiangVien = m.ID_GiangVien,
-                //    id_PhongHoc = m.ID_PhongHoc,
-                //    tenPhong = m.PhongHoc.TenPhongHoc,
-                //    tenGiangVien = m.GiangVien.HoVaTen,
-                //    tietHoc = m.TietHoc,
-                //    ngayHoc = m.NgayHoc,
-                //    NgayBD = m.NgayBatDau,
-                //    NgayKT = m.NgayKetThuc,
-                //    soLuong = db.DangKyHocPhans.Where(l => l.ID_NhomThucHanh == m.ID_NhomThucHanh).Count()
-                //}).ToList()
+                ID_LopHocPhan = x.ID_LopHocPhan,
+                ID_HocPhan = x.ID_HocPhan,
+                ID_NhanVienPDT = x.ID_NhanVienPDT,
+                ID_GiangVien = x.ID_GiangVien,
+                HocKy = x.HocKy.Value,
+                ID_NienKhoa = x.ID_NienKhoa,
+                SoTiet = x.SoTiet,
+                TrangThai = x.TrangThai,
+                NgayBatDau = x.NgayBatDau,
+                NgayKetThuc = x.NgayKetThuc,
+                SoLuong = db.DangKyHocPhans.Where(t => t.ID_LopHocPhan == x.ID_LopHocPhan).Count(),
             }).OrderBy(s => s.ID_LopHocPhan).ToList();
             return lst;
         }
-        public List<eLopHocPhan> SearchLopHocPhan(string maLopHocPhan, string maMonHoc, string hocKy, string namHoc)
+        public List<eLopHocPhan> SearchLopHocPhan(string maLopHocPhan, string tenMonHoc, string hocKy, string namHoc)
         {
-            List<eLopHocPhan> lst = db.LopHocPhans.Where(f => f.ID_LopHocPhan.Contains(maLopHocPhan) && f.ID_HocPhan.Contains(maMonHoc) && f.HocKy.ToString().Contains(hocKy) && f.NienKhoa.NienKhoa1.Contains(namHoc)).Select(x => new eLopHocPhan
+            List<eLopHocPhan> lst = db.LopHocPhans.Where(f => f.ID_LopHocPhan.Contains(maLopHocPhan) && f.HocPhan.TenMonHoc.Contains(tenMonHoc) && f.HocKy.ToString().Contains(hocKy) && f.NienKhoa.NienKhoa1.Contains(namHoc)).Select(x => new eLopHocPhan
             {
-                //id_LopHocPhan = x.ID_LopHocPhan,
-                //id_HocPhan = x.ID_HocPhan,
-                //id_NhanVienPDT = x.ID_NhanVienPDT,
-                //id_GiangVien = x.ID_GiangVien,
-                //id_PhongHoc = x.ID_PhongHoc,
-                //tenMonHoc = x.HocPhan.TenMonHoc,
-                //namHoc = x.NamHoc,
-                //hocKy = x.HocKy.Value,
-                //ngayHoc = x.NgayHoc,
-                //tietHoc = x.TietHoc,
-                //tenGiangVien = x.GiangVien.HoVaTen,
-                //tenPhongHoc = x.PhongHoc.TenPhongHoc,
-                //trangThai = x.TrangThai,
-                //NgayBD = x.NgayBatDau,
-                //NgayKT = x.NgayKetThuc,
-                //soLuong = db.DangKyHocPhans.Where(t => t.ID_LopHocPhan == x.ID_LopHocPhan).Count(),
-                //ListNhomTH = db.NhomThucHanhs.Where(t => t.ID_LopHocPhan == x.ID_LopHocPhan).Select(m => new eNhomThucHanh
-                //{
-                //    id_LopThucHanh = m.ID_NhomThucHanh,
-                //    id_LopHocPhan = m.ID_LopHocPhan,
-                //    tenNhom = m.TenNhom.Value,
-                //    id_GiangVien = m.ID_GiangVien,
-                //    id_PhongHoc = m.ID_PhongHoc,
-                //    tenPhong = m.PhongHoc.TenPhongHoc,
-                //    tenGiangVien = m.GiangVien.HoVaTen,
-                //    tietHoc = m.TietHoc,
-                //    ngayHoc = m.NgayHoc,
-                //    NgayBD = m.NgayBatDau,
-                //    NgayKT = m.NgayKetThuc,
-                //    soLuong = db.DangKyHocPhans.Where(l => l.ID_NhomThucHanh == m.ID_NhomThucHanh).Count()
+                ID_LopHocPhan = x.ID_LopHocPhan,
+                ID_HocPhan = x.ID_HocPhan,
+                ID_NhanVienPDT = x.ID_NhanVienPDT,
+                ID_GiangVien = x.ID_GiangVien,
+                HocKy = x.HocKy.Value,
+                ID_NienKhoa=x.ID_NienKhoa,
+                SoTiet=x.SoTiet,
+                TrangThai = x.TrangThai,
+                NgayBatDau = x.NgayBatDau,
+                NgayKetThuc = x.NgayKetThuc,
+                SoLuong = db.DangKyHocPhans.Where(t => t.ID_LopHocPhan == x.ID_LopHocPhan).Count(),
 
-                    
-                //}).ToList()
             }).OrderBy(gs => gs.ID_LopHocPhan).ToList();
             return lst;
         }
@@ -152,30 +91,28 @@ namespace DAL
             }
             return 1;
         }
-        public int AddLopHocPhan(string id, eLopHocPhan x)
+        public int AddLopHocPhan( eLopHocPhan x)
         {
             try
             {
                 LopHocPhan m = new LopHocPhan();
-                //m.ID_LopHocPhan = x.id_LopHocPhan;
-                //m.ID_HocPhan = x.id_HocPhan;
-                //m.ID_GiangVien = x.id_GiangVien;
-                //m.HocKy = x.hocKy;
-                //m.ID_NhanVienPDT = x.id_NhanVienPDT;
-                //m.ID_PhongHoc = x.id_PhongHoc;
-                //m.NamHoc = x.namHoc;
-                //m.TietHoc = x.tietHoc;
-                //m.NgayHoc = x.ngayHoc;
-                //m.TrangThai = x.trangThai;
-                //m.NgayBatDau = x.NgayBD;
-                //m.NgayKetThuc = x.NgayKT;
-                //db.LopHocPhans.Add(m);
-                //db.SaveChanges();
+                m.ID_LopHocPhan = x.ID_LopHocPhan;
+                m.ID_HocPhan = x.ID_HocPhan;
+                m.ID_GiangVien = x.ID_GiangVien;
+                m.HocKy = x.HocKy;
+                m.ID_NhanVienPDT = x.ID_NhanVienPDT;
+                m.TrangThai = x.TrangThai;
+                m.NgayBatDau = x.NgayBatDau;
+                m.NgayKetThuc = x.NgayKetThuc;
+                m.SoLuong = db.DangKyHocPhans.Where(t => t.ID_LopHocPhan == x.ID_LopHocPhan).Count();
+                m.SoTiet = x.SoTiet;
+                m.ID_NienKhoa = x.ID_NienKhoa;
+                db.LopHocPhans.Add(m);
+                db.SaveChanges();
                 return 1;
             }
             catch (Exception)
             {
-
                 return 0;
             }
 

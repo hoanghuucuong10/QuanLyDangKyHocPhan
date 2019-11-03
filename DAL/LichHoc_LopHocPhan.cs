@@ -16,9 +16,11 @@ namespace DAL
     {
         public int ID_LichHoc_LopHP { get; set; }
         public string ID_LopHocPhan { get; set; }
-        public Nullable<int> ID_LichHoc { get; set; }
+        public string NgayHoc { get; set; }
+        public string TietHoc { get; set; }
+        public string ID_PhongHoc { get; set; }
     
-        public virtual LichHoc LichHoc { get; set; }
         public virtual LopHocPhan LopHocPhan { get; set; }
+        public virtual PhongHoc PhongHoc { get; set; }
     }
 }

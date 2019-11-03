@@ -149,6 +149,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\GiangVienViewModels.cs" />
     <Compile Include="ViewModels\HocPhanViewModels.cs" />
+    <Compile Include="ViewModels\LichHocLTViewModels.cs" />
+    <Compile Include="ViewModels\LichHocTHViewModels.cs" />
+    <Compile Include="ViewModels\LopHocPhanViewModels.cs" />
+    <Compile Include="ViewModels\NhomThucHanhViewModels.cs" />
     <Compile Include="ViewModels\SinhVienViewModels.cs" />
     <EmbeddedResource Include="frmDangKyHocPhan.resx">
       <DependentUpon>frmDangKyHocPhan.cs</DependentUpon>
@@ -203,8 +207,13 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\DKHP.ViewModels.GiangVienViewModels.datasource" />
     <None Include="Properties\DataSources\DKHP.ViewModels.HocPhanViewModels.datasource" />
+    <None Include="Properties\DataSources\DKHP.ViewModels.LichHocLTViewModels.datasource" />
+    <None Include="Properties\DataSources\DKHP.ViewModels.LichHocTHViewModels.datasource" />
+    <None Include="Properties\DataSources\DKHP.ViewModels.LopHocPhanViewModels.datasource" />
+    <None Include="Properties\DataSources\DKHP.ViewModels.NhomThucHanhViewModels.datasource" />
     <None Include="Properties\DataSources\DKHP.ViewModels.SinhVienViewModels.datasource" />
     <None Include="Properties\DataSources\Entities.eDangKyHocPhan.datasource" />
+    <None Include="Properties\DataSources\Entities.eLichHoc.datasource" />
     <None Include="Properties\DataSources\Entities.eLopHocPhan.datasource" />
     <None Include="Properties\DataSources\Entities.eLopThucHanh.datasource" />
     <None Include="Properties\DataSources\Entities.eSinhVien.datasource" />

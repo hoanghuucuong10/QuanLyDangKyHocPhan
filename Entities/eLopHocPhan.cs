@@ -15,6 +15,7 @@ namespace Entities
         public Nullable<int> ID_NienKhoa { get; set; }
         public Nullable<int> HocKy { get; set; }
         public string TrangThai { get; set; }
+        public Nullable<int> SoLuong { get; set; }
         public Nullable<int> SoTiet { get; set; }
         public Nullable<System.DateTime> NgayBatDau { get; set; }
         public Nullable<System.DateTime> NgayKetThuc { get; set; }

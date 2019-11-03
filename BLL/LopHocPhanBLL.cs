@@ -24,10 +24,10 @@ namespace BLL
             
             return LHP.EditLopHocPhan( id,x);
         }
-        public int AddLopHocPhan(string id, eLopHocPhan x)
+        public int AddLopHocPhan( eLopHocPhan x)
         {
 
-            return LHP.AddLopHocPhan(id, x);
+            return LHP.AddLopHocPhan( x);
         }
 
         public string CreateID()
@@ -36,11 +36,13 @@ namespace BLL
         }
 
 
-        public List<eLopHocPhan> SearchLopHocPhan(string maLopHocPhan, string maMonHoc, string hocKy, string namHoc)
+        public List<eLopHocPhan> SearchLopHocPhan(string maLopHocPhan, string tenMonHoc, string hocKy, string namHoc)
         {
            
-            return LHP.SearchLopHocPhan(maLopHocPhan,maMonHoc,hocKy,namHoc);
+            return LHP.SearchLopHocPhan(maLopHocPhan,tenMonHoc,hocKy,namHoc);
         }
+
+      
 
     }
 }

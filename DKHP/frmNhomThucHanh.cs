@@ -9,145 +9,143 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entities;
+using DKHP.ViewModels;
 namespace DKHP
 {
     public partial class frmNhomThucHanh : Form
     {
-        public eNhomThucHanh lTH = new eNhomThucHanh();
-
         NhomThucHanhBLL nTH = new NhomThucHanhBLL();
+        public int flag { get; set; }
+        public eNhomThucHanh nhomTH { get; set; }
         //thêm nhóm th
-        public frmNhomThucHanh()
+        public frmNhomThucHanh(string id_LopHP)
         {
             InitializeComponent();
-            LoadCCB();
+            LoadCBB();
+            LoadCBLich();
+            this.flag = 0;
             btnXoa.Visible = false;
-            lTH.ID_NhomThucHanh = nTH.CreateID();
-            tbMaLHP.Text= frmLopHocPhan.instance.dataGridView1.Rows[frmLopHocPhan.instance.dataGridView1.CurrentRow.Index].Cells[10].Value.ToString().Trim();
-            cbMonHoc.SelectedValue = frmLopHocPhan.instance.dataGridView1.Rows[frmLopHocPhan.instance.dataGridView1.CurrentRow.Index].Cells[10].Value.ToString().Trim();
+            nhomTH = new eNhomThucHanh();
+            nhomTH.ID_NhomThucHanh = nTH.CreateID();
+            foreach(eNhomThucHanh x in frmLopHocPhan.instance.lstTH)
+            {
+                if (nhomTH.ID_NhomThucHanh == x.ID_NhomThucHanh)
+                {
+                    string id = nhomTH.ID_NhomThucHanh;
+                    string numStr = id.Substring(2);
+                    int num = int.Parse(numStr) + 1;
+
+                    numStr = num.ToString();
+                    while (numStr.Count() != 8)
+                    {
+                        numStr = "0" + numStr;
+                    }
+                    numStr = "th" + numStr;
+                    nhomTH.ID_NhomThucHanh = numStr;
+                }
+            }
+            tbIDTH.Text = nhomTH.ID_NhomThucHanh.Trim();
+            tbMaLHP.Text = id_LopHP.Trim();
 
         }
 
         //sửa nhóm th
-        public frmNhomThucHanh(string id)
+        public frmNhomThucHanh(eNhomThucHanh n)
         {
             InitializeComponent();
-            LoadCCB();
-            lTH = nTH.GetNhomByID(id);
-            tbMaLHP.Text = lTH.ID_LopHocPhan.Trim();
+            LoadCBB();
+            LoadCBLich();
+            this.flag = 0;
+            this.nhomTH = n;
             numNhom.Enabled = false;
-            if (frmLopHocPhan.instance.groupBox1.Text == "Thông Tin Lớp Học Phần")
+            if (frmLopHocPhan.instance.GroupboxThongTin.Text == "Thông Tin Lớp Học Phần")
             {
                 btnLuu.Visible = false;
                 btnXoa.Visible = false;
-                cbMonHoc.Enabled = false;
-                cbGiangVien.Enabled = false;
-                cbNgayHoc.Enabled = false;
-                cbPhongHoc.Enabled = false;
-                cbTietHoc.Enabled = false;
-                numNhom.Enabled = false;
+                cbGiangVien.Enabled = true;
+                numSoTiet.Enabled = true;
+                numNhom.Enabled = true;
                 dateTimePicker1.Enabled = false;
                 dateTimePicker2.Enabled = false;
             }else
             {
                 btnLuu.Visible = true;
                 btnXoa.Visible = true;
-                cbMonHoc.Enabled = false;
-                cbGiangVien.Enabled = true;
-                cbNgayHoc.Enabled = true;
-                cbPhongHoc.Enabled = true;
-                cbTietHoc.Enabled = true;
+                cbGiangVien.Enabled = false;
+                numSoTiet.Enabled = false;
                 numNhom.Enabled = false;
                 dateTimePicker1.Enabled = true;
                 dateTimePicker2.Enabled = true;
             }
-
+            tbIDTH.Text = n.ID_NhomThucHanh.Trim();
+            tbMaLHP.Text = n.ID_LopHocPhan.Trim();
             LopHocPhanBLL hpBLL = new LopHocPhanBLL();
-            List<eLopHocPhan> s = hpBLL.SearchLopHocPhan(lTH.ID_LopHocPhan.Trim(), "", "", "");
-            int a = cbMonHoc.ValueMember.IndexOf(s[0].ID_HocPhan.Trim());
+            List<eLopHocPhan> s = hpBLL.SearchLopHocPhan(n.ID_LopHocPhan.Trim(), "", "", "");
 
-            cbMonHoc.SelectedValue = frmLopHocPhan.instance.cbMonHoc.SelectedValue;
-            cbGiangVien.SelectedValue = frmLopHocPhan.instance.dataGridView2.Rows[frmLopHocPhan.instance.dataGridView2.CurrentRow.Index].Cells[5].Value.ToString().Trim();
-            numNhom.Value = int.Parse(frmLopHocPhan.instance.dataGridView2.Rows[frmLopHocPhan.instance.dataGridView2.CurrentRow.Index].Cells[4].Value.ToString().Trim());
-            cbNgayHoc.SelectedItem = frmLopHocPhan.instance.dataGridView2.Rows[frmLopHocPhan.instance.dataGridView2.CurrentRow.Index].Cells[8].Value.ToString().Trim();
-            cbTietHoc.SelectedItem = frmLopHocPhan.instance.dataGridView2.Rows[frmLopHocPhan.instance.dataGridView2.CurrentRow.Index].Cells[9].Value.ToString().Trim();
-            cbPhongHoc.SelectedValue = (new PhongHocBLL().GetPhongHocByName( frmLopHocPhan.instance.dataGridView2.Rows[frmLopHocPhan.instance.dataGridView2.CurrentRow.Index].Cells[7].Value.ToString().Trim())).ID_PhongHoc.Trim();
-            dateTimePicker1.Value = Convert.ToDateTime(frmLopHocPhan.instance.dataGridView2.Rows[frmLopHocPhan.instance.dataGridView2.CurrentRow.Index].Cells[10].Value.ToString().Trim());
-            dateTimePicker2.Value = Convert.ToDateTime(frmLopHocPhan.instance.dataGridView2.Rows[frmLopHocPhan.instance.dataGridView2.CurrentRow.Index].Cells[11].Value.ToString().Trim());
+            cbGiangVien.SelectedValue = nhomTH.ID_GiangVien.Trim();
+            numNhom.Value = int.Parse(nhomTH.TenNhom);
+            numSoTiet.Value = nhomTH.SoTiet.Value;
+            dateTimePicker1.Value = nhomTH.NgayBatDau.Value;
+            dateTimePicker2.Value = nhomTH.NgayKetThuc.Value;
+            nhomTH.LichHoc_NhomThucHanh = new LichHocBLL().GetLichHoc_NhomThucHanh(nhomTH.ID_NhomThucHanh);
 
-
+            LoadDSLichHocNhomTH();
         }
-        public void LoadCCB()
+        public void LoadDSLichHocNhomTH()
         {
-            cbNgayHoc.Items.Add("Thứ Hai");
-            cbNgayHoc.Items.Add("Thứ Ba");
-            cbNgayHoc.Items.Add("Thứ Tư");
-            cbNgayHoc.Items.Add("Thứ Năm");
-            cbNgayHoc.Items.Add("Thứ Sáu");
-            cbNgayHoc.Items.Add("Thứ Bảy");
-            cbNgayHoc.Items.Add("Chủ Nhật");
-
+            List<LichHocTHViewModels> lst = nhomTH.LichHoc_NhomThucHanh.Select(t => new LichHocTHViewModels
+            {
+                ID_LichHoc_NhomTH = t.ID_LichHoc_NhomTH,
+                ID_NhomThucHanh = t.ID_NhomThucHanh,
+                ID_PhongHoc = t.ID_PhongHoc,
+                TenPhongHoc = new PhongHocBLL().GetPhongHocByID(t.ID_PhongHoc).TenPhongHoc,
+                NgayHoc = t.NgayHoc,
+                TietHoc = t.TietHoc
+            }).ToList();
+            lichHocTHViewModelsBindingSource.DataSource = lst;
+        }
+        public void LoadCBB()
+        {
             GiangVienBLL gv = new GiangVienBLL();
             cbGiangVien.DataSource = gv.GetAllGiangVien();
-            cbGiangVien.DisplayMember = "hoVaTen";
-            cbGiangVien.ValueMember = "id_GiangVien";
-
-            PhongHocBLL ph = new PhongHocBLL();
-            cbPhongHoc.DataSource = ph.GetAllPhongHoc();
-            cbPhongHoc.DisplayMember = "tenPhong";
-            cbPhongHoc.ValueMember = "id_PhongHoc";
-
-
-            HocPhanBLL hp = new HocPhanBLL();
-            cbMonHoc.DataSource = hp.GetALLHocPhan();
-            cbMonHoc.DisplayMember = "tenMonHoc";
-            cbMonHoc.ValueMember = "id_HocPhan";
+            cbGiangVien.DisplayMember = "HoVaTen";
+            cbGiangVien.ValueMember = "ID_GiangVien";
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            //string m= lTH.ID_NhomThucHanh;
-            //lTH.ID_GiangVien = cbGiangVien.SelectedValue.ToString().Trim();
-            //lTH.GiangVien.te = cbGiangVien.Text.ToString().Trim();
-            //lTH.id_PhongHoc = cbPhongHoc.SelectedValue.ToString().Trim();
-            //lTH.tenPhong = cbPhongHoc.Text.ToString().Trim();
-            //lTH.ngayHoc = cbNgayHoc.SelectedItem.ToString().Trim();
-            //lTH.tietHoc = cbTietHoc.SelectedItem.ToString().Trim();
-            //lTH.id_LopHocPhan = frmLopHocPhan.instance.tbID.Text;
-            //lTH.tenMonHoc = frmLopHocPhan.instance.cbMonHoc.Text.ToString().Trim();
-            //lTH.tenNhom = int.Parse(numNhom.Value.ToString());
-            //lTH.NgayBD = dateTimePicker1.Value;
-            //lTH.NgayKT = dateTimePicker2.Value;
-           
-            //List<eNhomThucHanh> lst = frmLopHocPhan.instance.lstTH;
-            //int flag = 0;
-            //foreach (eNhomThucHanh x in lst)
-            //{
-            //    if (lTH.id_LopThucHanh == x.id_LopThucHanh)
-            //    {
-            //        x.id_GiangVien = lTH.id_GiangVien;
-            //        x.id_LopHocPhan = lTH.id_LopHocPhan;
-            //        x.id_PhongHoc = lTH.id_PhongHoc;
-            //        x.ngayHoc = lTH.ngayHoc;
-            //        x.tenGiangVien = lTH.tenGiangVien;
-            //        x.tenMonHoc = lTH.tenMonHoc;
-            //        x.tenNhom = lTH.tenNhom;
-            //        x.tenPhong = lTH.tenPhong;
-            //        x.tietHoc = lTH.tietHoc;
-            //        x.NgayBD = lTH.NgayBD;
-            //        x.NgayKT = lTH.NgayKT;
-            //        flag = 1;
-            //    }
-            //}
-            //if(flag==0)
-            //{
-            //    lst.Add(lTH);
-            //}
+            
+            nhomTH.ID_GiangVien= cbGiangVien.SelectedValue.ToString().Trim();
+            nhomTH.TenNhom = numNhom.Value.ToString();
+            nhomTH.SoTiet =int.Parse( numSoTiet.Value.ToString().Trim());
+            nhomTH.NgayBatDau = dateTimePicker1.Value;
+            nhomTH.NgayKetThuc = dateTimePicker2.Value;
 
-            //frmLopHocPhan.instance.lstTH = lst;
-            //frmLopHocPhan.instance.LoadDanhSachNhom(lst);
-            //frmLopHocPhan.instance.dataGridView2.Refresh();
-            //this.Close();
+            List<eNhomThucHanh> lst = frmLopHocPhan.instance.lstTH;
+            int f = 0;
+            foreach (eNhomThucHanh x in lst)
+            {
+                if (nhomTH.ID_NhomThucHanh == x.ID_NhomThucHanh)
+                {
+                    x.ID_GiangVien = nhomTH.ID_GiangVien;
+                    x.ID_LopHocPhan = nhomTH.ID_LopHocPhan;
+                    x.LichHoc_NhomThucHanh = nhomTH.LichHoc_NhomThucHanh;             
+                    x.TenNhom = nhomTH.TenNhom;
+                    x.SoLuong = nhomTH.SoLuong;
+                    x.NgayBatDau = nhomTH.NgayBatDau;
+                    x.NgayKetThuc = nhomTH.NgayKetThuc;
+                    f = 1;
+                }
+            }
+            if (f == 0)
+            {
+                lst.Add(nhomTH);
+            }
+
+            frmLopHocPhan.instance.lstTH = lst;
+            frmLopHocPhan.instance.LoadDanhSachNhom(lst);
+            frmLopHocPhan.instance.dataGridView2.Refresh();
+            this.Close();
 
         }
 
@@ -158,17 +156,268 @@ namespace DKHP
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            //if (nTH.DelNhomTH(lTH.id_LopThucHanh) == 1)
-            //{
-            //    MessageBox.Show("Xóa thành công!!!");
-            //    this.Close();
-            //    frmLopHocPhan.instance.LoadDanhSachNhom(nTH.GetNhomByIDLopHocPhan(frmLopHocPhan.instance.tbID.Text.Trim()));
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Xóa không thành công!!!");
-            //}
+            if (nTH.DelNhomTH(nhomTH.ID_NhomThucHanh) == 1)
+            {
+                MessageBox.Show("Xóa thành công!!!");
+                this.Close();
+                frmLopHocPhan.instance.LoadDanhSachNhom(nTH.GetNhomByIDLopHocPhan(frmLopHocPhan.instance.tbID.Text.Trim()));
+            }
+            else
+            {
+                MessageBox.Show("Xóa không thành công!!!");
+            }
 
+        }
+        //------------------------------------Lich Hoc Thuc Hanh------------------------------------------------
+        #region LichHocLyThuyet
+        private void btnXoaLich_Click(object sender, EventArgs e)
+        {
+            if (nhomTH.LichHoc_NhomThucHanh.Count == 0)
+            {
+                MessageBox.Show("Không có lịch để xóa");
+                return;
+            }
+            cbPhong.Enabled = false;
+            cbNgayHoc.Enabled = false;
+            cbTietHoc.Enabled = false;
+
+            btnLuuLichHoc.Visible = false;
+            btnHuyLuuLichHoc.Visible = false;
+            btnThemLich.Visible = true;
+            btnSuaLich.Visible = true;
+            btnXoaLich.Visible = true;
+
+            foreach (eLichHoc_NhomThucHanh x in nhomTH.LichHoc_NhomThucHanh)
+            {
+                if (x.ID_LichHoc_NhomTH == int.Parse(dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[3].Value.ToString().Trim()))
+                {
+                    nhomTH.LichHoc_NhomThucHanh.Remove(x);
+                    break;
+                }
+            }
+            
+            LoadDSLichHocNhomTH();
+        }
+
+        private void btnSuaLich_Click(object sender, EventArgs e)
+        {
+            if (nhomTH.LichHoc_NhomThucHanh.Count == 0)
+            {
+                MessageBox.Show("Không có lịch để sửa");
+                return;
+            }
+            this.flag = 1;
+            cbPhong.Enabled = true;
+            cbNgayHoc.Enabled = true;
+            cbTietHoc.Enabled = true;
+
+            btnLuuLichHoc.Visible = true;
+            btnHuyLuuLichHoc.Visible = true;
+            btnThemLich.Visible = false;
+            btnSuaLich.Visible = false;
+            btnXoaLich.Visible = false;
+
+            try
+            {
+                cbNgayHoc.SelectedItem = dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[0].Value.ToString().Trim();
+                cbTietHoc.SelectedItem = dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[1].Value.ToString().Trim();
+                cbPhong.SelectedValue = dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[5].Value.ToString().Trim();
+            }
+            catch (Exception)
+            {
+            }
+        }
+        private void btnThemLich_Click(object sender, EventArgs e)
+        {
+            flag = 2;
+            cbPhong.Enabled = true;
+            cbNgayHoc.Enabled = true;
+            cbTietHoc.Enabled = true;
+
+            btnLuuLichHoc.Visible = true;
+            btnHuyLuuLichHoc.Visible = true;
+            btnThemLich.Visible = false;
+            btnSuaLich.Visible = false;
+            btnXoaLich.Visible = false;
+
+
+            
+
+        }
+        private void btnLuuLichHoc_Click(object sender, EventArgs e)
+        {
+            cbPhong.Enabled = false;
+            cbNgayHoc.Enabled = false;
+            cbTietHoc.Enabled = false;
+
+            btnLuuLichHoc.Visible = false;
+            btnHuyLuuLichHoc.Visible = false;
+            btnThemLich.Visible = true;
+            btnSuaLich.Visible = true;
+            btnXoaLich.Visible = true;
+
+
+            //thêm
+            if (this.flag == 2)
+            {
+                eLichHoc_NhomThucHanh lich = new eLichHoc_NhomThucHanh();
+
+                lich.ID_LichHoc_NhomTH = new LichHocBLL().GetLichHoc_NhomThucHanh(tbMaLHP.Text.Trim()).Count;
+                try
+                {
+                    foreach (eLichHoc_NhomThucHanh x in nhomTH.LichHoc_NhomThucHanh)
+                    {
+                        if (lich.ID_LichHoc_NhomTH == x.ID_LichHoc_NhomTH)
+                        {
+                            lich.ID_LichHoc_NhomTH++;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                }
+              
+
+                lich.ID_PhongHoc = cbPhong.SelectedValue.ToString().Trim();
+                lich.TietHoc = cbTietHoc.SelectedItem.ToString();
+                lich.NgayHoc = cbNgayHoc.SelectedItem.ToString();
+                lich.ID_NhomThucHanh = tbIDTH.Text.Trim();
+
+                //kiểm tra lịch trùng trong list lịch 
+                int f = 0;
+                try
+                {
+                    foreach (eLichHoc_NhomThucHanh x in nhomTH.LichHoc_NhomThucHanh)
+                    {
+                        if (lich.ID_PhongHoc == x.ID_PhongHoc && lich.NgayHoc == x.NgayHoc && lich.TietHoc == x.TietHoc)
+                        {
+                            f = 1;
+                            break;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                }
+               
+                if (f != 1)
+                {
+                    if(nhomTH.LichHoc_NhomThucHanh==null)
+                    {
+                        nhomTH.LichHoc_NhomThucHanh = new List<eLichHoc_NhomThucHanh>();       
+                    }
+                    nhomTH.LichHoc_NhomThucHanh.Add(lich);
+
+                }
+                else
+                {
+                    MessageBox.Show("Lịch bị trùng");
+                }
+                LoadDSLichHocNhomTH();
+
+                try
+                {
+                    cbNgayHoc.SelectedItem = dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[0].Value.ToString().Trim();
+                    cbTietHoc.SelectedItem = dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[1].Value.ToString().Trim();
+                    cbPhong.SelectedValue = dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[5].Value.ToString().Trim();
+
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+            else if (flag == 1)  // Sửa
+            {
+
+
+                int index = nhomTH.LichHoc_NhomThucHanh.IndexOf(nhomTH.LichHoc_NhomThucHanh.Where(x => x.ID_LichHoc_NhomTH == int.Parse(dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[3].Value.ToString().Trim())).FirstOrDefault());
+                nhomTH.LichHoc_NhomThucHanh[index].NgayHoc = cbNgayHoc.SelectedItem.ToString().Trim();
+                nhomTH.LichHoc_NhomThucHanh[index].TietHoc = cbTietHoc.SelectedItem.ToString().Trim();
+                nhomTH.LichHoc_NhomThucHanh[index].ID_PhongHoc = cbPhong.SelectedValue.ToString().Trim();
+
+                LoadDSLichHocNhomTH();
+            }
+
+
+        }
+
+        private void btnHuyLuuLichHoc_Click(object sender, EventArgs e)
+        {
+            cbPhong.Enabled = false;
+            cbNgayHoc.Enabled = false;
+            cbTietHoc.Enabled = false;
+
+            btnLuuLichHoc.Visible = false;
+            btnHuyLuuLichHoc.Visible = false;
+            btnThemLich.Visible = true;
+            btnSuaLich.Visible = true;
+            btnXoaLich.Visible = true;
+
+
+
+            
+
+        }
+        //load dữ liệu cho combobox lịch học
+        public void LoadCBLich()
+        {
+            #region TietHoc
+            cbTietHoc.Items.Add("1-3");
+            cbTietHoc.Items.Add("1-2");
+            cbTietHoc.Items.Add("2-3");
+
+            cbTietHoc.Items.Add("4-6");
+            cbTietHoc.Items.Add("4-5");
+            cbTietHoc.Items.Add("5-6");
+
+            cbTietHoc.Items.Add("1-6");
+
+            cbTietHoc.Items.Add("7-9");
+            cbTietHoc.Items.Add("7-8");
+            cbTietHoc.Items.Add("8-9");
+
+            cbTietHoc.Items.Add("10-12");
+            cbTietHoc.Items.Add("10-11");
+            cbTietHoc.Items.Add("11-12");
+            #endregion
+            #region cbbngayHoc
+            cbNgayHoc.Items.Add("Thứ Hai");
+            cbNgayHoc.Items.Add("Thứ Ba");
+            cbNgayHoc.Items.Add("Thứ Tư");
+            cbNgayHoc.Items.Add("Thứ Năm");
+            cbNgayHoc.Items.Add("Thứ Sáu");
+            cbNgayHoc.Items.Add("Thứ Bảy");
+            cbNgayHoc.Items.Add("Chủ Nhật");
+            #endregion
+            #region cbbPhongHoc
+            cbPhong.DataSource = new PhongHocBLL().GetAllPhongHoc();
+            cbPhong.DisplayMember = "TenPhongHoc";
+            cbPhong.ValueMember = "ID_PhongHoc";
+            #endregion
+            cbTietHoc.SelectedIndex = 0;
+            cbNgayHoc.SelectedIndex = 0;
+        }
+
+        #endregion
+
+        private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //LoadFormThongTinLichLT();
+            try
+            {
+
+                if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                {
+                    cbNgayHoc.SelectedItem = dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString().Trim();
+                    cbTietHoc.SelectedItem = dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString().Trim();
+                    cbPhong.SelectedValue = dataGridView3.Rows[e.RowIndex].Cells[5].Value.ToString().Trim();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(dataGridView3.Rows.Count.ToString());
+            }
         }
     }
 }

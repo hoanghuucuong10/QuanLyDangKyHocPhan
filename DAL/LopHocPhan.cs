@@ -33,6 +33,7 @@ namespace DAL
         public Nullable<int> SoTiet { get; set; }
         public Nullable<System.DateTime> NgayBatDau { get; set; }
         public Nullable<System.DateTime> NgayKetThuc { get; set; }
+        public Nullable<int> SoLuong { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DangKyHocPhan> DangKyHocPhans { get; set; }

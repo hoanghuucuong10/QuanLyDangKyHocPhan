@@ -29,7 +29,6 @@ namespace DAL
         public virtual DbSet<Diem> Diems { get; set; }
         public virtual DbSet<GiangVien> GiangViens { get; set; }
         public virtual DbSet<HocPhan> HocPhans { get; set; }
-        public virtual DbSet<LichHoc> LichHocs { get; set; }
         public virtual DbSet<LichHoc_LopHocPhan> LichHoc_LopHocPhan { get; set; }
         public virtual DbSet<LichHoc_NhomThucHanh> LichHoc_NhomThucHanh { get; set; }
         public virtual DbSet<LopHocPhan> LopHocPhans { get; set; }

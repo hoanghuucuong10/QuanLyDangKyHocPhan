@@ -13,6 +13,7 @@ namespace Entities
         public string ID_GiangVien { get; set; }
         public string TenNhom { get; set; }
         public Nullable<int> SoTiet { get; set; }
+        public Nullable<int> SoLuong { get; set; }
         public Nullable<System.DateTime> NgayBatDau { get; set; }
         public Nullable<System.DateTime> NgayKetThuc { get; set; }
 

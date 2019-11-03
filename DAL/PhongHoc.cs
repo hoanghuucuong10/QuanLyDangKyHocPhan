@@ -17,13 +17,16 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PhongHoc()
         {
-            this.LichHocs = new HashSet<LichHoc>();
+            this.LichHoc_LopHocPhan = new HashSet<LichHoc_LopHocPhan>();
+            this.LichHoc_NhomThucHanh = new HashSet<LichHoc_NhomThucHanh>();
         }
     
         public string ID_PhongHoc { get; set; }
         public string TenPhongHoc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LichHoc> LichHocs { get; set; }
+        public virtual ICollection<LichHoc_LopHocPhan> LichHoc_LopHocPhan { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LichHoc_NhomThucHanh> LichHoc_NhomThucHanh { get; set; }
     }
 }

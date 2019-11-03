@@ -46,22 +46,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="LichHocs">
-      <EntityTypeMapping TypeName="DangKyHocPhanModel.LichHoc">
-        <MappingFragment StoreEntitySet="LichHoc">
-          <ScalarProperty Name="ID_LichHoc" ColumnName="ID_LichHoc" />
-          <ScalarProperty Name="NgayHoc" ColumnName="NgayHoc" />
-          <ScalarProperty Name="TietHoc" ColumnName="TietHoc" />
-          <ScalarProperty Name="ID_PhongHoc" ColumnName="ID_PhongHoc" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="LichHoc_LopHocPhan">
       <EntityTypeMapping TypeName="DangKyHocPhanModel.LichHoc_LopHocPhan">
         <MappingFragment StoreEntitySet="LichHoc_LopHocPhan">
           <ScalarProperty Name="ID_LichHoc_LopHP" ColumnName="ID_LichHoc_LopHP" />
           <ScalarProperty Name="ID_LopHocPhan" ColumnName="ID_LopHocPhan" />
-          <ScalarProperty Name="ID_LichHoc" ColumnName="ID_LichHoc" />
+          <ScalarProperty Name="NgayHoc" ColumnName="NgayHoc" />
+          <ScalarProperty Name="TietHoc" ColumnName="TietHoc" />
+          <ScalarProperty Name="ID_PhongHoc" ColumnName="ID_PhongHoc" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -70,13 +62,16 @@
         <MappingFragment StoreEntitySet="LichHoc_NhomThucHanh">
           <ScalarProperty Name="ID_LichHoc_NhomTH" ColumnName="ID_LichHoc_NhomTH" />
           <ScalarProperty Name="ID_NhomThucHanh" ColumnName="ID_NhomThucHanh" />
-          <ScalarProperty Name="ID_LichHoc" ColumnName="ID_LichHoc" />
+          <ScalarProperty Name="NgayHoc" ColumnName="NgayHoc" />
+          <ScalarProperty Name="TietHoc" ColumnName="TietHoc" />
+          <ScalarProperty Name="ID_PhongHoc" ColumnName="ID_PhongHoc" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="LopHocPhans">
       <EntityTypeMapping TypeName="DangKyHocPhanModel.LopHocPhan">
         <MappingFragment StoreEntitySet="LopHocPhan">
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
           <ScalarProperty Name="ID_LopHocPhan" ColumnName="ID_LopHocPhan" />
           <ScalarProperty Name="ID_HocPhan" ColumnName="ID_HocPhan" />
           <ScalarProperty Name="ID_NhanVienPDT" ColumnName="ID_NhanVienPDT" />
@@ -117,6 +112,7 @@
     <EntitySetMapping Name="NhomThucHanhs">
       <EntityTypeMapping TypeName="DangKyHocPhanModel.NhomThucHanh">
         <MappingFragment StoreEntitySet="NhomThucHanh">
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
           <ScalarProperty Name="ID_NhomThucHanh" ColumnName="ID_NhomThucHanh" />
           <ScalarProperty Name="ID_LopHocPhan" ColumnName="ID_LopHocPhan" />
           <ScalarProperty Name="ID_GiangVien" ColumnName="ID_GiangVien" />

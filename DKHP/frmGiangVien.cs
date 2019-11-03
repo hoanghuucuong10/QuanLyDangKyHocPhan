@@ -198,7 +198,7 @@ namespace DKHP
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            ShowDataGrid();
+            
         }
 
         private void btnHuy_Click(object sender, EventArgs e)

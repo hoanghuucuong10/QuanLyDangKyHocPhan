@@ -81,9 +81,7 @@
       <DependentUpon>DangKyHocPhan.tt</DependentUpon>
     </Compile>
     <Compile Include="HocPhanDAL.cs" />
-    <Compile Include="LichHoc.cs">
-      <DependentUpon>DangKyHocPhan.tt</DependentUpon>
-    </Compile>
+    <Compile Include="LichHocDAL.cs" />
     <Compile Include="LichHoc_LopHocPhan.cs">
       <DependentUpon>DangKyHocPhan.tt</DependentUpon>
     </Compile>
@@ -109,6 +107,7 @@
     <Compile Include="NienKhoa.cs">
       <DependentUpon>DangKyHocPhan.tt</DependentUpon>
     </Compile>
+    <Compile Include="NienKhoaDAL.cs" />
     <Compile Include="PhongHoc.cs">
       <DependentUpon>DangKyHocPhan.tt</DependentUpon>
     </Compile>
