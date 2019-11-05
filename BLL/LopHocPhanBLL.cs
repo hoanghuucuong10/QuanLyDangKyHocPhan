@@ -42,7 +42,6 @@ namespace BLL
             return LHP.SearchLopHocPhan(maLopHocPhan,tenMonHoc,hocKy,namHoc);
         }
 
-      
 
     }
 }

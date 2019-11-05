@@ -45,8 +45,9 @@ namespace DAL
             List<eNienKhoa> lst = db.NienKhoas.Select(x => new eNienKhoa
             {
                 ID_NienKhoa = x.ID_NienKhoa,
-                NienKhoa1 = x.NienKhoa1
-            }).ToList(); return lst;
+                NienKhoa1 = x.NienKhoa1.Trim()
+            }).ToList();
+            return lst;
         }
     }
 }

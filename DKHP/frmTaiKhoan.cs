@@ -23,9 +23,9 @@ namespace DKHP
         {
             InitializeComponent();
             taiKhoan = tk;
-            Load();
+            Loadform();
         }
-        public void Load()
+        public void Loadform()
         {
             if (taiKhoan is eSinhVien)
             {
@@ -190,7 +190,7 @@ namespace DKHP
                     {
                         MessageBox.Show("Lưu Thành Công");
                         taiKhoan = x;
-                        Load();
+                        Loadform();
                         kt = 0;
                     }
                     else
@@ -212,7 +212,7 @@ namespace DKHP
                     {
                         MessageBox.Show("Lưu Thành Công");
                         taiKhoan = x;
-                        Load();
+                        Loadform();
                         kt = 0;
                     }
                     else
@@ -233,7 +233,7 @@ namespace DKHP
                     {
                         MessageBox.Show("Lưu Thành Công");
                         taiKhoan = x;
-                        Load();
+                        Loadform();
                         kt = 0;
                     }
                     else
@@ -245,7 +245,7 @@ namespace DKHP
 
         private void btnHuy_Click(object sender, EventArgs e)
         {
-            Load();
+            Loadform();
         }
         string fileName = "";
         byte[] byteImage = { };

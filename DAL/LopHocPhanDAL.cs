@@ -65,6 +65,7 @@ namespace DAL
             }).OrderBy(gs => gs.ID_LopHocPhan).ToList();
             return lst;
         }
+
         public int EditLopHocPhan(string id, eLopHocPhan x)
         {
             try
