@@ -147,6 +147,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DangKyHocPhanViewModels.cs" />
     <Compile Include="ViewModels\GiangVienViewModels.cs" />
     <Compile Include="ViewModels\HocPhanViewModels.cs" />
     <Compile Include="ViewModels\LichHocLTViewModels.cs" />
@@ -205,6 +206,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\DKHP.ViewModels.DangKyHocPhanViewModels.datasource" />
     <None Include="Properties\DataSources\DKHP.ViewModels.GiangVienViewModels.datasource" />
     <None Include="Properties\DataSources\DKHP.ViewModels.HocPhanViewModels.datasource" />
     <None Include="Properties\DataSources\DKHP.ViewModels.LichHocLTViewModels.datasource" />

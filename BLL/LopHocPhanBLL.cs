@@ -41,7 +41,10 @@ namespace BLL
            
             return LHP.SearchLopHocPhan(maLopHocPhan,tenMonHoc,hocKy,namHoc);
         }
-
+        public List<eLopHocPhan> GetAllHocPhanSinhVien(string idSV, int hocKy, string namHoc)
+        {
+            return LHP.GetAllHocPhanSinhVien(idSV, hocKy, namHoc);
+        }
 
     }
 }

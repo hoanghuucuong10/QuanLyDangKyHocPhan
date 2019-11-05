@@ -14,7 +14,10 @@ namespace BLL
         {
             return hocPhanDAL.GetALLHocPhan();
         }
-
+        public List<eHocPhan> SearchHocPhan(string id, string name)
+        {
+            return hocPhanDAL.SearchHocPhan(id, name);
+        }
         public eHocPhan AddNewHocPhan(eHocPhan hp)
         {
             return hocPhanDAL.AddNewHocPhan(hp);

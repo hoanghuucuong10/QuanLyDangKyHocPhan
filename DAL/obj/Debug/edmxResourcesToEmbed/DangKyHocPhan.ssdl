@@ -57,7 +57,7 @@
     <Key>
       <PropertyRef Name="ID_LichHoc_NhomTH" />
     </Key>
-    <Property Name="ID_LichHoc_NhomTH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_LichHoc_NhomTH" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="ID_NhomThucHanh" Type="nchar" MaxLength="10" />
     <Property Name="NgayHoc" Type="nvarchar" MaxLength="30" />
     <Property Name="TietHoc" Type="nvarchar" MaxLength="30" />

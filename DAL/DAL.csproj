@@ -69,6 +69,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DangKyHocPhan.tt</DependentUpon>
     </Compile>
+    <Compile Include="DangKyHocPhanDAL.cs" />
     <Compile Include="Diem.cs">
       <DependentUpon>DangKyHocPhan.tt</DependentUpon>
     </Compile>

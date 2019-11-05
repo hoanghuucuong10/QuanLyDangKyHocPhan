@@ -49,10 +49,15 @@ namespace DKHP
         {
             List<HocPhanViewModels> lstHP = lst.Select(t => new HocPhanViewModels(t)).ToList(); 
             dgv.DataSource = lstHP;
-
        
-            dgv.AutoSize = true;
+            dgv.Columns["ID_HocPhan"].HeaderText = "Mã Học Phần";
+            dgv.Columns[0].Width = 200;
+            dgv.Columns["TenMonHoc"].HeaderText = "Tên Môn Học";
+            dgv.Columns[1].Width = 300;
+            dgv.Columns["SoTC"].HeaderText = "Số Tín Chỉ";
+            dgv.Columns[2].Width = 200;
 
+            dgv.ReadOnly = true;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.MultiSelect = false;
             dgv.BackgroundColor = Color.White;
@@ -224,5 +229,9 @@ namespace DKHP
             ShowDataGrid();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadDatagridView(hocPhanBLL.SearchHocPhan(tbxIDSearch.Text.Trim(), tbTenSearch.Text.Trim()),dataGridView1);
+        }
     }
 }

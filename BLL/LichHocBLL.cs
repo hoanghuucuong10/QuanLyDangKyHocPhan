@@ -26,5 +26,10 @@ namespace BLL
         {
             return lichHoc.AddLichTH(x);
         }
+
+        public bool CheckLichTrung(string idSV, string idLopHP, string idNhom, string hocKy, int id_NienKhoa)
+        {
+            return lichHoc.CheckLichTrung(idSV, idLopHP, idNhom,hocKy,id_NienKhoa);
+        }
     }
 }

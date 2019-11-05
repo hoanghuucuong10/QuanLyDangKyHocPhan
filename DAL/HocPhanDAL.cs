@@ -21,6 +21,17 @@ namespace DAL
 
             return lst;
         }
+        public List<eHocPhan> SearchHocPhan(string id, string name)
+        {
+            List<eHocPhan> lst = db.HocPhans.Where(s=>s.ID_HocPhan.Contains(id)&&s.TenMonHoc.ToUpper().Contains(name)).Select(x => new eHocPhan
+            {
+                ID_HocPhan = x.ID_HocPhan,
+                TenMonHoc = x.TenMonHoc,
+                SoTC = x.SoTC.Value
+            }).ToList();
+
+            return lst;
+        }
         public eHocPhan GetHocPhanByID(string id)
         {
 

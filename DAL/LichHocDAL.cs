@@ -79,5 +79,43 @@ namespace DAL
                 return 0;
             }
         }
+        public bool CheckLichTrung(string idSV, string idLopHP, string idNhom, string hocKy, int id_NienKhoa)
+        {
+            List<LichHoc_LopHocPhan> lstLopHP = db.LichHoc_LopHocPhan.Where(x => x.ID_LopHocPhan == idLopHP).ToList();
+            List<LichHoc_NhomThucHanh> lstNhomTH = db.LichHoc_NhomThucHanh.Where(x => x.ID_NhomThucHanh == idNhom).ToList();
+
+            //danh sách lịch lớp học phần của sv trong kỳ
+            List<LichHoc_LopHocPhan> lstLopHPSV = db.LichHoc_LopHocPhan.Where(x => x.LopHocPhan.HocKy.ToString().Trim() == hocKy.Trim() && x.LopHocPhan.ID_NienKhoa == id_NienKhoa && x.LopHocPhan.DangKyHocPhans.Any(m=>m.ID_SinhVien==idSV)).ToList();
+            //danh sach lich nhom thuc hanh cua sv trong ky
+            List<LichHoc_NhomThucHanh> lstNhomTHSV = db.LichHoc_NhomThucHanh.Where(x => x.NhomThucHanh.LopHocPhan.HocKy.ToString().Trim() == hocKy.Trim() && x.NhomThucHanh.LopHocPhan.ID_NienKhoa == id_NienKhoa && x.NhomThucHanh.LopHocPhan.DangKyHocPhans.Any(m => m.ID_SinhVien == idSV)).ToList();
+
+            int a = 0;
+            foreach(LichHoc_LopHocPhan x in lstLopHP)
+            {
+                foreach(LichHoc_LopHocPhan y in lstLopHPSV)
+                {
+                    if(x.ID_PhongHoc==y.ID_PhongHoc && x.NgayHoc==y.NgayHoc&&x.TietHoc==y.TietHoc)
+                    {
+                        a = 1;
+                        break;
+                    }
+                }
+            }
+            foreach (LichHoc_NhomThucHanh x in lstNhomTH)
+            {
+                foreach (LichHoc_NhomThucHanh y in lstNhomTHSV)
+                {
+                    if (x.ID_PhongHoc == y.ID_PhongHoc && x.NgayHoc == y.NgayHoc && x.TietHoc == y.TietHoc)
+                    {
+                        a = 1;
+                        break;
+                    }
+                }
+            }
+            if (a == 0)
+                return false;
+            else
+                return true;//trùng lịch
+        }
     }
 }

@@ -133,5 +133,22 @@ namespace DAL
             return numStr;
         }
 
+        public List<eLopHocPhan> GetAllHocPhanSinhVien(string idSV, int hocKy, string namHoc)
+        {
+            List<eLopHocPhan> lst = db.LopHocPhans.Where(x => x.HocKy == hocKy && x.NienKhoa.NienKhoa1 == namHoc && x.DangKyHocPhans.Any(t => t.ID_SinhVien == idSV)).Select(m=>new eLopHocPhan{
+                ID_LopHocPhan = m.ID_LopHocPhan,
+                ID_HocPhan = m.ID_HocPhan,
+                ID_NhanVienPDT = m.ID_NhanVienPDT,
+                ID_GiangVien = m.ID_GiangVien,
+                HocKy = m.HocKy.Value,
+                ID_NienKhoa = m.ID_NienKhoa,
+                SoTiet = m.SoTiet,
+                TrangThai = m.TrangThai,
+                NgayBatDau = m.NgayBatDau,
+                NgayKetThuc = m.NgayKetThuc,
+                SoLuong = db.DangKyHocPhans.Where(s => s.ID_LopHocPhan == m.ID_LopHocPhan).Count(),
+            }).ToList();
+            return lst;
+        }
     }
 }

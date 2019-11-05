@@ -18,6 +18,10 @@ namespace BLL
         {
             return nth.GetNhomByID(id);
         }
+        public string GetTenNhomByID(string id)
+        {
+            return nth.GetTenNhomByID(id);
+        }
         public List<eNhomThucHanh> GetNhomByIDGiangVien(string id, int hocKy,string namHoc)
         {
             return nth.GetNhomByIDGiangVien(id, hocKy, namHoc);
