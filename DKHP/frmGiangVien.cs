@@ -44,7 +44,7 @@ namespace DKHP
         public frmGiangVien()
         {
             InitializeComponent();
-            LoadDatagridView(gvBLL.SearchAllGiangVien(tbxSearch.Text.Trim(), tbTenSearch.Text.Trim()), dataGridView1);
+            LoadDatagridView(gvBLL.SearchAllGiangVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()), dgvGiangVien);
             byteImage = converterDemo(pictureBox1.Image);
           
         }
@@ -119,7 +119,7 @@ namespace DKHP
         public void XemThongTin()
         {
             btnChonAnh.Visible = false;
-            groupBox1.Text = "Thông Tin Sinh Viên";
+            groupBoxThongTinGiangVien.Text = "Thông Tin Giảng Viên";
             instance.tbxID.ReadOnly = true;
             instance.tbxTen.ReadOnly = true;
             instance.tbTrinhDo.Enabled = false;
@@ -129,14 +129,15 @@ namespace DKHP
             instance.btnLuu.Visible = false;
             instance.btnHuy.Visible = false;
             instance.tbxMK.ReadOnly = true;
-
+            instance.btnThem.Visible = true;
+            instance.btnSua.Visible = true;
            
         }
 
         public void Them()
         {
             btnChonAnh.Visible = true;
-            groupBox1.Text = "Thêm Sinh Viên";
+            groupBoxThongTinGiangVien.Text = "Thêm Giảng Viên";
             instance.tbxID.ReadOnly = true;
             instance.tbxTen.ReadOnly = false;
             instance.tbTrinhDo.Enabled = true;
@@ -152,7 +153,7 @@ namespace DKHP
         public void ChinhSua()
         {
             btnChonAnh.Visible = true;
-            groupBox1.Text = "Chỉnh Sửa Sinh Viên";
+            groupBoxThongTinGiangVien.Text = "Chỉnh Sửa Giảng Viên";
             instance.tbxID.ReadOnly = true;
             instance.tbxTen.ReadOnly = false;
             instance.tbTrinhDo.Enabled = true;
@@ -165,13 +166,13 @@ namespace DKHP
             ShowDataGrid();
 
         }
-
+        //Lấy giá trị trên datagridview xổ sang form thông tin
         private void ShowDataGrid()
         {
             int rowSelected = 0;
             try
             {
-                rowSelected = dataGridView1.CurrentRow.Index;
+                rowSelected = dgvGiangVien.CurrentRow.Index;
             }
             catch (Exception e)
             {
@@ -179,9 +180,9 @@ namespace DKHP
             }
 
 
-            if (groupBox1.Text != "Thêm Sinh Viên")
+            if (groupBoxThongTinGiangVien.Text != "Thêm Giảng Viên")
             {
-                GiangVienViewModels gv = new GiangVienViewModels( gvBLL.GetGiangVienByID(dataGridView1.Rows[rowSelected].Cells[0].Value.ToString()));
+                GiangVienViewModels gv = new GiangVienViewModels( gvBLL.GetGiangVienByID(dgvGiangVien.Rows[rowSelected].Cells[0].Value.ToString()));
                 tbxID.Text = gv.ID_GiangVien.Trim();
                 tbxTen.Text = gv.HoVaTen.Trim();
                 tbTrinhDo.Text = gv.TrinhDo.Trim();
@@ -196,9 +197,9 @@ namespace DKHP
             }
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvGiangVien_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            ShowDataGrid();
         }
 
         private void btnHuy_Click(object sender, EventArgs e)
@@ -315,7 +316,7 @@ namespace DKHP
                 gv.MatKhau = tbxMK.Text.Trim();
                 gv.HinhAnh = byteImage;
 
-                if (groupBox1.Text == "Thêm Sinh Viên")
+                if (groupBoxThongTinGiangVien.Text == "Thêm Giảng Viên")
                 {
                     if (gvBLL.AddNewGiangVien(gv) == false)
                     {
@@ -325,9 +326,10 @@ namespace DKHP
                     {
                         MessageBox.Show("Thêm Thành Công");
                         kt = 0;
-                        LoadDatagridView(gvBLL.SearchAllGiangVien(tbxSearch.Text.Trim(), tbTenSearch.Text.Trim()), dataGridView1);
+                        LoadDatagridView(gvBLL.SearchAllGiangVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()), dgvGiangVien);
                         ShowDataGrid();
                         pictureBox1.Image = Resources.book;
+                        XemThongTin();
                     }
                 }
                 else
@@ -340,21 +342,22 @@ namespace DKHP
                     {
                         MessageBox.Show("Chỉnh Sửa Thành Công");
                         kt = 0;
-                        LoadDatagridView(gvBLL.SearchAllGiangVien(tbxSearch.Text.Trim(), tbTenSearch.Text.Trim()), dataGridView1);
+                        LoadDatagridView(gvBLL.SearchAllGiangVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()), dgvGiangVien);
                         ShowDataGrid();
+                        XemThongTin();
                     }
                 }
             }
            
         }
         //Search
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadDatagridView(gvBLL.SearchAllGiangVien(tbxSearch.Text.Trim(),tbTenSearch.Text.Trim()), dataGridView1);
+            LoadDatagridView(gvBLL.SearchAllGiangVien(txtIDSearch.Text.Trim(),txtTenSearch.Text.Trim()), dgvGiangVien);
         }
         private void tbxSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadDatagridView(gvBLL.SearchAllGiangVien(tbxSearch.Text.Trim(), tbTenSearch.Text.Trim()), dataGridView1);
+            LoadDatagridView(gvBLL.SearchAllGiangVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()), dgvGiangVien);
         }
 
         private void btnHide_Click(object sender, EventArgs e)
@@ -390,7 +393,7 @@ namespace DKHP
             btnThem.Visible = false;
         }
 
-        private void tbxMK_TextChanged(object sender, EventArgs e)
+        private void dgvGiangVien_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

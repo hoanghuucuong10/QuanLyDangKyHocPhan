@@ -230,10 +230,15 @@ namespace DKHP
         {
 
         }
+
+
+
         #endregion
 
-
-
-
+        private void mnNVXemLichDay_Click(object sender, EventArgs e)
+        {
+            frmLichDay frm = new frmLichDay();
+            ShowPNMain(frm);
+        }
     }
 }

@@ -17,6 +17,10 @@ namespace BLL
         {
             return new DangKyHocPhanDAL().SoLuong(idLopHocPhan);
         }
+        public int SoLuongNhomTH(string idNhomTH)
+        {
+            return new DangKyHocPhanDAL().SoLuongNhomTH(idNhomTH);
+        }
         public bool DangKy(string idSV, string idLopHP, string idNhomTH)
         {
             return new DangKyHocPhanDAL().DangKy(idSV, idLopHP, idNhomTH);

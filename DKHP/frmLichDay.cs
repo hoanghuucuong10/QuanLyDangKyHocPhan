@@ -20,62 +20,32 @@ namespace DKHP
         {
             InitializeComponent();
             this.eGV = gV;
-            int a = DateTime.Now.Year;
-            int n = 0;
-            List<string> lstItem = new List<string>();
-            foreach (eLopHocPhan x in new LopHocPhanBLL().GetAllLopHocPhan())
-            {
-                n = 0;
-                foreach (string t in lstItem)
-                {
-                   // if (x._NienKhoa.NienKhoa1.Trim() == t.Trim())
-                    //{
-                   ////     n = 1;
-                   // }
-                }
-                if (n == 0)
-                {
-                    //lstItem.Add(x._NienKhoa.NienKhoa1.Trim());
-                }
-            }
-            n = 0;
-            foreach (string t in lstItem)
-            {
-                if ((a + "-" + (a + 1)) == t.Trim())
-                {
-                    n = 1;
-                }
-            }
-            if (n == 0)
-            {
-                lstItem.Add(a + "-" + (a + 1));
-            }
-            n = 0;
-            foreach (string t in lstItem)
-            {
-                if (((a + 1) + "-" + (a + 2)) == t.Trim())
-                {
-                    n = 1;
-                }
-            }
-            if (n == 0)
-            {
-                lstItem.Add((a + 1) + "-" + (a + 2));
-            }
-            n = 0;
-            foreach (string t in lstItem)
-            {
-                if (((a + 2) + "-" + (a + 3)) == t.Trim())
-                {
-                    n = 1;
-                }
-            }
-            if (n == 0)
-            {
-                lstItem.Add((a + 2) + "-" + (a + 3));
-            }
-            cbNamHocSearch.DataSource = lstItem;
+            btnSearch.Visible = false;
+            cbNamHocSearch.DataSource = new NienKhoaBLL().GetAllNienKhoa();
+            cbNamHocSearch.ValueMember = "ID_NienKhoa";
+            cbNamHocSearch.DisplayMember = "NienKhoa1";
 
+        }
+        public frmLichDay()
+        {
+            InitializeComponent();
+            cbNamHocSearch.DataSource = new NienKhoaBLL().GetAllNienKhoa();
+            cbNamHocSearch.ValueMember = "ID_NienKhoa";
+            cbNamHocSearch.DisplayMember = "NienKhoa1";
+
+        }
+        private void btnSearchGV_Click(object sender, EventArgs e)
+        {
+            eGiangVien x = new GiangVienBLL().GetGiangVienByID(txtID.Text.Trim());
+            if (x!=null)
+            {
+                this.eGV = x;
+                txtMail.Text = x.Mail.Trim();
+                txtPhone.Text = x.SDT.Trim();
+                txtTen.Text = x.HoVaTen.Trim();
+                txtTrinhDo.Text = x.TrinhDo.Trim();
+                txtAddress.Text = x.DiaChi.Trim();
+            }
         }
         public void ClearPN()
         {
@@ -115,10 +85,161 @@ namespace DKHP
             panel34.Controls.Clear();
             panel35.Controls.Clear();
         }
-        public void AddPanelTH(eNhomThucHanh a)
+        public void AddPanelTH(eLichHoc_NhomThucHanh x)
         {
-         
-      
+            eLopHocPhan a = new LopHocPhanBLL().GetHocPhanByIDNhomTH(x.ID_NhomThucHanh);
+            eNhomThucHanh b = new NhomThucHanhBLL().GetNhomByID(x.ID_NhomThucHanh);
+            ePhongHoc c = new PhongHocBLL().GetPhongHocByID(x.ID_PhongHoc);
+            eHocPhan d = new HocPhanBLL().GetHocPhanByID(a.ID_HocPhan);
+            frmPnLich pnLich = new frmPnLich(a.ID_LopHocPhan.Trim(), d.TenMonHoc.Trim(), new GiangVienBLL().GetGiangVienByID(a.ID_GiangVien).HoVaTen.Trim(), x.TietHoc, c.TenPhongHoc, b.TenNhom.Trim(), b.NgayBatDau.Value.ToShortDateString(), b.NgayKetThuc.Value.ToShortDateString());
+            pnLich.TopLevel = false;
+            pnLich.FormBorderStyle = FormBorderStyle.None;
+            pnLich.Visible = true;
+            if (x.NgayHoc == "Thứ Hai" && x.TietHoc == "1-3")
+            {
+                panel1.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Ba" && x.TietHoc == "1-3")
+            {
+                panel2.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Tư" && x.TietHoc == "1-3")
+            {
+                panel3.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Năm" && x.TietHoc == "1-3")
+            {
+                panel4.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Sáu" && x.TietHoc == "1-3")
+            {
+                panel5.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Bảy" && x.TietHoc == "1-3")
+            {
+                panel6.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Chủ Nhật" && x.TietHoc == "1-3")
+            {
+                panel7.Controls.Add(pnLich);
+            }
+            //
+            if (x.NgayHoc == "Thứ Hai" && x.TietHoc == "4-6")
+            {
+                panel8.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Ba" && x.TietHoc == "4-6")
+            {
+                panel9.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Tư" && x.TietHoc == "4-6")
+            {
+                panel10.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Năm" && x.TietHoc == "4-6")
+            {
+                panel11.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Sáu" && x.TietHoc == "4-6")
+            {
+                panel12.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Bảy" && x.TietHoc == "4-6")
+            {
+                panel13.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Chủ Nhật" && x.TietHoc == "4-6")
+            {
+                panel14.Controls.Add(pnLich);
+            }
+            //7-9
+            if (x.NgayHoc == "Thứ Hai" && x.TietHoc == "7-9")
+            {
+                panel15.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Ba" && x.TietHoc == "7-9")
+            {
+                panel16.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Tư" && x.TietHoc == "7-9")
+            {
+                panel17.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Năm" && x.TietHoc == "7-9")
+            {
+                panel18.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Sáu" && x.TietHoc == "7-9")
+            {
+                panel19.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Bảy" && x.TietHoc == "7-9")
+            {
+                panel20.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Chủ Nhật" && x.TietHoc == "7-9")
+            {
+                panel21.Controls.Add(pnLich);
+            }
+            //10-12
+            if (x.NgayHoc == "Thứ Hai" && x.TietHoc == "10-12")
+            {
+                panel22.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Ba" && x.TietHoc == "10-12")
+            {
+                panel23.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Tư" && x.TietHoc == "10-12")
+            {
+                panel24.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Năm" && x.TietHoc == "10-12")
+            {
+                panel25.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Sáu" && x.TietHoc == "10-12")
+            {
+                panel26.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Bảy" && x.TietHoc == "10-12")
+            {
+                panel27.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Chủ Nhật" && x.TietHoc == "10-12")
+            {
+                panel28.Controls.Add(pnLich);
+            }
+            //13-15
+            if (x.NgayHoc == "Thứ Hai" && x.TietHoc == "13-15")
+            {
+                panel29.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Ba" && x.TietHoc == "13-15")
+            {
+                panel30.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Tư" && x.TietHoc == "13-15")
+            {
+                panel31.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Năm" && x.TietHoc == "13-15")
+            {
+                panel32.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Sáu" && x.TietHoc == "13-15")
+            {
+                panel33.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Thứ Bảy" && x.TietHoc == "13-15")
+            {
+                panel34.Controls.Add(pnLich);
+            }
+            if (x.NgayHoc == "Chủ Nhật" && x.TietHoc == "13-15")
+            {
+                panel35.Controls.Add(pnLich);
+            }
+
         }
         public void AddPanelLT(eLopHocPhan a)
         {
@@ -127,26 +248,24 @@ namespace DKHP
         public void LoadLichDay(int hocKy,string namHoc)
         {
             ClearPN();
-            List<eLopHocPhan> lstLHP = (new LopHocPhanBLL()).GetAllLopHocPhanGiangVien(eGV.ID_GiangVien,hocKy,namHoc);
-            foreach (eLopHocPhan e in lstLHP)
+            List<eLichHoc_LopHocPhan> lstLichLT = new LichHocBLL().GetLichHocLyThuyet_GiangVien(eGV.ID_GiangVien, int.Parse(cbHocKiSearch.Text.Trim()), int.Parse(cbNamHocSearch.SelectedValue.ToString().Trim()));
+            List<eLichHoc_NhomThucHanh> lstLichTH = new LichHocBLL().GetLichHocThucHanh_GiangVien(eGV.ID_GiangVien, int.Parse(cbHocKiSearch.Text.Trim()), int.Parse(cbNamHocSearch.SelectedValue.ToString().Trim())); ;
+            foreach(eLichHoc_NhomThucHanh x in lstLichTH)
             {
-                AddPanelLT(e);
-            }
-
-            List<eNhomThucHanh> lstTH = (new NhomThucHanhBLL()).GetNhomByIDGiangVien(eGV.ID_GiangVien, hocKy, namHoc);
-            foreach (eNhomThucHanh e in lstTH)
-            {
-                AddPanelTH(e);
+                AddPanelTH(x);
+                
             }
         }
 
-        private void btnSearch_Click_1(object sender, EventArgs e)
+
+
+        private void btnSearch_Click(object sender, EventArgs e)
         {
             int hocKy = int.Parse(cbHocKiSearch.SelectedItem.ToString().Trim());
             string namHoc = cbNamHocSearch.Text.Trim();
             LoadLichDay(hocKy, namHoc);
         }
 
-    
+
     }
 }

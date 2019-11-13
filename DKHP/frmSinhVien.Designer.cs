@@ -41,25 +41,24 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.tbxMail = new System.Windows.Forms.TextBox();
+            this.txtMail = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.tbxAddress = new System.Windows.Forms.TextBox();
-            this.tbxPhone = new System.Windows.Forms.TextBox();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.txtPhone = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.tbxTen = new System.Windows.Forms.TextBox();
-            this.tbxMK = new System.Windows.Forms.TextBox();
-            this.tbxID = new System.Windows.Forms.TextBox();
+            this.txtTen = new System.Windows.Forms.TextBox();
+            this.txtMK = new System.Windows.Forms.TextBox();
+            this.txtID = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.tbTenSearch = new System.Windows.Forms.TextBox();
+            this.txtTenSearch = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.tbxSearch = new System.Windows.Forms.TextBox();
+            this.txtIDSearch = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.err = new System.Windows.Forms.ErrorProvider(this.components);
+            this.dgvSinhVien = new System.Windows.Forms.DataGridView();
             this.iDSinhVienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hoVaTenDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tenLopNienCheDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,12 +69,13 @@
             this.hinhAnhDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.iDLopNienCheDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sinhVienViewModelsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.err = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.err)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSinhVien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sinhVienViewModelsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.err)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -91,17 +91,17 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.tbxMail);
+            this.groupBox1.Controls.Add(this.txtMail);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.tbxAddress);
-            this.groupBox1.Controls.Add(this.tbxPhone);
+            this.groupBox1.Controls.Add(this.txtAddress);
+            this.groupBox1.Controls.Add(this.txtPhone);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.tbxTen);
-            this.groupBox1.Controls.Add(this.tbxMK);
-            this.groupBox1.Controls.Add(this.tbxID);
+            this.groupBox1.Controls.Add(this.txtTen);
+            this.groupBox1.Controls.Add(this.txtMK);
+            this.groupBox1.Controls.Add(this.txtID);
             this.groupBox1.Location = new System.Drawing.Point(12, 22);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(277, 482);
@@ -232,12 +232,12 @@
             this.label6.TabIndex = 23;
             this.label6.Text = "Email:";
             // 
-            // tbxMail
+            // txtMail
             // 
-            this.tbxMail.Location = new System.Drawing.Point(113, 379);
-            this.tbxMail.Name = "tbxMail";
-            this.tbxMail.Size = new System.Drawing.Size(142, 20);
-            this.tbxMail.TabIndex = 22;
+            this.txtMail.Location = new System.Drawing.Point(113, 379);
+            this.txtMail.Name = "txtMail";
+            this.txtMail.Size = new System.Drawing.Size(142, 20);
+            this.txtMail.TabIndex = 22;
             // 
             // label3
             // 
@@ -257,19 +257,19 @@
             this.label4.TabIndex = 20;
             this.label4.Text = "Số Điện Thoại:";
             // 
-            // tbxAddress
+            // txtAddress
             // 
-            this.tbxAddress.Location = new System.Drawing.Point(113, 344);
-            this.tbxAddress.Name = "tbxAddress";
-            this.tbxAddress.Size = new System.Drawing.Size(142, 20);
-            this.tbxAddress.TabIndex = 18;
+            this.txtAddress.Location = new System.Drawing.Point(113, 344);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(142, 20);
+            this.txtAddress.TabIndex = 18;
             // 
-            // tbxPhone
+            // txtPhone
             // 
-            this.tbxPhone.Location = new System.Drawing.Point(113, 309);
-            this.tbxPhone.Name = "tbxPhone";
-            this.tbxPhone.Size = new System.Drawing.Size(142, 20);
-            this.tbxPhone.TabIndex = 19;
+            this.txtPhone.Location = new System.Drawing.Point(113, 309);
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(142, 20);
+            this.txtPhone.TabIndex = 19;
             // 
             // label1
             // 
@@ -298,36 +298,36 @@
             this.label8.TabIndex = 16;
             this.label8.Text = "Mã Sinh Viên:";
             // 
-            // tbxTen
+            // txtTen
             // 
-            this.tbxTen.Location = new System.Drawing.Point(113, 238);
-            this.tbxTen.Name = "tbxTen";
-            this.tbxTen.Size = new System.Drawing.Size(142, 20);
-            this.tbxTen.TabIndex = 14;
+            this.txtTen.Location = new System.Drawing.Point(113, 238);
+            this.txtTen.Name = "txtTen";
+            this.txtTen.Size = new System.Drawing.Size(142, 20);
+            this.txtTen.TabIndex = 14;
             // 
-            // tbxMK
+            // txtMK
             // 
-            this.tbxMK.Location = new System.Drawing.Point(113, 203);
-            this.tbxMK.Name = "tbxMK";
-            this.tbxMK.Size = new System.Drawing.Size(109, 20);
-            this.tbxMK.TabIndex = 15;
+            this.txtMK.Location = new System.Drawing.Point(113, 203);
+            this.txtMK.Name = "txtMK";
+            this.txtMK.Size = new System.Drawing.Size(109, 20);
+            this.txtMK.TabIndex = 15;
             // 
-            // tbxID
+            // txtID
             // 
-            this.tbxID.Location = new System.Drawing.Point(113, 168);
-            this.tbxID.Name = "tbxID";
-            this.tbxID.ReadOnly = true;
-            this.tbxID.Size = new System.Drawing.Size(121, 20);
-            this.tbxID.TabIndex = 15;
+            this.txtID.Location = new System.Drawing.Point(113, 168);
+            this.txtID.Name = "txtID";
+            this.txtID.ReadOnly = true;
+            this.txtID.Size = new System.Drawing.Size(121, 20);
+            this.txtID.TabIndex = 15;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnSearch);
-            this.groupBox2.Controls.Add(this.tbTenSearch);
+            this.groupBox2.Controls.Add(this.txtTenSearch);
             this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.tbxSearch);
+            this.groupBox2.Controls.Add(this.txtIDSearch);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.dgvSinhVien);
             this.groupBox2.Location = new System.Drawing.Point(308, 22);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(898, 482);
@@ -345,15 +345,15 @@
             this.btnSearch.Size = new System.Drawing.Size(25, 25);
             this.btnSearch.TabIndex = 8;
             this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.button1_Click);
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // tbTenSearch
+            // txtTenSearch
             // 
-            this.tbTenSearch.Location = new System.Drawing.Point(350, 66);
-            this.tbTenSearch.Name = "tbTenSearch";
-            this.tbTenSearch.Size = new System.Drawing.Size(133, 20);
-            this.tbTenSearch.TabIndex = 7;
-            this.tbTenSearch.TextChanged += new System.EventHandler(this.tbxSearch_TextChanged);
+            this.txtTenSearch.Location = new System.Drawing.Point(350, 66);
+            this.txtTenSearch.Name = "txtTenSearch";
+            this.txtTenSearch.Size = new System.Drawing.Size(133, 20);
+            this.txtTenSearch.TabIndex = 7;
+            this.txtTenSearch.TextChanged += new System.EventHandler(this.tbxSearch_TextChanged);
             // 
             // label10
             // 
@@ -364,13 +364,13 @@
             this.label10.TabIndex = 6;
             this.label10.Text = "Họ Và Tên:";
             // 
-            // tbxSearch
+            // txtIDSearch
             // 
-            this.tbxSearch.Location = new System.Drawing.Point(137, 66);
-            this.tbxSearch.Name = "tbxSearch";
-            this.tbxSearch.Size = new System.Drawing.Size(133, 20);
-            this.tbxSearch.TabIndex = 7;
-            this.tbxSearch.TextChanged += new System.EventHandler(this.tbxSearch_TextChanged);
+            this.txtIDSearch.Location = new System.Drawing.Point(137, 66);
+            this.txtIDSearch.Name = "txtIDSearch";
+            this.txtIDSearch.Size = new System.Drawing.Size(133, 20);
+            this.txtIDSearch.TabIndex = 7;
+            this.txtIDSearch.TextChanged += new System.EventHandler(this.tbxSearch_TextChanged);
             // 
             // label2
             // 
@@ -381,14 +381,14 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Nhập mã sinh viên:";
             // 
-            // dataGridView1
+            // dgvSinhVien
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvSinhVien.AutoGenerateColumns = false;
+            this.dgvSinhVien.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvSinhVien.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvSinhVien.BackgroundColor = System.Drawing.Color.White;
+            this.dgvSinhVien.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSinhVien.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iDSinhVienDataGridViewTextBoxColumn,
             this.hoVaTenDataGridViewTextBoxColumn,
             this.tenLopNienCheDataGridViewTextBoxColumn,
@@ -398,17 +398,13 @@
             this.matKhauDataGridViewTextBoxColumn,
             this.hinhAnhDataGridViewImageColumn,
             this.iDLopNienCheDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.sinhVienViewModelsBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(37, 104);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(837, 354);
-            this.dataGridView1.TabIndex = 5;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            // 
-            // err
-            // 
-            this.err.ContainerControl = this;
+            this.dgvSinhVien.DataSource = this.sinhVienViewModelsBindingSource;
+            this.dgvSinhVien.Location = new System.Drawing.Point(37, 104);
+            this.dgvSinhVien.Name = "dgvSinhVien";
+            this.dgvSinhVien.RowHeadersVisible = false;
+            this.dgvSinhVien.Size = new System.Drawing.Size(837, 354);
+            this.dgvSinhVien.TabIndex = 5;
+            this.dgvSinhVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSinhVien_CellClick);
             // 
             // iDSinhVienDataGridViewTextBoxColumn
             // 
@@ -479,6 +475,10 @@
             // 
             this.sinhVienViewModelsBindingSource.DataSource = typeof(DKHP.ViewModels.SinhVienViewModels);
             // 
+            // err
+            // 
+            this.err.ContainerControl = this;
+            // 
             // frmSinhVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -494,9 +494,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSinhVien)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sinhVienViewModelsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -506,30 +506,30 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.TextBox tbxSearch;
+        private System.Windows.Forms.TextBox txtIDSearch;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvSinhVien;
         private System.Windows.Forms.Button btnLuu;
         private System.Windows.Forms.Button btnHuy;
         private System.Windows.Forms.ComboBox cbLop;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox tbxMail;
+        private System.Windows.Forms.TextBox txtMail;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox tbxAddress;
-        private System.Windows.Forms.TextBox tbxPhone;
+        private System.Windows.Forms.TextBox txtAddress;
+        private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox tbxTen;
-        private System.Windows.Forms.TextBox tbxID;
+        private System.Windows.Forms.TextBox txtTen;
+        private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox tbxMK;
+        private System.Windows.Forms.TextBox txtMK;
         private System.Windows.Forms.Button btnHide;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnChonAnh;
-        private System.Windows.Forms.TextBox tbTenSearch;
+        private System.Windows.Forms.TextBox txtTenSearch;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ErrorProvider err;
         private System.Windows.Forms.BindingSource sinhVienViewModelsBindingSource;

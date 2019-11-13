@@ -27,9 +27,48 @@ namespace BLL
             return lichHoc.AddLichTH(x);
         }
 
+        public int EditLichLT(eLichHoc_LopHocPhan x)
+        {
+            return lichHoc.EditLichLT(x);
+        }
+        public int EditLichTH(eLichHoc_NhomThucHanh x)
+        {
+            return lichHoc.EditLichTH(x);
+        }
+
         public bool CheckLichTrung(string idSV, string idLopHP, string idNhom, string hocKy, int id_NienKhoa)
         {
-            return lichHoc.CheckLichTrung(idSV, idLopHP, idNhom,hocKy,id_NienKhoa);
+            return lichHoc.CheckLichTrung(idSV, idLopHP, idNhom, hocKy, id_NienKhoa);
+        }
+
+        public int CreateIDThucHanh()
+        {
+            return lichHoc.CreateIDThucHanh();
+        }
+        public int CreateIDLyThuyet()
+        {
+            return lichHoc.CreateIDLyThuyet();
+        }
+        public List<eLichHoc_LopHocPhan> GetLichHocLyThuyet_GiangVien(string id_GV, int hocKy, int idNienKhoa)
+        {
+
+            return lichHoc.GetLichHocLyThuyet_GiangVien(id_GV, hocKy, idNienKhoa);
+        }
+        public List<eLichHoc_NhomThucHanh> GetLichHocThucHanh_GiangVien(string id_GV, int hocKy, int idNienKhoa)
+        {
+
+            return lichHoc.GetLichHocThucHanh_GiangVien(id_GV, hocKy, idNienKhoa);
+        }
+
+        public List<eLichHoc_LopHocPhan> GetLichHocLyThuyet_SinhVien(string id_SV, int hocKy, int idNienKhoa)
+        {
+
+            return lichHoc.GetLichHocLyThuyet_SinhVien(id_SV, hocKy, idNienKhoa);
+        }
+        public List<eLichHoc_NhomThucHanh> GetLichHocThucHanh_SinhVien(string id_SV, int hocKy, int idNienKhoa)
+        {
+
+            return lichHoc.GetLichHocThucHanh_SinhVien(id_SV, hocKy, idNienKhoa);
         }
     }
 }

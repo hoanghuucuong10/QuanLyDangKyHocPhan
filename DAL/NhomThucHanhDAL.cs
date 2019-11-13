@@ -79,24 +79,47 @@ namespace DAL
         }
         public int EditNhomThucHanh(eNhomThucHanh a)
         {
-            NhomThucHanh n = db.NhomThucHanhs.Where(t => t.ID_NhomThucHanh == a.ID_NhomThucHanh).FirstOrDefault();
-            if (n != null)
+            try
             {
-                n.ID_NhomThucHanh = a.ID_NhomThucHanh;
-                n.ID_LopHocPhan = a.ID_LopHocPhan;
-                n.ID_GiangVien = a.ID_GiangVien;
-                n.TenNhom = a.TenNhom;
-                n.SoTiet = a.SoTiet;
-                n.NgayBatDau = a.NgayBatDau;
-                n.NgayKetThuc = a.NgayKetThuc;
-                n.SoLuong = db.DangKyHocPhans.Where(x => x.ID_NhomThucHanh == a.ID_NhomThucHanh).Count();
-                db.NhomThucHanhs.Add(n);
-            }
-            else
-                return 0;
+                NhomThucHanh n = db.NhomThucHanhs.Where(t => t.ID_NhomThucHanh == a.ID_NhomThucHanh).FirstOrDefault();
+                if (n != null) // có thì chỉnh thông tin
+                {
+                    n.ID_NhomThucHanh = a.ID_NhomThucHanh;
+                    n.ID_LopHocPhan = a.ID_LopHocPhan;
+                    n.ID_GiangVien = a.ID_GiangVien;
+                    n.TenNhom = a.TenNhom;
+                    n.SoTiet = a.SoTiet;
+                    n.NgayBatDau = a.NgayBatDau;
+                    n.NgayKetThuc = a.NgayKetThuc;
+                    n.SoLuong = db.DangKyHocPhans.Where(x => x.ID_NhomThucHanh == a.ID_NhomThucHanh).Count();
 
-            db.SaveChanges();
-            return 1;
+                    db.SaveChanges();
+                    return 1;
+                }
+                else // chưa có thì thêm mới
+                {
+                    n = new NhomThucHanh();
+                    n.ID_NhomThucHanh = a.ID_NhomThucHanh;
+                    n.ID_LopHocPhan = a.ID_LopHocPhan;
+                    n.ID_GiangVien = a.ID_GiangVien;
+                    n.TenNhom = a.TenNhom;
+                    n.SoTiet = a.SoTiet;
+                    n.NgayBatDau = a.NgayBatDau;
+                    n.NgayKetThuc = a.NgayKetThuc;
+                    n.SoLuong = db.DangKyHocPhans.Where(x => x.ID_NhomThucHanh == a.ID_NhomThucHanh).Count();
+                    db.NhomThucHanhs.Add(n);
+
+                    db.SaveChanges();
+                    return 2;
+                }
+
+            }
+            catch (Exception)
+            {
+
+                return 0;
+            }
+           
         }
         public int AddNewNhomThucHanh(eNhomThucHanh a)
         {
@@ -123,16 +146,23 @@ namespace DAL
 
         public int DelNhomTH(string id)
         {
-            try
-            {
-                db.NhomThucHanhs.Remove(db.NhomThucHanhs.Where(x => x.ID_NhomThucHanh == id).FirstOrDefault());
-                db.SaveChanges();
-                return 1;
-            }
-            catch (Exception)
-            {
-
+            if (db.DangKyHocPhans.Where(x => x.ID_NhomThucHanh == id).FirstOrDefault() != null)
                 return 0;
+            else
+            {
+                NhomThucHanh z = db.NhomThucHanhs.Where(x => x.ID_NhomThucHanh == id).FirstOrDefault();
+                if (z != null)
+                {
+                    foreach (LichHoc_NhomThucHanh t in db.LichHoc_NhomThucHanh.Where(x => x.ID_NhomThucHanh == id).ToList())
+                    {
+                        db.LichHoc_NhomThucHanh.Remove(t);
+                    }
+                    db.NhomThucHanhs.Remove(z);
+                    db.SaveChanges();
+                    return 1;
+                }
+                return 2;
+
             }
         }
         public string CreateID()

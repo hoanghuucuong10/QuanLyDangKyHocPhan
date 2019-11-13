@@ -45,7 +45,7 @@ namespace DKHP
         public frmSinhVien()
         {
             InitializeComponent();
-            LoadDatagridView(svBLL.SearchAllSinhVien(tbxSearch.Text.Trim(), tbTenSearch.Text.Trim()), dataGridView1);
+            LoadDatagridView(svBLL.SearchAllSinhVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()), dgvSinhVien);
 
             LoadComboBox();
             byteImage = ImageToByteArray(pictureBox1.Image);
@@ -58,6 +58,7 @@ namespace DKHP
             cbLop.ValueMember = "ID_LopNienChe";
             cbLop.DropDownStyle = ComboBoxStyle.DropDownList;
         }
+        //cập nhật dữ liệu cho datagridview
         public void LoadDatagridView(List<eSinhVien> lst, DataGridView dgv)
         {
             List<SinhVienViewModels> lstView = lst.Select(t => new SinhVienViewModels(t)).ToList();
@@ -74,75 +75,76 @@ namespace DKHP
         {
             btnChonAnh.Visible = false;
             groupBox1.Text = "Thông Tin Sinh Viên";
-            instance.tbxID.ReadOnly = true;
-            instance.tbxTen.ReadOnly = true;
+            instance.txtID.ReadOnly = true;
+            instance.txtTen.ReadOnly = true;
             instance.cbLop.Enabled = false;
-            instance.tbxPhone.ReadOnly = true;
-            instance.tbxMail.ReadOnly = true;
-            instance.tbxAddress.ReadOnly = true;
+            instance.txtPhone.ReadOnly = true;
+            instance.txtMail.ReadOnly = true;
+            instance.txtAddress.ReadOnly = true;
             instance.btnLuu.Visible = false;
             instance.btnHuy.Visible = false;
+            instance.btnSua.Visible = true;
+            instance.btnThem.Visible = true;
             ShowDataGrid();
         }
         public void Them()
         {
             btnChonAnh.Visible = true;
             groupBox1.Text = "Thêm Sinh Viên";
-            instance.tbxID.ReadOnly = true;
-            instance.tbxTen.ReadOnly = false;
+            instance.txtID.ReadOnly = true;
+            instance.txtTen.ReadOnly = false;
             instance.cbLop.Enabled = true;
-            instance.tbxPhone.ReadOnly = false;
-            instance.tbxMail.ReadOnly = false;
-            instance.tbxAddress.ReadOnly = false;
+            instance.txtPhone.ReadOnly = false;
+            instance.txtMail.ReadOnly = false;
+            instance.txtAddress.ReadOnly = false;
             instance.btnLuu.Visible = true;
             instance.btnHuy.Visible = true;
+            instance.btnSua.Visible = false;
+            instance.btnThem.Visible = false;
             ShowDataGrid();
         }
         public void ChinhSua()
         {
             btnChonAnh.Visible = true;
             groupBox1.Text = "Chỉnh Sửa Sinh Viên";
-            instance.tbxID.ReadOnly = true;
-            instance.tbxTen.ReadOnly = false;
+            instance.txtID.ReadOnly = true;
+            instance.txtTen.ReadOnly = false;
             instance.cbLop.Enabled = true;
-            instance.tbxPhone.ReadOnly = false;
-            instance.tbxMail.ReadOnly = false;
-            instance.tbxAddress.ReadOnly = false;
+            instance.txtPhone.ReadOnly = false;
+            instance.txtMail.ReadOnly = false;
+            instance.txtAddress.ReadOnly = false;
             instance.btnLuu.Visible = true;
             instance.btnHuy.Visible = true;
+            instance.btnSua.Visible = false;
+            instance.btnThem.Visible = false;
             ShowDataGrid();
         }
 
         private void ShowDataGrid()
         {
-            int rowSelected = 0;
-            try
-            {
-                rowSelected = dataGridView1.CurrentRow.Index;
-            }
-            catch (Exception e)
+           if(dgvSinhVien.CurrentRow!=null)
             {
 
-            }
-
-            if (groupBox1.Text != "Thêm Sinh Viên")
-            {
-                SinhVienViewModels sv = new SinhVienViewModels(svBLL.GetSinhVienByID(dataGridView1.Rows[rowSelected].Cells[0].Value.ToString()));
-                tbxID.Text = sv.ID_SinhVien.Trim();
-                tbxTen.Text = sv.HoVaTen.Trim();
-                cbLop.SelectedText = sv.TenLopNienChe.Trim();
-                tbxPhone.Text = sv.SDT.Trim();
-                tbxAddress.Text = sv.DiaChi.Trim();
-                tbxMail.Text = sv.Mail.Trim();
-                tbxMK.Text = sv.MatKhau.Trim();
-                if (sv.HinhAnh != null)
+                if (groupBox1.Text != "Thêm Sinh Viên")
                 {
-                    pictureBox1.Image = ByteToImg(Convert.ToBase64String(sv.HinhAnh));
+                    SinhVienViewModels sv = new SinhVienViewModels(svBLL.GetSinhVienByID(dgvSinhVien.Rows[dgvSinhVien.CurrentRow.Index].Cells[0].Value.ToString()));
+                    txtID.Text = sv.ID_SinhVien.Trim();
+                    txtTen.Text = sv.HoVaTen.Trim();
+                    cbLop.SelectedText = sv.TenLopNienChe.Trim();
+                    txtPhone.Text = sv.SDT.Trim();
+                    txtAddress.Text = sv.DiaChi.Trim();
+                    txtMail.Text = sv.Mail.Trim();
+                    txtMK.Text = sv.MatKhau.Trim();
+                    if (sv.HinhAnh != null)
+                    {
+                        pictureBox1.Image = ByteToImg(Convert.ToBase64String(sv.HinhAnh));
+                    }
                 }
+
             }
 
         }
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvSinhVien_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             ShowDataGrid();
         }
@@ -219,74 +221,74 @@ namespace DKHP
             kt = 0;
             #region Kiểm tra dữ liệu nhập
             //Tên
-            if (string.IsNullOrEmpty(tbxTen.Text))
+            if (string.IsNullOrEmpty(txtTen.Text))
             {
-                err.SetError(tbxTen, "Không được để trống");
+                err.SetError(txtTen, "Không được để trống");
             }
             else
             {
-                if (!Regex.IsMatch(tbxTen.Text, @"^[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]*(\s[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]*)+$"))
+                if (!Regex.IsMatch(txtTen.Text, @"^[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]*(\s[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]*)+$"))
                 {
-                    err.SetError(tbxTen, "Tên không hợp lệ");
+                    err.SetError(txtTen, "Tên không hợp lệ");
                 }
                 else
                 {
-                    err.SetError(tbxTen, "");
+                    err.SetError(txtTen, "");
                     kt++;
                 }
             }
             //Phone
-            if (string.IsNullOrEmpty(tbxPhone.Text))
+            if (string.IsNullOrEmpty(txtPhone.Text))
             {
 
-                err.SetError(tbxPhone, "Không được để trống");
+                err.SetError(txtPhone, "Không được để trống");
             }
             else
             {
-                if (!Regex.IsMatch(tbxPhone.Text, @"^[0][1-9][0-9]+$"))
+                if (!Regex.IsMatch(txtPhone.Text, @"^[0][1-9][0-9]+$"))
                 {
 
-                    err.SetError(tbxPhone, "Số điện thoại không hợp lệ");
+                    err.SetError(txtPhone, "Số điện thoại không hợp lệ");
                 }
                 else
                 {
-                    err.SetError(tbxPhone, "");
+                    err.SetError(txtPhone, "");
                     kt++;
                 }
             }
             //Địa chỉ
-            if (string.IsNullOrEmpty(tbxAddress.Text))
+            if (string.IsNullOrEmpty(txtAddress.Text))
             {
-                err.SetError(tbxAddress, "Không được để trống");
+                err.SetError(txtAddress, "Không được để trống");
             }
             else
             {
-                if (!Regex.IsMatch(tbxAddress.Text, @"^[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ1-9][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ1-9]*(\s[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ1-9][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ1-9]*)+$"))
+                if (!Regex.IsMatch(txtAddress.Text, @"^[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ1-9][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ1-9]*(\s[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ1-9][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ1-9]*)+$"))
                 {
 
-                    err.SetError(tbxAddress, "Tên không hợp lệ");
+                    err.SetError(txtAddress, "Tên không hợp lệ");
                 }
                 else
                 {
-                    err.SetError(tbxAddress, "");
+                    err.SetError(txtAddress, "");
                     kt++;
                 }
             }
             //email
-            if (string.IsNullOrEmpty(tbxMail.Text))
+            if (string.IsNullOrEmpty(txtMail.Text))
             {
-                err.SetError(tbxMail, "Không được để trống");
+                err.SetError(txtMail, "Không được để trống");
             }
             else
             {
-                if (!Regex.IsMatch(tbxMail.Text, ""))
+                if (!Regex.IsMatch(txtMail.Text, ""))
                 {
 
-                    err.SetError(tbxMail, "Email không hợp lệ");
+                    err.SetError(txtMail, "Email không hợp lệ");
                 }
                 else
                 {
-                    err.SetError(tbxMail, "");
+                    err.SetError(txtMail, "");
                     kt++;
                 }
             }
@@ -296,13 +298,13 @@ namespace DKHP
             {
                 eSinhVien sv = new eSinhVien();
                 sv.HinhAnh = byteImage;
-                sv.ID_SinhVien = tbxID.Text.Trim();
-                sv.HoVaTen = tbxTen.Text.Trim();
+                sv.ID_SinhVien = txtID.Text.Trim();
+                sv.HoVaTen = txtTen.Text.Trim();
                 sv.ID_LopNienChe = cbLop.SelectedValue.ToString().Trim();
-                sv.SDT = tbxPhone.Text.Trim();
-                sv.Mail = tbxMail.Text.Trim();
-                sv.DiaChi = tbxAddress.Text.Trim();
-                sv.MatKhau = tbxMK.Text.Trim();
+                sv.SDT = txtPhone.Text.Trim();
+                sv.Mail = txtMail.Text.Trim();
+                sv.DiaChi = txtAddress.Text.Trim();
+                sv.MatKhau = txtMK.Text.Trim();
 
                 if (groupBox1.Text == "Thêm Sinh Viên")
                 {
@@ -314,7 +316,7 @@ namespace DKHP
                     {
                         MessageBox.Show("Thêm Thành Công");
                         kt = 0;
-                        LoadDatagridView(svBLL.SearchAllSinhVien(tbxSearch.Text.Trim(), tbTenSearch.Text.Trim()), dataGridView1);
+                        LoadDatagridView(svBLL.SearchAllSinhVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()), dgvSinhVien);
                         ShowDataGrid();
                         pictureBox1.Image = Resources.book;
                     }
@@ -329,7 +331,7 @@ namespace DKHP
                     {
                         MessageBox.Show("Chỉnh Sửa Thành Công");
                         kt = 0;
-                        LoadDatagridView(svBLL.SearchAllSinhVien(tbxSearch.Text.Trim(), tbTenSearch.Text.Trim()), dataGridView1);
+                        LoadDatagridView(svBLL.SearchAllSinhVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()), dgvSinhVien);
                         ShowDataGrid();
                     }
                 }
@@ -339,17 +341,17 @@ namespace DKHP
         //Ẩn password
         private void btnHide_Click(object sender, EventArgs e)
         {
-            tbxMK.UseSystemPasswordChar = tbxMK.UseSystemPasswordChar == true ? false : true;
+            txtMK.UseSystemPasswordChar = txtMK.UseSystemPasswordChar == true ? false : true;
         }
         //btnSearch
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadDatagridView(svBLL.SearchAllSinhVien(tbxSearch.Text.Trim(), tbTenSearch.Text.Trim()), dataGridView1);
+            LoadDatagridView(svBLL.SearchAllSinhVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()), dgvSinhVien);
         }
 
         private void tbxSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadDatagridView(svBLL.SearchAllSinhVien(tbxSearch.Text.Trim(), tbTenSearch.Text.Trim()), dataGridView1);
+            LoadDatagridView(svBLL.SearchAllSinhVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()), dgvSinhVien);
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -361,14 +363,14 @@ namespace DKHP
             btnThem.Visible = false;
 
             pictureBox1.Image = Resources.book;
-            tbxID.Text = svBLL.CreateID();
-            tbxTen.Text = "";
+            txtID.Text = svBLL.CreateID();
+            txtTen.Text = "";
             cbLop.SelectedIndex = 0;
-            tbxPhone.Text = "";
-            tbxMail.Text = "";
-            tbxAddress.Text = "";
-            tbxMK.Text = "123456";
-            tbxMK.ReadOnly = true;
+            txtPhone.Text = "";
+            txtMail.Text = "";
+            txtAddress.Text = "";
+            txtMK.Text = "123456";
+            txtMK.ReadOnly = true;
         }
 
         private void btnSua_Click(object sender, EventArgs e)

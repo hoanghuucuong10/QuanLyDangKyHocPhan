@@ -26,8 +26,10 @@ namespace DKHP
             this.flag = 0;
             btnXoa.Visible = false;
             nhomTH = new eNhomThucHanh();
+            nhomTH.ID_LopHocPhan = id_LopHP;
             nhomTH.ID_NhomThucHanh = nTH.CreateID();
-            foreach(eNhomThucHanh x in frmLopHocPhan.instance.lstTH)
+            nhomTH.LichHoc_NhomThucHanh = new List<eLichHoc_NhomThucHanh>();
+            foreach (eNhomThucHanh x in frmLopHocPhan.instance.lstTH)
             {
                 if (nhomTH.ID_NhomThucHanh == x.ID_NhomThucHanh)
                 {
@@ -57,6 +59,11 @@ namespace DKHP
             LoadCBLich();
             this.flag = 0;
             this.nhomTH = n;
+            if(nhomTH.LichHoc_NhomThucHanh==null)
+            {
+                nhomTH.LichHoc_NhomThucHanh = new List<eLichHoc_NhomThucHanh>();
+            }
+
             numNhom.Enabled = false;
             if (frmLopHocPhan.instance.GroupboxThongTin.Text == "Thông Tin Lớp Học Phần")
             {
@@ -67,7 +74,8 @@ namespace DKHP
                 numNhom.Enabled = true;
                 dateTimePicker1.Enabled = false;
                 dateTimePicker2.Enabled = false;
-            }else
+            }
+            else
             {
                 btnLuu.Visible = true;
                 btnXoa.Visible = true;
@@ -79,31 +87,17 @@ namespace DKHP
             }
             tbIDTH.Text = n.ID_NhomThucHanh.Trim();
             tbMaLHP.Text = n.ID_LopHocPhan.Trim();
-            LopHocPhanBLL hpBLL = new LopHocPhanBLL();
-            List<eLopHocPhan> s = hpBLL.SearchLopHocPhan(n.ID_LopHocPhan.Trim(), "", "", "");
 
             cbGiangVien.SelectedValue = nhomTH.ID_GiangVien.Trim();
             numNhom.Value = int.Parse(nhomTH.TenNhom);
             numSoTiet.Value = nhomTH.SoTiet.Value;
             dateTimePicker1.Value = nhomTH.NgayBatDau.Value;
             dateTimePicker2.Value = nhomTH.NgayKetThuc.Value;
-            nhomTH.LichHoc_NhomThucHanh = new LichHocBLL().GetLichHoc_NhomThucHanh(nhomTH.ID_NhomThucHanh);
+
 
             LoadDSLichHocNhomTH();
         }
-        public void LoadDSLichHocNhomTH()
-        {
-            List<LichHocTHViewModels> lst = nhomTH.LichHoc_NhomThucHanh.Select(t => new LichHocTHViewModels
-            {
-                ID_LichHoc_NhomTH = t.ID_LichHoc_NhomTH,
-                ID_NhomThucHanh = t.ID_NhomThucHanh,
-                ID_PhongHoc = t.ID_PhongHoc,
-                TenPhongHoc = new PhongHocBLL().GetPhongHocByID(t.ID_PhongHoc).TenPhongHoc,
-                NgayHoc = t.NgayHoc,
-                TietHoc = t.TietHoc
-            }).ToList();
-            lichHocTHViewModelsBindingSource.DataSource = lst;
-        }
+        
         public void LoadCBB()
         {
             GiangVienBLL gv = new GiangVienBLL();
@@ -114,37 +108,40 @@ namespace DKHP
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            
-            nhomTH.ID_GiangVien= cbGiangVien.SelectedValue.ToString().Trim();
+
+            nhomTH.ID_GiangVien = cbGiangVien.SelectedValue.ToString().Trim();
             nhomTH.TenNhom = numNhom.Value.ToString();
-            nhomTH.SoTiet =int.Parse( numSoTiet.Value.ToString().Trim());
+            nhomTH.SoTiet = int.Parse(numSoTiet.Value.ToString().Trim());
+            nhomTH.SoLuong = new DangKyHocPhanBLL().SoLuongNhomTH(nhomTH.ID_NhomThucHanh);
             nhomTH.NgayBatDau = dateTimePicker1.Value;
             nhomTH.NgayKetThuc = dateTimePicker2.Value;
-
+            
             List<eNhomThucHanh> lst = frmLopHocPhan.instance.lstTH;
             int f = 0;
+            //nhóm thực hành đã có trong lst (chỉnh sửa nhóm thực hành)
             foreach (eNhomThucHanh x in lst)
             {
                 if (nhomTH.ID_NhomThucHanh == x.ID_NhomThucHanh)
                 {
                     x.ID_GiangVien = nhomTH.ID_GiangVien;
                     x.ID_LopHocPhan = nhomTH.ID_LopHocPhan;
-                    x.LichHoc_NhomThucHanh = nhomTH.LichHoc_NhomThucHanh;             
+                    x.LichHoc_NhomThucHanh = nhomTH.LichHoc_NhomThucHanh;
                     x.TenNhom = nhomTH.TenNhom;
                     x.SoLuong = nhomTH.SoLuong;
                     x.NgayBatDau = nhomTH.NgayBatDau;
                     x.NgayKetThuc = nhomTH.NgayKetThuc;
+                    x.LichHoc_NhomThucHanh = nhomTH.LichHoc_NhomThucHanh;
                     f = 1;
                 }
             }
-            if (f == 0)
+            if (f == 0)//nhóm thực hành mới
             {
                 lst.Add(nhomTH);
             }
 
             frmLopHocPhan.instance.lstTH = lst;
             frmLopHocPhan.instance.LoadDanhSachNhom(lst);
-            frmLopHocPhan.instance.dataGridView2.Refresh();
+            frmLopHocPhan.instance.dgvNhomTH.Refresh();
             this.Close();
 
         }
@@ -156,20 +153,22 @@ namespace DKHP
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (nTH.DelNhomTH(nhomTH.ID_NhomThucHanh) == 1)
+            List<eNhomThucHanh> lst = frmLopHocPhan.instance.lstTH;
+            foreach (eNhomThucHanh t in lst)
             {
-                MessageBox.Show("Xóa thành công!!!");
-                this.Close();
-                frmLopHocPhan.instance.LoadDanhSachNhom(nTH.GetNhomByIDLopHocPhan(frmLopHocPhan.instance.tbID.Text.Trim()));
+                if (t.ID_NhomThucHanh == nhomTH.ID_NhomThucHanh)
+                {
+                    lst.Remove(t);
+                    break;
+                }
             }
-            else
-            {
-                MessageBox.Show("Xóa không thành công!!!");
-            }
-
+            frmLopHocPhan.instance.lstTH = lst;
+            frmLopHocPhan.instance.LoadDanhSachNhom(lst);
+            frmLopHocPhan.instance.dgvNhomTH.Refresh();
+            this.Close();
         }
         //------------------------------------Lich Hoc Thuc Hanh------------------------------------------------
-        #region LichHocLyThuyet
+        #region LichHoc
         private void btnXoaLich_Click(object sender, EventArgs e)
         {
             if (nhomTH.LichHoc_NhomThucHanh.Count == 0)
@@ -195,7 +194,7 @@ namespace DKHP
                     break;
                 }
             }
-            
+
             LoadDSLichHocNhomTH();
         }
 
@@ -241,7 +240,7 @@ namespace DKHP
             btnXoaLich.Visible = false;
 
 
-            
+
 
         }
         private void btnLuuLichHoc_Click(object sender, EventArgs e)
@@ -262,21 +261,9 @@ namespace DKHP
             {
                 eLichHoc_NhomThucHanh lich = new eLichHoc_NhomThucHanh();
 
-                lich.ID_LichHoc_NhomTH = new LichHocBLL().GetLichHoc_NhomThucHanh(tbMaLHP.Text.Trim()).Count;
-                try
-                {
-                    foreach (eLichHoc_NhomThucHanh x in nhomTH.LichHoc_NhomThucHanh)
-                    {
-                        if (lich.ID_LichHoc_NhomTH == x.ID_LichHoc_NhomTH)
-                        {
-                            lich.ID_LichHoc_NhomTH++;
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                }
-              
+                lich.ID_LichHoc_NhomTH = -1;
+           
+
 
                 lich.ID_PhongHoc = cbPhong.SelectedValue.ToString().Trim();
                 lich.TietHoc = cbTietHoc.SelectedItem.ToString();
@@ -285,8 +272,9 @@ namespace DKHP
 
                 //kiểm tra lịch trùng trong list lịch 
                 int f = 0;
-                try
+                if(nhomTH.LichHoc_NhomThucHanh!=null)
                 {
+
                     foreach (eLichHoc_NhomThucHanh x in nhomTH.LichHoc_NhomThucHanh)
                     {
                         if (lich.ID_PhongHoc == x.ID_PhongHoc && lich.NgayHoc == x.NgayHoc && lich.TietHoc == x.TietHoc)
@@ -296,52 +284,39 @@ namespace DKHP
                         }
                     }
                 }
-                catch (Exception)
-                {
-                }
-               
                 if (f != 1)
                 {
-                    if(nhomTH.LichHoc_NhomThucHanh==null)
-                    {
-                        nhomTH.LichHoc_NhomThucHanh = new List<eLichHoc_NhomThucHanh>();       
-                    }
                     nhomTH.LichHoc_NhomThucHanh.Add(lich);
-
                 }
                 else
                 {
                     MessageBox.Show("Lịch bị trùng");
                 }
                 LoadDSLichHocNhomTH();
-
-                try
-                {
-                    cbNgayHoc.SelectedItem = dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[0].Value.ToString().Trim();
-                    cbTietHoc.SelectedItem = dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[1].Value.ToString().Trim();
-                    cbPhong.SelectedValue = dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[5].Value.ToString().Trim();
-
-                }
-                catch (Exception)
-                {
-
-                }
+                
             }
             else if (flag == 1)  // Sửa
             {
-
-
                 int index = nhomTH.LichHoc_NhomThucHanh.IndexOf(nhomTH.LichHoc_NhomThucHanh.Where(x => x.ID_LichHoc_NhomTH == int.Parse(dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[3].Value.ToString().Trim())).FirstOrDefault());
                 nhomTH.LichHoc_NhomThucHanh[index].NgayHoc = cbNgayHoc.SelectedItem.ToString().Trim();
                 nhomTH.LichHoc_NhomThucHanh[index].TietHoc = cbTietHoc.SelectedItem.ToString().Trim();
                 nhomTH.LichHoc_NhomThucHanh[index].ID_PhongHoc = cbPhong.SelectedValue.ToString().Trim();
-
                 LoadDSLichHocNhomTH();
             }
-
-
         }
-
+        public void LoadDSLichHocNhomTH()
+        {
+            List<LichHocTHViewModels> lss = nhomTH.LichHoc_NhomThucHanh.Select(x=>new LichHocTHViewModels {
+                ID_LichHoc_NhomTH=x.ID_LichHoc_NhomTH,
+                ID_NhomThucHanh=x.ID_NhomThucHanh,
+                ID_PhongHoc=x.ID_PhongHoc,
+                NgayHoc=x.NgayHoc,
+                TenPhongHoc=new PhongHocBLL().GetPhongHocByID(x.ID_PhongHoc).TenPhongHoc.ToString().Trim(),
+                TietHoc=x.TietHoc.Trim()
+            }).ToList();
+            lichHocTHViewModelsBindingSource.DataSource = null;
+            lichHocTHViewModelsBindingSource.DataSource = lss;
+        }
         private void btnHuyLuuLichHoc_Click(object sender, EventArgs e)
         {
             cbPhong.Enabled = false;
@@ -356,7 +331,7 @@ namespace DKHP
 
 
 
-            
+
 
         }
         //load dữ liệu cho combobox lịch học
@@ -418,6 +393,11 @@ namespace DKHP
             {
                 MessageBox.Show(dataGridView3.Rows.Count.ToString());
             }
+        }
+
+        private void frmNhomThucHanh_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

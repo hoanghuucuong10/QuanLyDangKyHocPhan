@@ -42,7 +42,7 @@ namespace DKHP
         public frmHocPhan()
         {
             InitializeComponent();
-            LoadDatagridView(hocPhanBLL.GetALLHocPhan(), dataGridView1);
+            LoadDatagridView(hocPhanBLL.GetALLHocPhan(), dgvHocPhan);
         }
 
         public void LoadDatagridView(List<eHocPhan> lst, DataGridView dgv)
@@ -103,7 +103,7 @@ namespace DKHP
             int rowSelected = 0;
             try
             {
-                rowSelected = dataGridView1.CurrentRow.Index;
+                rowSelected = dgvHocPhan.CurrentRow.Index;
             }
             catch (Exception e)
             {
@@ -113,7 +113,7 @@ namespace DKHP
 
             if (groupBox1.Text != "Thêm Học Phần")
             {
-                eHocPhan hp = hocPhanBLL.GetHocPhanByID(dataGridView1.Rows[rowSelected].Cells[0].Value.ToString());
+                eHocPhan hp = hocPhanBLL.GetHocPhanByID(dgvHocPhan.Rows[rowSelected].Cells[0].Value.ToString());
                 tbxID.Text = hp.ID_HocPhan;
                 tbxTenMonHoc.Text = hp.TenMonHoc;
                 numSoTC.Value = hp.SoTC.Value;
@@ -180,7 +180,7 @@ namespace DKHP
                     {
                         MessageBox.Show("Thêm Thành Công");
                         kt = 0;
-                        LoadDatagridView(hocPhanBLL.GetALLHocPhan(), dataGridView1);
+                        LoadDatagridView(hocPhanBLL.GetALLHocPhan(), dgvHocPhan);
                         ShowDataGrid();
                     }
                 }
@@ -194,7 +194,7 @@ namespace DKHP
                     {
                         MessageBox.Show("Chỉnh Sửa Thành Công");
                         kt = 0;
-                        LoadDatagridView(hocPhanBLL.GetALLHocPhan(), dataGridView1);
+                        LoadDatagridView(hocPhanBLL.GetALLHocPhan(), dgvHocPhan);
                         ShowDataGrid();
                     }
                 }
@@ -224,14 +224,16 @@ namespace DKHP
             numSoTC.Value = 0;
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvHocPhan_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             ShowDataGrid();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadDatagridView(hocPhanBLL.SearchHocPhan(tbxIDSearch.Text.Trim(), tbTenSearch.Text.Trim()),dataGridView1);
+            LoadDatagridView(hocPhanBLL.SearchHocPhan(tbxIDSearch.Text.Trim(), tbTenSearch.Text.Trim()),dgvHocPhan);
         }
+
+
     }
 }

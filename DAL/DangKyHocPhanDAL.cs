@@ -74,5 +74,9 @@ namespace DAL
                 return false;
             }
         }
+        public int SoLuongNhomTH(string idNhomTH)
+        {
+            return db.DangKyHocPhans.Where(x => x.ID_NhomThucHanh == idNhomTH).Count();
+        }
     }
 }

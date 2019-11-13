@@ -41,17 +41,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnHuy = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.err = new System.Windows.Forms.ErrorProvider(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.dgvHocPhan = new System.Windows.Forms.DataGridView();
             this.tbTenSearch = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.tbxIDSearch = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.err = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSoTC)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHocPhan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.err)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,7 +72,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(397, 483);
+            this.groupBox1.Size = new System.Drawing.Size(397, 447);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông Tin Học Phần";
@@ -81,7 +81,7 @@
             // 
             this.btnSua.BackColor = System.Drawing.Color.White;
             this.btnSua.Image = global::DKHP.Properties.Resources.contract;
-            this.btnSua.Location = new System.Drawing.Point(269, 313);
+            this.btnSua.Location = new System.Drawing.Point(268, 311);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(84, 40);
             this.btnSua.TabIndex = 29;
@@ -103,7 +103,7 @@
             // 
             this.btnThem.BackColor = System.Drawing.Color.White;
             this.btnThem.Image = global::DKHP.Properties.Resources.add;
-            this.btnThem.Location = new System.Drawing.Point(72, 312);
+            this.btnThem.Location = new System.Drawing.Point(69, 311);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(84, 40);
             this.btnThem.TabIndex = 30;
@@ -194,8 +194,8 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.btnSearch);
+            this.groupBox2.Controls.Add(this.dgvHocPhan);
             this.groupBox2.Controls.Add(this.tbTenSearch);
             this.groupBox2.Controls.Add(this.tbxIDSearch);
             this.groupBox2.Controls.Add(this.label10);
@@ -204,37 +204,33 @@
             this.groupBox2.ForeColor = System.Drawing.Color.Black;
             this.groupBox2.Location = new System.Drawing.Point(450, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(756, 483);
+            this.groupBox2.Size = new System.Drawing.Size(756, 447);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Danh Sách Học Phần";
             // 
-            // dataGridView1
+            // btnSearch
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(30, 66);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(700, 392);
-            this.dataGridView1.TabIndex = 6;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.btnSearch.BackColor = System.Drawing.Color.White;
+            this.btnSearch.BackgroundImage = global::DKHP.Properties.Resources.search__1_;
+            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSearch.Location = new System.Drawing.Point(461, 37);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(24, 24);
+            this.btnSearch.TabIndex = 16;
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // err
+            // dgvHocPhan
             // 
-            this.err.ContainerControl = this;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.BackgroundImage = global::DKHP.Properties.Resources.search__1_;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point(461, 37);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(24, 24);
-            this.button1.TabIndex = 16;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.dgvHocPhan.BackgroundColor = System.Drawing.Color.White;
+            this.dgvHocPhan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHocPhan.Location = new System.Drawing.Point(30, 66);
+            this.dgvHocPhan.Name = "dgvHocPhan";
+            this.dgvHocPhan.RowHeadersVisible = false;
+            this.dgvHocPhan.Size = new System.Drawing.Size(700, 343);
+            this.dgvHocPhan.TabIndex = 6;
+            this.dgvHocPhan.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHocPhan_CellClick);
             // 
             // tbTenSearch
             // 
@@ -242,6 +238,13 @@
             this.tbTenSearch.Name = "tbTenSearch";
             this.tbTenSearch.Size = new System.Drawing.Size(133, 20);
             this.tbTenSearch.TabIndex = 14;
+            // 
+            // tbxIDSearch
+            // 
+            this.tbxIDSearch.Location = new System.Drawing.Point(103, 40);
+            this.tbxIDSearch.Name = "tbxIDSearch";
+            this.tbxIDSearch.Size = new System.Drawing.Size(133, 20);
+            this.tbxIDSearch.TabIndex = 15;
             // 
             // label10
             // 
@@ -252,13 +255,6 @@
             this.label10.TabIndex = 12;
             this.label10.Text = "Tên Môn Học: ";
             // 
-            // tbxIDSearch
-            // 
-            this.tbxIDSearch.Location = new System.Drawing.Point(103, 40);
-            this.tbxIDSearch.Name = "tbxIDSearch";
-            this.tbxIDSearch.Size = new System.Drawing.Size(133, 20);
-            this.tbxIDSearch.TabIndex = 15;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -268,6 +264,10 @@
             this.label4.TabIndex = 13;
             this.label4.Text = "Mã Học Phần:";
             // 
+            // err
+            // 
+            this.err.ContainerControl = this;
+            // 
             // frmHocPhan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -275,7 +275,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::DKHP.Properties.Resources.istockphoto_995719694_612x612;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1182, 471);
+            this.ClientSize = new System.Drawing.Size(1178, 467);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -289,7 +289,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numSoTC)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHocPhan)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
             this.ResumeLayout(false);
 
@@ -307,11 +307,11 @@
         private System.Windows.Forms.TextBox tbxTenMonHoc;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnHuy;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvHocPhan;
         private System.Windows.Forms.ErrorProvider err;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnThem;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox tbTenSearch;
         private System.Windows.Forms.TextBox tbxIDSearch;
         private System.Windows.Forms.Label label10;

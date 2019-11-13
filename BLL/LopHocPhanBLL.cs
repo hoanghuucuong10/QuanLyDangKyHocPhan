@@ -14,15 +14,23 @@ namespace BLL
         {
             return LHP.GetAllLopHocPhan();
         }
+        public eLopHocPhan GetHocPhanbyID(string id)
+        {
+            return LHP.GetHocPhanbyID(id);
+        }
+        public eLopHocPhan GetHocPhanByIDNhomTH(string id)
+        {
+            return LHP.GetHocPhanByIDNhomTH(id);
+        }
         public List<eLopHocPhan> GetAllLopHocPhanGiangVien(string idGV, int hocKy,string namHoc)
         {
             return LHP.GetAllLopHocPhanGiangVien(idGV, hocKy, namHoc);
         }
 
-        public int EditLopHocPhan(string id, eLopHocPhan x)
+        public int EditLopHocPhan(eLopHocPhan x)
         {
             
-            return LHP.EditLopHocPhan( id,x);
+            return LHP.EditLopHocPhan(x);
         }
         public int AddLopHocPhan( eLopHocPhan x)
         {

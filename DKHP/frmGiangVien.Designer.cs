@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxThongTinGiangVien = new System.Windows.Forms.GroupBox();
             this.btnSua = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnThem = new System.Windows.Forms.Button();
@@ -52,9 +52,9 @@
             this.tbxTen = new System.Windows.Forms.TextBox();
             this.tbxMK = new System.Windows.Forms.TextBox();
             this.tbxID = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.groupBoxDanhSachGiangVien = new System.Windows.Forms.GroupBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.dgvGiangVien = new System.Windows.Forms.DataGridView();
             this.iDGiangVienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hoVaTenDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.trinhDoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,50 +64,50 @@
             this.hinhAnhDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.matKhauDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.giangVienViewModelsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tbTenSearch = new System.Windows.Forms.TextBox();
+            this.txtTenSearch = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.tbxSearch = new System.Windows.Forms.TextBox();
+            this.txtIDSearch = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.err = new System.Windows.Forms.ErrorProvider(this.components);
-            this.groupBox1.SuspendLayout();
+            this.groupBoxThongTinGiangVien.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBoxDanhSachGiangVien.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGiangVien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.giangVienViewModelsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.err)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // groupBoxThongTinGiangVien
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.btnSua);
-            this.groupBox1.Controls.Add(this.pictureBox1);
-            this.groupBox1.Controls.Add(this.btnThem);
-            this.groupBox1.Controls.Add(this.btnChonAnh);
-            this.groupBox1.Controls.Add(this.btnHide);
-            this.groupBox1.Controls.Add(this.btnLuu);
-            this.groupBox1.Controls.Add(this.btnHuy);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.tbxMail);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.tbxAddress);
-            this.groupBox1.Controls.Add(this.tbxPhone);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.tbTrinhDo);
-            this.groupBox1.Controls.Add(this.tbxTen);
-            this.groupBox1.Controls.Add(this.tbxMK);
-            this.groupBox1.Controls.Add(this.tbxID);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(277, 483);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Thông Tin Giảng Viên";
+            this.groupBoxThongTinGiangVien.BackColor = System.Drawing.Color.Transparent;
+            this.groupBoxThongTinGiangVien.Controls.Add(this.btnSua);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.pictureBox1);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.btnThem);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.btnChonAnh);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.btnHide);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.btnLuu);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.btnHuy);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.label7);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.label5);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.label6);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.tbxMail);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.label3);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.label4);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.tbxAddress);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.tbxPhone);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.label1);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.label9);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.label8);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.tbTrinhDo);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.tbxTen);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.tbxMK);
+            this.groupBoxThongTinGiangVien.Controls.Add(this.tbxID);
+            this.groupBoxThongTinGiangVien.Location = new System.Drawing.Point(12, 12);
+            this.groupBoxThongTinGiangVien.Name = "groupBoxThongTinGiangVien";
+            this.groupBoxThongTinGiangVien.Size = new System.Drawing.Size(277, 483);
+            this.groupBoxThongTinGiangVien.TabIndex = 1;
+            this.groupBoxThongTinGiangVien.TabStop = false;
+            this.groupBoxThongTinGiangVien.Text = "Thông Tin Giảng Viên";
             // 
             // btnSua
             // 
@@ -311,7 +311,6 @@
             this.tbxMK.Size = new System.Drawing.Size(109, 20);
             this.tbxMK.TabIndex = 15;
             this.tbxMK.UseSystemPasswordChar = true;
-            this.tbxMK.TextChanged += new System.EventHandler(this.tbxMK_TextChanged);
             // 
             // tbxID
             // 
@@ -321,42 +320,42 @@
             this.tbxID.Size = new System.Drawing.Size(121, 20);
             this.tbxID.TabIndex = 15;
             // 
-            // groupBox2
+            // groupBoxDanhSachGiangVien
             // 
-            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Controls.Add(this.tbTenSearch);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.tbxSearch);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(314, 12);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(892, 483);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Danh Sách Giảng Viên";
+            this.groupBoxDanhSachGiangVien.BackColor = System.Drawing.Color.Transparent;
+            this.groupBoxDanhSachGiangVien.Controls.Add(this.btnSearch);
+            this.groupBoxDanhSachGiangVien.Controls.Add(this.dgvGiangVien);
+            this.groupBoxDanhSachGiangVien.Controls.Add(this.txtTenSearch);
+            this.groupBoxDanhSachGiangVien.Controls.Add(this.label10);
+            this.groupBoxDanhSachGiangVien.Controls.Add(this.txtIDSearch);
+            this.groupBoxDanhSachGiangVien.Controls.Add(this.label2);
+            this.groupBoxDanhSachGiangVien.Location = new System.Drawing.Point(314, 12);
+            this.groupBoxDanhSachGiangVien.Name = "groupBoxDanhSachGiangVien";
+            this.groupBoxDanhSachGiangVien.Size = new System.Drawing.Size(892, 483);
+            this.groupBoxDanhSachGiangVien.TabIndex = 2;
+            this.groupBoxDanhSachGiangVien.TabStop = false;
+            this.groupBoxDanhSachGiangVien.Text = "Danh Sách Giảng Viên";
             // 
-            // button1
+            // btnSearch
             // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.BackgroundImage = global::DKHP.Properties.Resources.search__1_;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point(464, 70);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(24, 24);
-            this.button1.TabIndex = 11;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnSearch.BackColor = System.Drawing.Color.White;
+            this.btnSearch.BackgroundImage = global::DKHP.Properties.Resources.search__1_;
+            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSearch.Location = new System.Drawing.Point(464, 70);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(24, 24);
+            this.btnSearch.TabIndex = 11;
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // dataGridView1
+            // dgvGiangVien
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvGiangVien.AutoGenerateColumns = false;
+            this.dgvGiangVien.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvGiangVien.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvGiangVien.BackgroundColor = System.Drawing.Color.White;
+            this.dgvGiangVien.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvGiangVien.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iDGiangVienDataGridViewTextBoxColumn,
             this.hoVaTenDataGridViewTextBoxColumn,
             this.trinhDoDataGridViewTextBoxColumn,
@@ -365,13 +364,14 @@
             this.mailDataGridViewTextBoxColumn,
             this.hinhAnhDataGridViewImageColumn,
             this.matKhauDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.giangVienViewModelsBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(26, 104);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(847, 354);
-            this.dataGridView1.TabIndex = 6;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dgvGiangVien.DataSource = this.giangVienViewModelsBindingSource;
+            this.dgvGiangVien.Location = new System.Drawing.Point(26, 104);
+            this.dgvGiangVien.Name = "dgvGiangVien";
+            this.dgvGiangVien.RowHeadersVisible = false;
+            this.dgvGiangVien.Size = new System.Drawing.Size(847, 354);
+            this.dgvGiangVien.TabIndex = 6;
+            this.dgvGiangVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGiangVien_CellClick);
+            this.dgvGiangVien.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGiangVien_CellContentClick);
             // 
             // iDGiangVienDataGridViewTextBoxColumn
             // 
@@ -434,13 +434,13 @@
             // 
             this.giangVienViewModelsBindingSource.DataSource = typeof(DKHP.ViewModels.GiangVienViewModels);
             // 
-            // tbTenSearch
+            // txtTenSearch
             // 
-            this.tbTenSearch.Location = new System.Drawing.Point(325, 72);
-            this.tbTenSearch.Name = "tbTenSearch";
-            this.tbTenSearch.Size = new System.Drawing.Size(133, 20);
-            this.tbTenSearch.TabIndex = 10;
-            this.tbTenSearch.TextChanged += new System.EventHandler(this.tbxSearch_TextChanged);
+            this.txtTenSearch.Location = new System.Drawing.Point(325, 72);
+            this.txtTenSearch.Name = "txtTenSearch";
+            this.txtTenSearch.Size = new System.Drawing.Size(133, 20);
+            this.txtTenSearch.TabIndex = 10;
+            this.txtTenSearch.TextChanged += new System.EventHandler(this.tbxSearch_TextChanged);
             // 
             // label10
             // 
@@ -451,13 +451,13 @@
             this.label10.TabIndex = 9;
             this.label10.Text = "Họ Và Tên:";
             // 
-            // tbxSearch
+            // txtIDSearch
             // 
-            this.tbxSearch.Location = new System.Drawing.Point(115, 72);
-            this.tbxSearch.Name = "tbxSearch";
-            this.tbxSearch.Size = new System.Drawing.Size(133, 20);
-            this.tbxSearch.TabIndex = 10;
-            this.tbxSearch.TextChanged += new System.EventHandler(this.tbxSearch_TextChanged);
+            this.txtIDSearch.Location = new System.Drawing.Point(115, 72);
+            this.txtIDSearch.Name = "txtIDSearch";
+            this.txtIDSearch.Size = new System.Drawing.Size(133, 20);
+            this.txtIDSearch.TabIndex = 10;
+            this.txtIDSearch.TextChanged += new System.EventHandler(this.tbxSearch_TextChanged);
             // 
             // label2
             // 
@@ -480,17 +480,17 @@
             this.BackgroundImage = global::DKHP.Properties.Resources.istockphoto_995719694_612x612;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1218, 507);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBoxDanhSachGiangVien);
+            this.Controls.Add(this.groupBoxThongTinGiangVien);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmGiangVien";
             this.Text = "frmGiangVien";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxThongTinGiangVien.ResumeLayout(false);
+            this.groupBoxThongTinGiangVien.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBoxDanhSachGiangVien.ResumeLayout(false);
+            this.groupBoxDanhSachGiangVien.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGiangVien)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.giangVienViewModelsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
             this.ResumeLayout(false);
@@ -499,7 +499,7 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxThongTinGiangVien;
         private System.Windows.Forms.Button btnChonAnh;
         private System.Windows.Forms.Button btnHide;
         private System.Windows.Forms.Button btnLuu;
@@ -518,14 +518,14 @@
         private System.Windows.Forms.TextBox tbxTen;
         private System.Windows.Forms.TextBox tbxMK;
         private System.Windows.Forms.TextBox tbxID;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBoxDanhSachGiangVien;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox tbxSearch;
+        private System.Windows.Forms.DataGridView dgvGiangVien;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtIDSearch;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbTrinhDo;
-        private System.Windows.Forms.TextBox tbTenSearch;
+        private System.Windows.Forms.TextBox txtTenSearch;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ErrorProvider err;
         private System.Windows.Forms.Button btnSua;
