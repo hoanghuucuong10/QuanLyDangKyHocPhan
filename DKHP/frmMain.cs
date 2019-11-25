@@ -181,12 +181,14 @@ namespace DKHP
         #region Diem
         private void mnDiemSV_Click(object sender, EventArgs e)
         {
-            ShowPNMain(frmDiemSV.Instance);
+            frmDiemSV frm = new frmDiemSV();
+            ShowPNMain(frm);
         }
 
         private void mnDiemLopHP_Click(object sender, EventArgs e)
         {
-
+            frmDiemLopHP frm = new frmDiemLopHP();
+            ShowPNMain(frm);
         }
         #endregion
         #endregion
@@ -202,7 +204,8 @@ namespace DKHP
         //Nhap Diem
         private void mnNhapDiem_Click(object sender, EventArgs e)
         {
-
+            frmDiemLopHocPhanGV frm = new frmDiemLopHocPhanGV((eGiangVien)tk);
+            ShowPNMain(frm);
         }
         //Xem Danh Sach Lop
         private void xemDanhSáchLớpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -228,7 +231,8 @@ namespace DKHP
         //Xem kết quả học tập
         private void mnKQHT_Click(object sender, EventArgs e)
         {
-
+            frmDiemSV frm = new frmDiemSV((eSinhVien)tk);
+            ShowPNMain(frm);
         }
 
 
@@ -238,6 +242,12 @@ namespace DKHP
         private void mnNVXemLichDay_Click(object sender, EventArgs e)
         {
             frmLichDay frm = new frmLichDay();
+            ShowPNMain(frm);
+        }
+
+        private void mnNVXemLichHoc_Click(object sender, EventArgs e)
+        {
+            frmLichHoc frm = new frmLichHoc();
             ShowPNMain(frm);
         }
     }

@@ -44,5 +44,9 @@ namespace BLL
         {        
             return nth.CreateID();
         }
+        public string GetNhomSV(string idLopHP, string idSV)
+        {
+            return nth.GetNhomSV(idLopHP,  idSV);
+        }
     }
 }

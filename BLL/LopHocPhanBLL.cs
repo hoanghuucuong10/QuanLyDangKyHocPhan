@@ -14,13 +14,13 @@ namespace BLL
         {
             return LHP.GetAllLopHocPhan();
         }
-        public eLopHocPhan GetHocPhanbyID(string id)
+        public eLopHocPhan GetLopHocPhanbyID(string id)
         {
-            return LHP.GetHocPhanbyID(id);
+            return LHP.GetLopHocPhanbyID(id);
         }
-        public eLopHocPhan GetHocPhanByIDNhomTH(string id)
+        public eLopHocPhan GetLopHocPhanByIDNhomTH(string id)
         {
-            return LHP.GetHocPhanByIDNhomTH(id);
+            return LHP.GetLopHocPhanByIDNhomTH(id);
         }
         public List<eLopHocPhan> GetAllLopHocPhanGiangVien(string idGV, int hocKy,string namHoc)
         {
@@ -49,9 +49,9 @@ namespace BLL
            
             return LHP.SearchLopHocPhan(maLopHocPhan,tenMonHoc,hocKy,namHoc);
         }
-        public List<eLopHocPhan> GetAllHocPhanSinhVien(string idSV, int hocKy, string namHoc)
+        public List<eLopHocPhan> GetAllLopHocPhanSinhVien(string idSV, int hocKy, string namHoc)
         {
-            return LHP.GetAllHocPhanSinhVien(idSV, hocKy, namHoc);
+            return LHP.GetAllLopHocPhanSinhVien(idSV, hocKy, namHoc);
         }
 
     }

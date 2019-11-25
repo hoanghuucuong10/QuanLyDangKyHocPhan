@@ -70,14 +70,14 @@
             this.mnSV1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnDSSV = new System.Windows.Forms.ToolStripMenuItem();
             this.mnDKHP = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnNVXemLichHoc = new System.Windows.Forms.ToolStripMenuItem();
             this.mnGV1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnDSGV = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnNVXemLichDay = new System.Windows.Forms.ToolStripMenuItem();
             this.mnD1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnDiemSV = new System.Windows.Forms.ToolStripMenuItem();
             this.mnDiemLopHP = new System.Windows.Forms.ToolStripMenuItem();
             this.pnMain = new System.Windows.Forms.Panel();
-            this.mnNVXemLichHoc = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnNVXemLichDay = new System.Windows.Forms.ToolStripMenuItem();
             this.pnMenu.SuspendLayout();
             this.menuStripGV.SuspendLayout();
             this.menuStripSV.SuspendLayout();
@@ -94,7 +94,7 @@
             this.pnMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnMenu.Location = new System.Drawing.Point(0, 0);
             this.pnMenu.Name = "pnMenu";
-            this.pnMenu.Size = new System.Drawing.Size(1234, 40);
+            this.pnMenu.Size = new System.Drawing.Size(1234, 154);
             this.pnMenu.TabIndex = 0;
             // 
             // menuStripGV
@@ -486,6 +486,13 @@
             this.mnDKHP.Text = "Đăng Ký Học Phần";
             this.mnDKHP.Click += new System.EventHandler(this.mnDKHP_Click);
             // 
+            // mnNVXemLichHoc
+            // 
+            this.mnNVXemLichHoc.Name = "mnNVXemLichHoc";
+            this.mnNVXemLichHoc.Size = new System.Drawing.Size(279, 32);
+            this.mnNVXemLichHoc.Text = "Xem Lịch Học";
+            this.mnNVXemLichHoc.Click += new System.EventHandler(this.mnNVXemLichHoc_Click);
+            // 
             // mnGV1
             // 
             this.mnGV1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -505,6 +512,13 @@
             this.mnDSGV.Size = new System.Drawing.Size(293, 32);
             this.mnDSGV.Text = "Danh Sách GIảng Viên";
             this.mnDSGV.Click += new System.EventHandler(this.mnDSGV_Click);
+            // 
+            // mnNVXemLichDay
+            // 
+            this.mnNVXemLichDay.Name = "mnNVXemLichDay";
+            this.mnNVXemLichDay.Size = new System.Drawing.Size(293, 32);
+            this.mnNVXemLichDay.Text = "Xem Lịch Dạy";
+            this.mnNVXemLichDay.Click += new System.EventHandler(this.mnNVXemLichDay_Click);
             // 
             // mnD1
             // 
@@ -537,25 +551,12 @@
             // 
             this.pnMain.BackColor = System.Drawing.Color.Transparent;
             this.pnMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnMain.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnMain.ForeColor = System.Drawing.Color.Black;
-            this.pnMain.Location = new System.Drawing.Point(0, 40);
+            this.pnMain.Location = new System.Drawing.Point(0, 154);
             this.pnMain.Name = "pnMain";
-            this.pnMain.Size = new System.Drawing.Size(1234, 546);
+            this.pnMain.Size = new System.Drawing.Size(1234, 545);
             this.pnMain.TabIndex = 1;
-            // 
-            // mnNVXemLichHoc
-            // 
-            this.mnNVXemLichHoc.Name = "mnNVXemLichHoc";
-            this.mnNVXemLichHoc.Size = new System.Drawing.Size(279, 32);
-            this.mnNVXemLichHoc.Text = "Xem Lịch Học";
-            // 
-            // mnNVXemLichDay
-            // 
-            this.mnNVXemLichDay.Name = "mnNVXemLichDay";
-            this.mnNVXemLichDay.Size = new System.Drawing.Size(293, 32);
-            this.mnNVXemLichDay.Text = "Xem Lịch Dạy";
-            this.mnNVXemLichDay.Click += new System.EventHandler(this.mnNVXemLichDay_Click);
             // 
             // frmMain
             // 

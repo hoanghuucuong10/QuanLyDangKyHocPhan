@@ -10,25 +10,52 @@ namespace DAL
     {
         DangKyHocPhanEntities db = new DangKyHocPhanEntities();
 
+        public bool AddDiem(string idSV, string idLopHP)
+        {
+            try
+            {
+                Diem x = new Diem();
+                x.ID_LopHocPhan = idLopHP;
+                x.ID_SinhVien = idSV;
+                db.Diems.Add(x);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public bool DelDiem(string idSV, string idLopHP)
+        {
+            try
+            {
+                Diem x = db.Diems.Where(t => t.ID_LopHocPhan == idLopHP && t.ID_SinhVien == idSV).FirstOrDefault();
+                if(x!=null)
+                {
+                    db.Diems.Remove(x);
+                    db.SaveChanges();
+                    return true;
+                }             
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
 
+        }
         public List<eDiem> GetDiemSV(string idSV)
         {
-            List<eDiem> lst = db.Diems.Where(x => x.ID_SinhVien == idSV).Select(t => new eDiem
+            List<eDiem> lst = db.Diems.Where(x => x.ID_SinhVien == idSV).OrderBy(t => t.LopHocPhan.NienKhoa.NienKhoa1).ThenBy(t => t.LopHocPhan.HocKy).Select(t => new eDiem
             {
-                //ID_SinhVien = t.ID_SinhVien,
-                //SinhVien = t.SinhVien,
-                //tenLopNC = t.SinhVien.LopNienChe.TenLop,
-                //id_LopHP = t.ID_LopHocPhan,
-                //tenHP = t.LopHocPhan.HocPhan.TenMonHoc,
-                //tenGiangVien = t.LopHocPhan.GiangVien.HoVaTen,
-                //hocKy = t.LopHocPhan.HocKy.Value,
-                //namHoc = t.LopHocPhan.NamHoc,
-                //tk1 = t.TK1.Value,
-                //tk2 = t.TK2.Value,
-                //tk3 = t.TK3.Value,
-                //gk = t.GK.Value,
-                //ck = t.CK.Value,
-                //tb = ((t.TK1.Value + t.TK2.Value + t.TK3.Value) + (2 * t.GK.Value) + (5 * t.CK.Value)) / 10
+                ID_SinhVien = t.ID_SinhVien,
+                ID_LopHocPhan = t.ID_LopHocPhan,
+                TK1 = t.TK1.Value,
+                TK2 = t.TK2.Value,
+                TK3 = t.TK3.Value,
+                GK = t.GK.Value,
+                CK = t.CK.Value,
             }).ToList();
             return lst;
         }
@@ -36,20 +63,13 @@ namespace DAL
         {
             List<eDiem> lst = db.Diems.Where(x => x.ID_LopHocPhan == id_LopHP).Select(t => new eDiem
             {
-                //id_SinhVien = t.ID_SinhVien,
-                //hoTenSV = t.SinhVien.HoVaTen,
-                //tenLopNC = t.SinhVien.LopNienChe.TenLop,
-                //id_LopHP = t.ID_LopHocPhan,
-                //tenHP = t.LopHocPhan.HocPhan.TenMonHoc,
-                //tenGiangVien = t.LopHocPhan.GiangVien.HoVaTen,
-                //hocKy = t.LopHocPhan.HocKy.Value,
-                //namHoc = t.LopHocPhan.NamHoc,
-                //tk1 = t.TK1.Value,
-                //tk2 = t.TK2.Value,
-                //tk3 = t.TK3.Value,
-                //gk = t.GK.Value,
-                //ck = t.CK.Value,
-                //tb = ((t.TK1.Value + t.TK2.Value + t.TK3.Value) + (2 * t.GK.Value) + (5 * t.CK.Value)) / 10
+                ID_SinhVien = t.ID_SinhVien,
+                ID_LopHocPhan = t.ID_LopHocPhan,
+                TK1 = t.TK1.Value,
+                TK2 = t.TK2.Value,
+                TK3 = t.TK3.Value,
+                GK = t.GK.Value,
+                CK = t.CK.Value,
             }).ToList();
             return lst;
         }

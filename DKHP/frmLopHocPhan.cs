@@ -44,7 +44,6 @@ namespace DKHP
             LoadDanhSachLopHocPhan(LHP.SearchLopHocPhan("", "", "", ""));
             LoadComboBox();
             LoadCBLichLyThuyet();
-
             flag = 0;
 
 

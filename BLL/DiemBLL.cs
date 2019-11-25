@@ -18,5 +18,13 @@ namespace BLL
         {
             return diemDal.GetDiemLopHocPhan(id_LopHP);
         }
+        public bool AddDiem(string idSV, string idLopHP)
+        {
+            return diemDal.AddDiem(idSV, idLopHP);
+        }
+        public bool DelDiem(string idSV, string idLopHP)
+        {
+            return diemDal.DelDiem(idSV, idLopHP);
+        }
     }
 }

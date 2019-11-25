@@ -25,6 +25,7 @@ namespace DKHP
             cbNamHocSearch.ValueMember = "ID_NienKhoa";
             cbNamHocSearch.DisplayMember = "NienKhoa1";
 
+            cbHocKiSearch.SelectedIndex = 0;
         }
         public frmLichDay()
         {
@@ -33,18 +34,15 @@ namespace DKHP
             cbNamHocSearch.ValueMember = "ID_NienKhoa";
             cbNamHocSearch.DisplayMember = "NienKhoa1";
 
+            cbHocKiSearch.SelectedIndex = 0;
         }
         private void btnSearchGV_Click(object sender, EventArgs e)
         {
             eGiangVien x = new GiangVienBLL().GetGiangVienByID(txtID.Text.Trim());
             if (x!=null)
             {
-                this.eGV = x;
-                txtMail.Text = x.Mail.Trim();
-                txtPhone.Text = x.SDT.Trim();
+                this.eGV = x;           
                 txtTen.Text = x.HoVaTen.Trim();
-                txtTrinhDo.Text = x.TrinhDo.Trim();
-                txtAddress.Text = x.DiaChi.Trim();
             }
         }
         public void ClearPN()
@@ -87,162 +85,396 @@ namespace DKHP
         }
         public void AddPanelTH(eLichHoc_NhomThucHanh x)
         {
-            eLopHocPhan a = new LopHocPhanBLL().GetHocPhanByIDNhomTH(x.ID_NhomThucHanh);
+            eLopHocPhan a = new LopHocPhanBLL().GetLopHocPhanByIDNhomTH(x.ID_NhomThucHanh);
             eNhomThucHanh b = new NhomThucHanhBLL().GetNhomByID(x.ID_NhomThucHanh);
             ePhongHoc c = new PhongHocBLL().GetPhongHocByID(x.ID_PhongHoc);
             eHocPhan d = new HocPhanBLL().GetHocPhanByID(a.ID_HocPhan);
-            frmPnLich pnLich = new frmPnLich(a.ID_LopHocPhan.Trim(), d.TenMonHoc.Trim(), new GiangVienBLL().GetGiangVienByID(a.ID_GiangVien).HoVaTen.Trim(), x.TietHoc, c.TenPhongHoc, b.TenNhom.Trim(), b.NgayBatDau.Value.ToShortDateString(), b.NgayKetThuc.Value.ToShortDateString());
+            eGiangVien e = new GiangVienBLL().GetGiangVienByID(a.ID_GiangVien);
+
+            frmPnLich pnLich = new frmPnLich(a.ID_LopHocPhan.Trim(), d.TenMonHoc.Trim(), e.HoVaTen.Trim(), x.TietHoc, c.TenPhongHoc, b.TenNhom.Trim(), b.NgayBatDau.Value.ToShortDateString(), b.NgayKetThuc.Value.ToShortDateString());
             pnLich.TopLevel = false;
             pnLich.FormBorderStyle = FormBorderStyle.None;
             pnLich.Visible = true;
-            if (x.NgayHoc == "Thứ Hai" && x.TietHoc == "1-3")
+
+            #region
+            x.NgayHoc = x.NgayHoc.Trim();
+            x.TietHoc = x.TietHoc.Trim();
+            if (x.NgayHoc == "Thứ Hai" && ( x.TietHoc == "1-3" || x.TietHoc=="1-2" || x.TietHoc == "2-3" || x.TietHoc=="1-5"))
             {
                 panel1.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Ba" && x.TietHoc == "1-3")
+            if (x.NgayHoc == "Thứ Ba" && ( x.TietHoc == "1-3" || x.TietHoc=="1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5"))
             {
                 panel2.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Tư" && x.TietHoc == "1-3")
+            if (x.NgayHoc == "Thứ Tư" && ( x.TietHoc == "1-3" || x.TietHoc=="1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5"))
             {
                 panel3.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Năm" && x.TietHoc == "1-3")
+            if (x.NgayHoc == "Thứ Năm" && ( x.TietHoc == "1-3" || x.TietHoc=="1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5"))
             {
                 panel4.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Sáu" && x.TietHoc == "1-3")
+            if (x.NgayHoc == "Thứ Sáu" && ( x.TietHoc == "1-3" || x.TietHoc=="1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5"))
             {
                 panel5.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Bảy" && x.TietHoc == "1-3")
+            if (x.NgayHoc == "Thứ Bảy" && ( x.TietHoc == "1-3" || x.TietHoc=="1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5"))
             {
                 panel6.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Chủ Nhật" && x.TietHoc == "1-3")
+            if (x.NgayHoc == "Chủ Nhật" && ( x.TietHoc == "1-3" || x.TietHoc=="1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5"))
             {
                 panel7.Controls.Add(pnLich);
+                return;
             }
             //
-            if (x.NgayHoc == "Thứ Hai" && x.TietHoc == "4-6")
+            if (x.NgayHoc == "Thứ Hai" && ( x.TietHoc == "4-6" || x.TietHoc=="4-5" || x.TietHoc == "5-6"))
             {
                 panel8.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Ba" && x.TietHoc == "4-6")
+            if (x.NgayHoc == "Thứ Ba" && ( x.TietHoc == "4-6" || x.TietHoc=="4-5" || x.TietHoc == "5-6"))
             {
                 panel9.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Tư" && x.TietHoc == "4-6")
+            if (x.NgayHoc == "Thứ Tư" && ( x.TietHoc == "4-6" || x.TietHoc=="4-5" || x.TietHoc == "5-6"))
             {
                 panel10.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Năm" && x.TietHoc == "4-6")
+            if (x.NgayHoc == "Thứ Năm" && ( x.TietHoc == "4-6" || x.TietHoc=="4-5" || x.TietHoc == "5-6"))
             {
                 panel11.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Sáu" && x.TietHoc == "4-6")
+            if (x.NgayHoc == "Thứ Sáu" && ( x.TietHoc == "4-6" || x.TietHoc=="4-5" || x.TietHoc == "5-6"))
             {
                 panel12.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Bảy" && x.TietHoc == "4-6")
+            if (x.NgayHoc == "Thứ Bảy" && ( x.TietHoc == "4-6" || x.TietHoc=="4-5" || x.TietHoc == "5-6"))
             {
                 panel13.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Chủ Nhật" && x.TietHoc == "4-6")
+            if (x.NgayHoc == "Chủ Nhật" && ( x.TietHoc == "4-6" || x.TietHoc=="4-5" || x.TietHoc == "5-6"))
             {
                 panel14.Controls.Add(pnLich);
+                return;
             }
             //7-9
-            if (x.NgayHoc == "Thứ Hai" && x.TietHoc == "7-9")
+            if (x.NgayHoc == "Thứ Hai" && ( x.TietHoc == "7-9" || x.TietHoc=="7-8" || x.TietHoc == "8-9" || x.TietHoc=="7-12"))
             {
                 panel15.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Ba" && x.TietHoc == "7-9")
+            if (x.NgayHoc == "Thứ Ba" && ( x.TietHoc == "7-9" || x.TietHoc=="7-8" || x.TietHoc == "8-9" || x.TietHoc=="7-12"))
             {
                 panel16.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Tư" && x.TietHoc == "7-9")
+            if (x.NgayHoc == "Thứ Tư" && ( x.TietHoc == "7-9" || x.TietHoc=="7-8" || x.TietHoc == "8-9" || x.TietHoc=="7-12"))
             {
                 panel17.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Năm" && x.TietHoc == "7-9")
+            if (x.NgayHoc == "Thứ Năm" && ( x.TietHoc == "7-9" || x.TietHoc=="7-8" || x.TietHoc == "8-9" || x.TietHoc=="7-12"))
             {
                 panel18.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Sáu" && x.TietHoc == "7-9")
+            if (x.NgayHoc == "Thứ Sáu" && ( x.TietHoc == "7-9" || x.TietHoc=="7-8" || x.TietHoc == "8-9" || x.TietHoc=="7-12"))
             {
                 panel19.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Bảy" && x.TietHoc == "7-9")
+            if (x.NgayHoc == "Thứ Bảy" && ( x.TietHoc == "7-9" || x.TietHoc=="7-8" || x.TietHoc == "8-9" || x.TietHoc=="7-12"))
             {
                 panel20.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Chủ Nhật" && x.TietHoc == "7-9")
+            if (x.NgayHoc == "Chủ Nhật" && ( x.TietHoc == "7-9" || x.TietHoc=="7-8" || x.TietHoc == "8-9" || x.TietHoc=="7-12"))
             {
                 panel21.Controls.Add(pnLich);
+                return;
             }
             //10-12
-            if (x.NgayHoc == "Thứ Hai" && x.TietHoc == "10-12")
+            if (x.NgayHoc == "Thứ Hai" && (  x.TietHoc=="10-12" || x.TietHoc == "10-11" || x.TietHoc=="11-12"))
             {
                 panel22.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Ba" && x.TietHoc == "10-12")
+            if (x.NgayHoc == "Thứ Ba" && (  x.TietHoc=="10-12" || x.TietHoc == "10-11" || x.TietHoc=="11-12"))
             {
                 panel23.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Tư" && x.TietHoc == "10-12")
+            if (x.NgayHoc == "Thứ Tư" && (  x.TietHoc=="10-12" || x.TietHoc == "10-11" || x.TietHoc=="11-12"))
             {
                 panel24.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Năm" && x.TietHoc == "10-12")
+            if (x.NgayHoc == "Thứ Năm" && (  x.TietHoc=="10-12" || x.TietHoc == "10-11" || x.TietHoc=="11-12"))
             {
                 panel25.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Sáu" && x.TietHoc == "10-12")
+            if (x.NgayHoc == "Thứ Sáu" && (  x.TietHoc=="10-12" || x.TietHoc == "10-11" || x.TietHoc=="11-12"))
             {
                 panel26.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Bảy" && x.TietHoc == "10-12")
+            if (x.NgayHoc == "Thứ Bảy" && (  x.TietHoc=="10-12" || x.TietHoc == "10-11" || x.TietHoc=="11-12"))
             {
                 panel27.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Chủ Nhật" && x.TietHoc == "10-12")
+            if (x.NgayHoc == "Chủ Nhật" && (  x.TietHoc=="10-12" || x.TietHoc == "10-11" || x.TietHoc=="11-12"))
             {
                 panel28.Controls.Add(pnLich);
+                return;
             }
             //13-15
-            if (x.NgayHoc == "Thứ Hai" && x.TietHoc == "13-15")
+            if (x.NgayHoc == "Thứ Hai" && (  x.TietHoc=="13-15" || x.TietHoc == "13-14" || x.TietHoc=="14-15"))
             {
                 panel29.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Ba" && x.TietHoc == "13-15")
+            if (x.NgayHoc == "Thứ Ba" && (  x.TietHoc=="13-15" || x.TietHoc == "13-14" || x.TietHoc=="14-15"))
             {
                 panel30.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Tư" && x.TietHoc == "13-15")
+            if (x.NgayHoc == "Thứ Tư" && (  x.TietHoc=="13-15" || x.TietHoc == "13-14" || x.TietHoc=="14-15"))
             {
                 panel31.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Năm" && x.TietHoc == "13-15")
+            if (x.NgayHoc == "Thứ Năm" && (  x.TietHoc=="13-15" || x.TietHoc == "13-14" || x.TietHoc=="14-15"))
             {
                 panel32.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Sáu" && x.TietHoc == "13-15")
+            if (x.NgayHoc == "Thứ Sáu" && (  x.TietHoc=="13-15" || x.TietHoc == "13-14" || x.TietHoc=="14-15"))
             {
                 panel33.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Thứ Bảy" && x.TietHoc == "13-15")
+            if (x.NgayHoc == "Thứ Bảy" && (  x.TietHoc=="13-15" || x.TietHoc == "13-14" || x.TietHoc=="14-15"))
             {
                 panel34.Controls.Add(pnLich);
+                return;
             }
-            if (x.NgayHoc == "Chủ Nhật" && x.TietHoc == "13-15")
+            if (x.NgayHoc == "Chủ Nhật" && (  x.TietHoc=="13-15" || x.TietHoc == "13-14" || x.TietHoc=="14-15"))
             {
                 panel35.Controls.Add(pnLich);
+                return;
             }
-
+            #endregion
         }
-        public void AddPanelLT(eLopHocPhan a)
+        public void AddPanelLT(eLichHoc_LopHocPhan x)
         {
+            eLopHocPhan a = new LopHocPhanBLL().GetLopHocPhanbyID(x.ID_LopHocPhan.Trim());
+            ePhongHoc c = new PhongHocBLL().GetPhongHocByID(x.ID_PhongHoc.Trim());
+            eHocPhan d = new HocPhanBLL().GetHocPhanByID(a.ID_HocPhan.Trim());
+            eGiangVien e = new GiangVienBLL().GetGiangVienByID(a.ID_GiangVien.Trim());
+
+            frmPnLich pnLich = new frmPnLich(a.ID_LopHocPhan.Trim(), d.TenMonHoc.Trim(), e.HoVaTen.Trim(), x.TietHoc, c.TenPhongHoc, a.NgayBatDau.Value.ToShortDateString(),a.NgayKetThuc.Value.ToShortDateString());
+            pnLich.TopLevel = false;
+            pnLich.FormBorderStyle = FormBorderStyle.None;
+            pnLich.Visible = true;
+
+            #region
+            x.NgayHoc = x.NgayHoc.Trim();
+            x.TietHoc = x.TietHoc.Trim();
+            if (x.NgayHoc == "Thứ Hai" && (x.TietHoc == "1-3" || x.TietHoc == "1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5"))
+            {
+                panel1.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Ba" && (x.TietHoc == "1-3" || x.TietHoc == "1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5"))
+            {
+                panel2.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Tư" && (x.TietHoc == "1-3" || x.TietHoc == "1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5"))
+            {
+                panel3.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Năm" && (x.TietHoc == "1-3" || x.TietHoc == "1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5"))
+            {
+                panel4.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Sáu" && (x.TietHoc == "1-3" || x.TietHoc == "1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5"))
+            {
+                panel5.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Bảy" && (x.TietHoc == "1-3" || x.TietHoc == "1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5"))
+            {
+                panel6.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Chủ Nhật" && (x.TietHoc == "1-3" || x.TietHoc == "1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5"))
+            {
+                panel7.Controls.Add(pnLich);
+                return;
+            }
+            //
+            if (x.NgayHoc == "Thứ Hai" && (x.TietHoc == "4-6" || x.TietHoc == "4-5" || x.TietHoc == "5-6"))
+            {
+                panel8.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Ba" && (x.TietHoc == "4-6" || x.TietHoc == "4-5" || x.TietHoc == "5-6"))
+            {
+                panel9.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Tư" && (x.TietHoc == "4-6" || x.TietHoc == "4-5" || x.TietHoc == "5-6"))
+            {
+                panel10.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Năm" && (x.TietHoc == "4-6" || x.TietHoc == "4-5" || x.TietHoc == "5-6"))
+            {
+                panel11.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Sáu" && (x.TietHoc == "4-6" || x.TietHoc == "4-5" || x.TietHoc == "5-6"))
+            {
+                panel12.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Bảy" && (x.TietHoc == "4-6" || x.TietHoc == "4-5" || x.TietHoc == "5-6"))
+            {
+                panel13.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Chủ Nhật" && (x.TietHoc == "4-6" || x.TietHoc == "4-5" || x.TietHoc == "5-6"))
+            {
+                panel14.Controls.Add(pnLich);
+                return;
+            }
+            //7-9
+            if (x.NgayHoc == "Thứ Hai" && (x.TietHoc == "7-9" || x.TietHoc == "7-8" || x.TietHoc == "8-9" || x.TietHoc == "7-12"))
+            {
+                panel15.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Ba" && (x.TietHoc == "7-9" || x.TietHoc == "7-8" || x.TietHoc == "8-9" || x.TietHoc == "7-12"))
+            {
+                panel16.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Tư" && (x.TietHoc == "7-9" || x.TietHoc == "7-8" || x.TietHoc == "8-9" || x.TietHoc == "7-12"))
+            {
+                panel17.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Năm" && (x.TietHoc == "7-9" || x.TietHoc == "7-8" || x.TietHoc == "8-9" || x.TietHoc == "7-12"))
+            {
+                panel18.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Sáu" && (x.TietHoc == "7-9" || x.TietHoc == "7-8" || x.TietHoc == "8-9" || x.TietHoc == "7-12"))
+            {
+                panel19.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Bảy" && (x.TietHoc == "7-9" || x.TietHoc == "7-8" || x.TietHoc == "8-9" || x.TietHoc == "7-12"))
+            {
+                panel20.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Chủ Nhật" && (x.TietHoc == "7-9" || x.TietHoc == "7-8" || x.TietHoc == "8-9" || x.TietHoc == "7-12"))
+            {
+                panel21.Controls.Add(pnLich);
+                return;
+            }
+            //10-12
+            if (x.NgayHoc == "Thứ Hai" && (x.TietHoc == "10-12" || x.TietHoc == "10-11" || x.TietHoc == "11-12"))
+            {
+                panel22.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Ba" && (x.TietHoc == "10-12" || x.TietHoc == "10-11" || x.TietHoc == "11-12"))
+            {
+                panel23.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Tư" && (x.TietHoc == "10-12" || x.TietHoc == "10-11" || x.TietHoc == "11-12"))
+            {
+                panel24.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Năm" && (x.TietHoc == "10-12" || x.TietHoc == "10-11" || x.TietHoc == "11-12"))
+            {
+                panel25.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Sáu" && (x.TietHoc == "10-12" || x.TietHoc == "10-11" || x.TietHoc == "11-12"))
+            {
+                panel26.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Bảy" && (x.TietHoc == "10-12" || x.TietHoc == "10-11" || x.TietHoc == "11-12"))
+            {
+                panel27.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Chủ Nhật" && (x.TietHoc == "10-12" || x.TietHoc == "10-11" || x.TietHoc == "11-12"))
+            {
+                panel28.Controls.Add(pnLich);
+                return;
+            }
+            //13-15
+            if (x.NgayHoc == "Thứ Hai" && (x.TietHoc == "13-15" || x.TietHoc == "13-14" || x.TietHoc == "14-15"))
+            {
+                panel29.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Ba" && (x.TietHoc == "13-15" || x.TietHoc == "13-14" || x.TietHoc == "14-15"))
+            {
+                panel30.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Tư" && (x.TietHoc == "13-15" || x.TietHoc == "13-14" || x.TietHoc == "14-15"))
+            {
+                panel31.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Năm" && (x.TietHoc == "13-15" || x.TietHoc == "13-14" || x.TietHoc == "14-15"))
+            {
+                panel32.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Sáu" && (x.TietHoc == "13-15" || x.TietHoc == "13-14" || x.TietHoc == "14-15"))
+            {
+                panel33.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Thứ Bảy" && (x.TietHoc == "13-15" || x.TietHoc == "13-14" || x.TietHoc == "14-15"))
+            {
+                panel34.Controls.Add(pnLich);
+                return;
+            }
+            if (x.NgayHoc == "Chủ Nhật" && (x.TietHoc == "13-15" || x.TietHoc == "13-14" || x.TietHoc == "14-15"))
+            {
+                panel35.Controls.Add(pnLich);
+                return;
+            }
+            #endregion
         }
 
         public void LoadLichDay(int hocKy,string namHoc)
@@ -252,8 +484,11 @@ namespace DKHP
             List<eLichHoc_NhomThucHanh> lstLichTH = new LichHocBLL().GetLichHocThucHanh_GiangVien(eGV.ID_GiangVien, int.Parse(cbHocKiSearch.Text.Trim()), int.Parse(cbNamHocSearch.SelectedValue.ToString().Trim())); ;
             foreach(eLichHoc_NhomThucHanh x in lstLichTH)
             {
-                AddPanelTH(x);
-                
+                AddPanelTH(x);    
+            }
+            foreach (eLichHoc_LopHocPhan x in lstLichLT)
+            {
+                AddPanelLT(x);
             }
         }
 

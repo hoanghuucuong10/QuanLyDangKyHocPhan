@@ -473,7 +473,6 @@
             // 
             // sinhVienViewModelsBindingSource
             // 
-            this.sinhVienViewModelsBindingSource.DataSource = typeof(DKHP.ViewModels.SinhVienViewModels);
             // 
             // err
             // 

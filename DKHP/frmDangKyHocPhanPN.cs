@@ -37,7 +37,7 @@ namespace DKHP
         }
         public void LoadDanhSachDaDangKy()
         {
-            lstHocPhanDangKy = new LopHocPhanBLL().GetAllHocPhanSinhVien(eSV.ID_SinhVien, int.Parse(cbHocKiSearch.SelectedItem.ToString().Trim()), cbNamHocSearch.Text.Trim()).Select(x => new DangKyHocPhanViewModels
+            lstHocPhanDangKy = new LopHocPhanBLL().GetAllLopHocPhanSinhVien(eSV.ID_SinhVien, int.Parse(cbHocKiSearch.SelectedItem.ToString().Trim()), cbNamHocSearch.Text.Trim()).Select(x => new DangKyHocPhanViewModels
             {
                 ID_LopHocPhan = x.ID_LopHocPhan.Trim(),
                 TenMonHoc = new HocPhanBLL().GetHocPhanByID(x.ID_HocPhan).TenMonHoc.Trim(),
@@ -91,7 +91,7 @@ namespace DKHP
             LoadDanhSachDaDangKy();
             LoadDSLopHocPhan();
            
-            dataGridView1.ClearSelection();
+            dgvDanhSachLopHP.ClearSelection();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -99,7 +99,7 @@ namespace DKHP
 
             try
             {
-                string idLopHP = dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString().Trim();
+                string idLopHP = dgvDanhSachLopHP.Rows[dgvDanhSachLopHP.CurrentRow.Index].Cells[0].Value.ToString().Trim();
                
                 #region Load danh sách lịch lý thuyết
                 lstLichLyThuyet = new LichHocBLL().GetLichHoc_LopHocPhan(idLopHP).Select(t => new LichHocLTViewModels
@@ -112,7 +112,7 @@ namespace DKHP
                     TietHoc = t.TietHoc
                 }).ToList();
                 lichHocLTViewModelsBindingSource.DataSource = lstLichLyThuyet;
-                dataGridView3.ClearSelection();
+                dgvLichHocLT.ClearSelection();
                 #endregion
              
                 #region Load danh sách nhóm TH
@@ -130,7 +130,7 @@ namespace DKHP
                 }).ToList();
 
                 nhomThucHanhViewModelsBindingSource.DataSource = lstNhomThucHanh;
-                dataGridView4.ClearSelection();
+                dgvDanhSachNhom.ClearSelection();
                 #endregion
 
 
@@ -143,7 +143,7 @@ namespace DKHP
         {
             try
             {
-                string idLopTH = dataGridView4.Rows[dataGridView4.CurrentRow.Index].Cells[0].Value.ToString().Trim();
+                string idLopTH = dgvDanhSachNhom.Rows[dgvDanhSachNhom.CurrentRow.Index].Cells[0].Value.ToString().Trim();
                 lstLichThucHanh = new LichHocBLL().GetLichHoc_NhomThucHanh(idLopTH).Select(t => new LichHocTHViewModels
                 {
                     ID_LichHoc_NhomTH = t.ID_LichHoc_NhomTH,
@@ -154,7 +154,7 @@ namespace DKHP
                     TietHoc = t.TietHoc
                 }).ToList();
                 lichHocTHViewModelsBindingSource.DataSource = lstLichThucHanh;
-                dataGridView5.ClearSelection();
+                dgvLichTH.ClearSelection();
             }
             catch (Exception)
             {
@@ -165,31 +165,31 @@ namespace DKHP
         {
             string idLopHP;
             string idNhomTH;
-            if (dataGridView1.Rows.Count==0) //hoc ky ko co hoc phan dang ky
+            if (dgvDanhSachLopHP.Rows.Count==0) //hoc ky ko co hoc phan dang ky
             {
                 return;
             }
             
-            if(dataGridView1.Rows.Count > 0)
+            if(dgvDanhSachLopHP.Rows.Count > 0)
             {
-                if(dataGridView3.Rows.Count==0)//Chưa chọn lớp học phần
+                if(dgvLichHocLT.Rows.Count==0)//Chưa chọn lớp học phần
                 {
                     MessageBox.Show("Vui lòng chọn lớp học phần muốn đăng ký");
                     return;
                 }
-                if (dataGridView4.Rows.Count == 0)// khong co nhom thuc hanh
+                if (dgvDanhSachNhom.Rows.Count == 0)// khong co nhom thuc hanh
                 {
-                    idLopHP = dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString().Trim();
+                    idLopHP = dgvDanhSachLopHP.Rows[dgvDanhSachLopHP.CurrentRow.Index].Cells[0].Value.ToString().Trim();
                     idNhomTH = "";
                 }else // co nhom thuc hanh
                 {
-                    if (dataGridView5.Rows.Count == 0) //chưa chọn nhóm thực hành
+                    if (dgvLichTH.Rows.Count == 0) //chưa chọn nhóm thực hành
                     {
                         MessageBox.Show("Vui lòng chọn nhóm thực hành");
                         return;
                     }
-                    idLopHP = dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString().Trim();
-                    idNhomTH = dataGridView4.Rows[dataGridView4.CurrentRow.Index].Cells[0].Value.ToString().Trim();
+                    idLopHP = dgvDanhSachLopHP.Rows[dgvDanhSachLopHP.CurrentRow.Index].Cells[0].Value.ToString().Trim();
+                    idNhomTH = dgvDanhSachNhom.Rows[dgvDanhSachNhom.CurrentRow.Index].Cells[0].Value.ToString().Trim();
                 }
                 //Kiểm tra lịch trùng nếu sai thì thông báo và return
                 bool kt = new LichHocBLL().CheckLichTrung(eSV.ID_SinhVien,idLopHP, idNhomTH, cbHocKiSearch.SelectedItem.ToString().Trim(), int.Parse( cbNamHocSearch.SelectedValue.ToString().Trim()));
@@ -203,9 +203,10 @@ namespace DKHP
                     if(k==true)
                     {
                         MessageBox.Show("Đăng Ký Thành Công");
+                        new DiemBLL().AddDiem(eSV.ID_SinhVien, idLopHP);
                         LoadDanhSachDaDangKy();
                         LoadDSLopHocPhan();
-                        dataGridView1.ClearSelection();
+                        dgvDanhSachLopHP.ClearSelection();
                         lichHocLTViewModelsBindingSource.DataSource = null;
                         nhomThucHanhViewModelsBindingSource.DataSource = null;
                         lichHocTHViewModelsBindingSource.DataSource = null;
@@ -215,13 +216,7 @@ namespace DKHP
                         MessageBox.Show("Đăng Ký Thất Bại");
                     }
                 }
-
-
-            }
-            
-            
-
-
+            }      
         }
 
         private void btHDK_Click(object sender, EventArgs e)
@@ -234,9 +229,10 @@ namespace DKHP
                 if(k==true)
                 {
                     MessageBox.Show("Hủy đăng ký thành công");
+                    new DiemBLL().DelDiem(eSV.ID_SinhVien, idLopHP);
                     LoadDanhSachDaDangKy();
                     LoadDSLopHocPhan();
-                    dataGridView1.ClearSelection();
+                    dgvDanhSachLopHP.ClearSelection();
                     lichHocLTViewModelsBindingSource.DataSource = null;
                     nhomThucHanhViewModelsBindingSource.DataSource = null;
                     lichHocTHViewModelsBindingSource.DataSource = null;

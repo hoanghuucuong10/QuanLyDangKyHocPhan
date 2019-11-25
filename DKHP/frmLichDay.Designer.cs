@@ -29,27 +29,8 @@
         private void InitializeComponent()
         {
             this.pnThongTinGiangVien = new System.Windows.Forms.Panel();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.txtMail = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.txtAddress = new System.Windows.Forms.TextBox();
-            this.txtPhone = new System.Windows.Forms.TextBox();
-            this.txtTrinhDo = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.picHinhAnh = new System.Windows.Forms.PictureBox();
-            this.btnSearchGV = new System.Windows.Forms.Button();
-            this.txtID = new System.Windows.Forms.TextBox();
-            this.txtTen = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.panelLich = new System.Windows.Forms.Panel();
             this.lb = new System.Windows.Forms.Label();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.cbNamHocSearch = new System.Windows.Forms.ComboBox();
-            this.cbHocKiSearch = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.panel35 = new System.Windows.Forms.Panel();
             this.panel28 = new System.Windows.Forms.Panel();
             this.panel21 = new System.Windows.Forms.Panel();
@@ -95,166 +76,45 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtTen = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtID = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnSearchGV = new System.Windows.Forms.Button();
+            this.cbHocKiSearch = new System.Windows.Forms.ComboBox();
+            this.cbNamHocSearch = new System.Windows.Forms.ComboBox();
+            this.picHinhAnh = new System.Windows.Forms.PictureBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
             this.pnThongTinGiangVien.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picHinhAnh)).BeginInit();
             this.panelLich.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHinhAnh)).BeginInit();
             this.SuspendLayout();
             // 
             // pnThongTinGiangVien
             // 
-            this.pnThongTinGiangVien.Controls.Add(this.label15);
-            this.pnThongTinGiangVien.Controls.Add(this.label16);
-            this.pnThongTinGiangVien.Controls.Add(this.txtMail);
-            this.pnThongTinGiangVien.Controls.Add(this.label17);
-            this.pnThongTinGiangVien.Controls.Add(this.label18);
-            this.pnThongTinGiangVien.Controls.Add(this.txtAddress);
-            this.pnThongTinGiangVien.Controls.Add(this.txtPhone);
-            this.pnThongTinGiangVien.Controls.Add(this.txtTrinhDo);
             this.pnThongTinGiangVien.Controls.Add(this.label11);
+            this.pnThongTinGiangVien.Controls.Add(this.btnSearch);
             this.pnThongTinGiangVien.Controls.Add(this.picHinhAnh);
+            this.pnThongTinGiangVien.Controls.Add(this.cbNamHocSearch);
+            this.pnThongTinGiangVien.Controls.Add(this.cbHocKiSearch);
             this.pnThongTinGiangVien.Controls.Add(this.btnSearchGV);
+            this.pnThongTinGiangVien.Controls.Add(this.label14);
             this.pnThongTinGiangVien.Controls.Add(this.txtID);
+            this.pnThongTinGiangVien.Controls.Add(this.label9);
             this.pnThongTinGiangVien.Controls.Add(this.txtTen);
             this.pnThongTinGiangVien.Controls.Add(this.label13);
             this.pnThongTinGiangVien.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnThongTinGiangVien.Location = new System.Drawing.Point(0, 0);
             this.pnThongTinGiangVien.Name = "pnThongTinGiangVien";
-            this.pnThongTinGiangVien.Size = new System.Drawing.Size(1218, 263);
+            this.pnThongTinGiangVien.Size = new System.Drawing.Size(1218, 194);
             this.pnThongTinGiangVien.TabIndex = 1;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(487, 126);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(51, 13);
-            this.label15.TabIndex = 83;
-            this.label15.Text = "Trình Độ:";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(503, 228);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(35, 13);
-            this.label16.TabIndex = 82;
-            this.label16.Text = "Email:";
-            // 
-            // txtMail
-            // 
-            this.txtMail.Location = new System.Drawing.Point(563, 221);
-            this.txtMail.Name = "txtMail";
-            this.txtMail.ReadOnly = true;
-            this.txtMail.Size = new System.Drawing.Size(142, 20);
-            this.txtMail.TabIndex = 81;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(494, 194);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(44, 13);
-            this.label17.TabIndex = 80;
-            this.label17.Text = "Địa Chỉ:";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(460, 160);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(78, 13);
-            this.label18.TabIndex = 79;
-            this.label18.Text = "Số Điện Thoại:";
-            // 
-            // txtAddress
-            // 
-            this.txtAddress.Location = new System.Drawing.Point(563, 187);
-            this.txtAddress.Name = "txtAddress";
-            this.txtAddress.ReadOnly = true;
-            this.txtAddress.Size = new System.Drawing.Size(142, 20);
-            this.txtAddress.TabIndex = 77;
-            // 
-            // txtPhone
-            // 
-            this.txtPhone.Location = new System.Drawing.Point(563, 153);
-            this.txtPhone.Name = "txtPhone";
-            this.txtPhone.ReadOnly = true;
-            this.txtPhone.Size = new System.Drawing.Size(142, 20);
-            this.txtPhone.TabIndex = 78;
-            // 
-            // txtTrinhDo
-            // 
-            this.txtTrinhDo.Location = new System.Drawing.Point(562, 119);
-            this.txtTrinhDo.Name = "txtTrinhDo";
-            this.txtTrinhDo.ReadOnly = true;
-            this.txtTrinhDo.Size = new System.Drawing.Size(110, 20);
-            this.txtTrinhDo.TabIndex = 76;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(559, 67);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(62, 13);
-            this.label11.TabIndex = 71;
-            this.label11.Text = "Họ Và Tên:";
-            // 
-            // picHinhAnh
-            // 
-            this.picHinhAnh.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picHinhAnh.Image = global::DKHP.Properties.Resources.book;
-            this.picHinhAnh.Location = new System.Drawing.Point(441, 23);
-            this.picHinhAnh.Name = "picHinhAnh";
-            this.picHinhAnh.Size = new System.Drawing.Size(102, 95);
-            this.picHinhAnh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picHinhAnh.TabIndex = 72;
-            this.picHinhAnh.TabStop = false;
-            // 
-            // btnSearchGV
-            // 
-            this.btnSearchGV.BackColor = System.Drawing.Color.White;
-            this.btnSearchGV.BackgroundImage = global::DKHP.Properties.Resources.search__1_;
-            this.btnSearchGV.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSearchGV.Location = new System.Drawing.Point(686, 35);
-            this.btnSearchGV.Name = "btnSearchGV";
-            this.btnSearchGV.Size = new System.Drawing.Size(24, 24);
-            this.btnSearchGV.TabIndex = 75;
-            this.btnSearchGV.UseVisualStyleBackColor = false;
-            this.btnSearchGV.Click += new System.EventHandler(this.btnSearchGV_Click);
-            // 
-            // txtID
-            // 
-            this.txtID.Location = new System.Drawing.Point(562, 39);
-            this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(118, 20);
-            this.txtID.TabIndex = 73;
-            // 
-            // txtTen
-            // 
-            this.txtTen.Location = new System.Drawing.Point(562, 83);
-            this.txtTen.Name = "txtTen";
-            this.txtTen.ReadOnly = true;
-            this.txtTen.Size = new System.Drawing.Size(148, 20);
-            this.txtTen.TabIndex = 70;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(559, 23);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(80, 13);
-            this.label13.TabIndex = 74;
-            this.label13.Text = "Mã Giảng Viên:";
             // 
             // panelLich
             // 
             this.panelLich.AutoScroll = true;
             this.panelLich.Controls.Add(this.lb);
-            this.panelLich.Controls.Add(this.btnSearch);
-            this.panelLich.Controls.Add(this.cbNamHocSearch);
-            this.panelLich.Controls.Add(this.cbHocKiSearch);
-            this.panelLich.Controls.Add(this.label14);
-            this.panelLich.Controls.Add(this.label9);
             this.panelLich.Controls.Add(this.panel35);
             this.panelLich.Controls.Add(this.panel28);
             this.panelLich.Controls.Add(this.panel21);
@@ -301,9 +161,9 @@
             this.panelLich.Controls.Add(this.label8);
             this.panelLich.Controls.Add(this.label1);
             this.panelLich.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelLich.Location = new System.Drawing.Point(0, 263);
+            this.panelLich.Location = new System.Drawing.Point(0, 194);
             this.panelLich.Name = "panelLich";
-            this.panelLich.Size = new System.Drawing.Size(1218, 278);
+            this.panelLich.Size = new System.Drawing.Size(1218, 347);
             this.panelLich.TabIndex = 2;
             // 
             // lb
@@ -313,78 +173,6 @@
             this.lb.Name = "lb";
             this.lb.Size = new System.Drawing.Size(0, 13);
             this.lb.TabIndex = 69;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.BackgroundImage = global::DKHP.Properties.Resources.search__1_;
-            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(729, 23);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(28, 28);
-            this.btnSearch.TabIndex = 68;
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // cbNamHocSearch
-            // 
-            this.cbNamHocSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbNamHocSearch.FormattingEnabled = true;
-            this.cbNamHocSearch.Items.AddRange(new object[] {
-            "1-3",
-            "4-6",
-            "7-9",
-            "10-12",
-            "13-15",
-            "1-2",
-            "2-3",
-            "4-5",
-            "5-6",
-            "7-8",
-            "8-9",
-            "10-11",
-            "11-12",
-            "13-14",
-            "14-15",
-            "1-6",
-            "7-12"});
-            this.cbNamHocSearch.Location = new System.Drawing.Point(562, 24);
-            this.cbNamHocSearch.Name = "cbNamHocSearch";
-            this.cbNamHocSearch.Size = new System.Drawing.Size(161, 28);
-            this.cbNamHocSearch.TabIndex = 66;
-            // 
-            // cbHocKiSearch
-            // 
-            this.cbHocKiSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbHocKiSearch.FormattingEnabled = true;
-            this.cbHocKiSearch.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3"});
-            this.cbHocKiSearch.Location = new System.Drawing.Point(416, 24);
-            this.cbHocKiSearch.Name = "cbHocKiSearch";
-            this.cbHocKiSearch.Size = new System.Drawing.Size(49, 28);
-            this.cbHocKiSearch.TabIndex = 67;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(486, 32);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(79, 20);
-            this.label14.TabIndex = 64;
-            this.label14.Text = "Năm Học:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(351, 32);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(59, 20);
-            this.label9.TabIndex = 65;
-            this.label9.Text = "Học Kì:";
             // 
             // panel35
             // 
@@ -786,6 +574,134 @@
             this.label1.Text = "Thứ Hai";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(559, 23);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(80, 13);
+            this.label13.TabIndex = 74;
+            this.label13.Text = "Mã Giảng Viên:";
+            // 
+            // txtTen
+            // 
+            this.txtTen.Location = new System.Drawing.Point(562, 83);
+            this.txtTen.Name = "txtTen";
+            this.txtTen.ReadOnly = true;
+            this.txtTen.Size = new System.Drawing.Size(148, 20);
+            this.txtTen.TabIndex = 70;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(368, 149);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(59, 20);
+            this.label9.TabIndex = 65;
+            this.label9.Text = "Học Kì:";
+            // 
+            // txtID
+            // 
+            this.txtID.Location = new System.Drawing.Point(562, 39);
+            this.txtID.Name = "txtID";
+            this.txtID.Size = new System.Drawing.Size(118, 20);
+            this.txtID.TabIndex = 73;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(503, 149);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(79, 20);
+            this.label14.TabIndex = 64;
+            this.label14.Text = "Năm Học:";
+            // 
+            // btnSearchGV
+            // 
+            this.btnSearchGV.BackColor = System.Drawing.Color.White;
+            this.btnSearchGV.BackgroundImage = global::DKHP.Properties.Resources.search__1_;
+            this.btnSearchGV.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSearchGV.Location = new System.Drawing.Point(686, 35);
+            this.btnSearchGV.Name = "btnSearchGV";
+            this.btnSearchGV.Size = new System.Drawing.Size(24, 24);
+            this.btnSearchGV.TabIndex = 75;
+            this.btnSearchGV.UseVisualStyleBackColor = false;
+            this.btnSearchGV.Click += new System.EventHandler(this.btnSearchGV_Click);
+            // 
+            // cbHocKiSearch
+            // 
+            this.cbHocKiSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbHocKiSearch.FormattingEnabled = true;
+            this.cbHocKiSearch.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3"});
+            this.cbHocKiSearch.Location = new System.Drawing.Point(433, 141);
+            this.cbHocKiSearch.Name = "cbHocKiSearch";
+            this.cbHocKiSearch.Size = new System.Drawing.Size(49, 28);
+            this.cbHocKiSearch.TabIndex = 67;
+            // 
+            // cbNamHocSearch
+            // 
+            this.cbNamHocSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbNamHocSearch.FormattingEnabled = true;
+            this.cbNamHocSearch.Items.AddRange(new object[] {
+            "1-3",
+            "4-6",
+            "7-9",
+            "10-12",
+            "13-15",
+            "1-2",
+            "2-3",
+            "4-5",
+            "5-6",
+            "7-8",
+            "8-9",
+            "10-11",
+            "11-12",
+            "13-14",
+            "14-15",
+            "1-6",
+            "7-12"});
+            this.cbNamHocSearch.Location = new System.Drawing.Point(579, 141);
+            this.cbNamHocSearch.Name = "cbNamHocSearch";
+            this.cbNamHocSearch.Size = new System.Drawing.Size(161, 28);
+            this.cbNamHocSearch.TabIndex = 66;
+            // 
+            // picHinhAnh
+            // 
+            this.picHinhAnh.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picHinhAnh.Image = global::DKHP.Properties.Resources.book;
+            this.picHinhAnh.Location = new System.Drawing.Point(441, 23);
+            this.picHinhAnh.Name = "picHinhAnh";
+            this.picHinhAnh.Size = new System.Drawing.Size(102, 95);
+            this.picHinhAnh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picHinhAnh.TabIndex = 72;
+            this.picHinhAnh.TabStop = false;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackgroundImage = global::DKHP.Properties.Resources.search__1_;
+            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.Location = new System.Drawing.Point(746, 140);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(28, 28);
+            this.btnSearch.TabIndex = 68;
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(559, 67);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(62, 13);
+            this.label11.TabIndex = 71;
+            this.label11.Text = "Họ Và Tên:";
+            // 
             // frmLichDay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -797,9 +713,9 @@
             this.Name = "frmLichDay";
             this.pnThongTinGiangVien.ResumeLayout(false);
             this.pnThongTinGiangVien.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picHinhAnh)).EndInit();
             this.panelLich.ResumeLayout(false);
             this.panelLich.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHinhAnh)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -809,11 +725,6 @@
         private System.Windows.Forms.Panel pnThongTinGiangVien;
         private System.Windows.Forms.Panel panelLich;
         private System.Windows.Forms.Label lb;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.ComboBox cbNamHocSearch;
-        private System.Windows.Forms.ComboBox cbHocKiSearch;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel35;
         private System.Windows.Forms.Panel panel28;
         private System.Windows.Forms.Panel panel21;
@@ -860,18 +771,15 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.PictureBox picHinhAnh;
+        private System.Windows.Forms.ComboBox cbNamHocSearch;
+        private System.Windows.Forms.ComboBox cbHocKiSearch;
         private System.Windows.Forms.Button btnSearchGV;
+        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtID;
+        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtTen;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox txtMail;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox txtAddress;
-        private System.Windows.Forms.TextBox txtPhone;
-        private System.Windows.Forms.TextBox txtTrinhDo;
     }
 }

@@ -179,5 +179,16 @@ namespace DAL
             numStr = "th" + numStr;
             return numStr;
         }
+
+        public string GetNhomSV(string idLopHP, string idSV)
+        {
+            NhomThucHanh a = db.NhomThucHanhs.Where(x => x.ID_LopHocPhan == idLopHP && x.DangKyHocPhans.Any(f => f.ID_SinhVien == idSV)).FirstOrDefault();
+            if (a != null)
+            {
+                return a.TenNhom.Trim();
+            }
+            else
+                return "";
+        }
     }
 }

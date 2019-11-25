@@ -137,7 +137,7 @@ namespace DAL
             return numStr;
         }
 
-        public List<eLopHocPhan> GetAllHocPhanSinhVien(string idSV, int hocKy, string namHoc)
+        public List<eLopHocPhan> GetAllLopHocPhanSinhVien(string idSV, int hocKy, string namHoc)
         {
             List<eLopHocPhan> lst = db.LopHocPhans.Where(x => x.HocKy == hocKy && x.NienKhoa.NienKhoa1 == namHoc && x.DangKyHocPhans.Any(t => t.ID_SinhVien == idSV)).Select(m=>new eLopHocPhan{
                 ID_LopHocPhan = m.ID_LopHocPhan,
@@ -154,7 +154,7 @@ namespace DAL
             }).ToList();
             return lst;
         }
-        public eLopHocPhan GetHocPhanbyID(string id)
+        public eLopHocPhan GetLopHocPhanbyID(string id)
         {
            eLopHocPhan lst = db.LopHocPhans.Where(x => x.ID_LopHocPhan==id).Select(m => new eLopHocPhan
             {
@@ -172,7 +172,7 @@ namespace DAL
             }).FirstOrDefault();
             return lst;
         }
-        public eLopHocPhan GetHocPhanByIDNhomTH(string id)
+        public eLopHocPhan GetLopHocPhanByIDNhomTH(string id)
         {
             eLopHocPhan lst = db.LopHocPhans.Where(x => x.NhomThucHanhs.Any(s=>s.ID_NhomThucHanh==id)).Select(m => new eLopHocPhan
             {
