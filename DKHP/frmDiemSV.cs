@@ -203,11 +203,7 @@ namespace DKHP
                 #region AddGrid
                 if (lstDiem.Count > 0)
                 {
-                    DataGridView d = new DataGridView();
-                    LoadDgv(d);
-
-
-                     Label labelHK = new Label();
+                    Label labelHK = new Label();
                     labelHK.BorderStyle = BorderStyle.FixedSingle;
                     labelHK.Width = 820;
                     labelHK.BackColor = Color.Gray;
@@ -215,6 +211,8 @@ namespace DKHP
                     labelHK.Text = a;
 
                     pnDiemSV.Controls.Add(labelHK);
+                    DataGridView d = new DataGridView();
+                    LoadDgv(d);
                     #endregion
                 }
 
@@ -231,7 +229,8 @@ namespace DKHP
             d.ScrollBars = ScrollBars.None;
             d.AllowUserToResizeRows = false;
             d.AllowUserToResizeColumns = false;
-
+            d.AllowUserToAddRows = false;
+            d.AllowUserToDeleteRows = false;
 
             d.DataSource = lstDiem;
             d.Visible = true;

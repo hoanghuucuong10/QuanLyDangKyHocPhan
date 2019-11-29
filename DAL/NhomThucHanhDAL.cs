@@ -167,7 +167,12 @@ namespace DAL
         }
         public string CreateID()
         {
-            string id = db.NhomThucHanhs.Max(x => x.ID_NhomThucHanh);
+            string id="th00000001";
+            if (db.NhomThucHanhs.Count()!=0)
+            {
+                id = db.NhomThucHanhs.Max(x => x.ID_NhomThucHanh);
+            }
+            
             string numStr = id.Substring(2);
             int num = int.Parse(numStr) + 1;
 

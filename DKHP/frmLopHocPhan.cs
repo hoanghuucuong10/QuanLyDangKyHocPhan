@@ -355,7 +355,7 @@ namespace DKHP
                 }
                 foreach (eLichHoc_LopHocPhan n in lstLichLT) //thêm lịch lý thuyết
                 {
-                    new LichHocBLL().AddLichLT(n);
+                    int k = new LichHocBLL().AddLichLT(n);
                 }
                 MessageBox.Show("Thêm Thành Công");
                 
@@ -524,7 +524,7 @@ namespace DKHP
             {
                 eLichHoc_LopHocPhan lich = new eLichHoc_LopHocPhan();
 
-                lich.ID_LichHoc_LopHP = new LichHocBLL().CreateIDLyThuyet();
+                lich.ID_LichHoc_LopHP = -1;
 
                 foreach (eLichHoc_LopHocPhan x in lstLichLT)
                 {
@@ -540,6 +540,7 @@ namespace DKHP
                 lich.ID_LopHocPhan = txtID.Text.Trim();
 
                 //kiểm tra lịch trùng trong list lịch lý thuyết 
+                #region kt lich trung trong list lich ly thuyet
                 int f = 0;
                 foreach (eLichHoc_LopHocPhan x in lstLichLT)
                 {
@@ -557,6 +558,7 @@ namespace DKHP
                 {
                     MessageBox.Show("Lịch bị trùng");
                 }
+                #endregion
                 LoadLichHocLopHP();
 
                 try

@@ -94,7 +94,7 @@
             this.pnMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnMenu.Location = new System.Drawing.Point(0, 0);
             this.pnMenu.Name = "pnMenu";
-            this.pnMenu.Size = new System.Drawing.Size(1234, 154);
+            this.pnMenu.Size = new System.Drawing.Size(1234, 40);
             this.pnMenu.TabIndex = 0;
             // 
             // menuStripGV
@@ -553,7 +553,7 @@
             this.pnMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnMain.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnMain.ForeColor = System.Drawing.Color.Black;
-            this.pnMain.Location = new System.Drawing.Point(0, 154);
+            this.pnMain.Location = new System.Drawing.Point(0, 40);
             this.pnMain.Name = "pnMain";
             this.pnMain.Size = new System.Drawing.Size(1234, 545);
             this.pnMain.TabIndex = 1;

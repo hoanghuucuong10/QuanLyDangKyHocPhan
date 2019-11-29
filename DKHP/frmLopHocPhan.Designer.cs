@@ -1065,6 +1065,7 @@
             this.iDLichHocLopHPDataGridViewTextBoxColumn.HeaderText = "ID_LichHoc_LopHP";
             this.iDLichHocLopHPDataGridViewTextBoxColumn.Name = "iDLichHocLopHPDataGridViewTextBoxColumn";
             this.iDLichHocLopHPDataGridViewTextBoxColumn.ReadOnly = true;
+            this.iDLichHocLopHPDataGridViewTextBoxColumn.Visible = false;
             this.iDLichHocLopHPDataGridViewTextBoxColumn.Width = 128;
             // 
             // dataGridViewTextBoxColumn1

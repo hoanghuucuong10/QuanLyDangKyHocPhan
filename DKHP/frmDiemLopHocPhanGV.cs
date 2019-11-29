@@ -130,7 +130,33 @@ namespace DKHP
 
         private void pnMain_Paint(object sender, PaintEventArgs e)
         {
+            dgvDiem.EnableHeadersVisualStyles = false;
+            dgvDiem.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
+            dgvDiem.AllowUserToResizeRows = false;
+            dgvDiem.AllowUserToResizeColumns = false;
+            dgvDiem.Columns[0].HeaderCell.Style.Font = new Font("Tahoma", 9, FontStyle.Bold);
+            dgvDiem.Columns[1].HeaderCell.Style.Font = new Font("Tahoma", 9, FontStyle.Bold);
+            dgvDiem.Columns[2].HeaderCell.Style.Font = new Font("Tahoma", 9, FontStyle.Bold);
+            dgvDiem.Columns[3].HeaderCell.Style.Font = new Font("Tahoma", 9, FontStyle.Bold);
+            dgvDiem.Columns[4].HeaderCell.Style.Font = new Font("Tahoma", 9, FontStyle.Bold);
+            dgvDiem.Columns[5].HeaderCell.Style.Font = new Font("Tahoma", 9, FontStyle.Bold);
+            dgvDiem.Columns[6].HeaderCell.Style.Font = new Font("Tahoma", 9, FontStyle.Bold);
+            dgvDiem.Columns[7].HeaderCell.Style.Font = new Font("Tahoma", 9, FontStyle.Bold);
+            dgvDiem.Columns[8].HeaderCell.Style.Font = new Font("Tahoma", 9, FontStyle.Bold);
+            dgvDiem.Columns[9].HeaderCell.Style.Font = new Font("Tahoma", 9, FontStyle.Bold);
+            dgvDiem.Columns[10].HeaderCell.Style.Font = new Font("Tahoma", 9, FontStyle.Bold);
 
+            dgvDiem.Columns[0].HeaderCell.Style.ForeColor = Color.White;
+            dgvDiem.Columns[1].HeaderCell.Style.ForeColor = Color.White;
+            dgvDiem.Columns[2].HeaderCell.Style.ForeColor = Color.White;
+            dgvDiem.Columns[3].HeaderCell.Style.ForeColor = Color.White;
+            dgvDiem.Columns[4].HeaderCell.Style.ForeColor = Color.White;
+            dgvDiem.Columns[5].HeaderCell.Style.ForeColor = Color.White;
+            dgvDiem.Columns[6].HeaderCell.Style.ForeColor = Color.White;
+            dgvDiem.Columns[7].HeaderCell.Style.ForeColor = Color.White;
+            dgvDiem.Columns[8].HeaderCell.Style.ForeColor = Color.White;
+            dgvDiem.Columns[9].HeaderCell.Style.ForeColor = Color.White;
+            dgvDiem.Columns[10].HeaderCell.Style.ForeColor = Color.White;
         }
 
         private void treeLopHocPhan_AfterSelect(object sender, TreeViewEventArgs e)
@@ -138,9 +164,17 @@ namespace DKHP
             string idLopHP = "";
             if (treeLopHocPhan.SelectedNode != null)
             {
-                idLopHP = treeLopHocPhan.SelectedNode.Tag.ToString();
+                if (treeLopHocPhan.SelectedNode.Tag == null)
+                {
+                    idLopHP = "";
+                }
+                else
+                {
+                    idLopHP = treeLopHocPhan.SelectedNode.Tag.ToString();
+                }
+
             }
-            if (idLopHP.Count() > 1)
+            if (idLopHP!= "")
             {
                 eLopHocPhan elhp = new LopHocPhanBLL().GetLopHocPhanbyID(idLopHP);
                 if (elhp != null)
@@ -184,7 +218,8 @@ namespace DKHP
                     {
                         diemLopHocPhanViewModelsBindingSource.DataSource = lst;
                     }
-                }else
+                }
+                else
                 {
                     diemLopHocPhanViewModelsBindingSource.DataSource = null;
                 }

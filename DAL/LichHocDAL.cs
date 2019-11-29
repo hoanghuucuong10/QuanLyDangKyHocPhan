@@ -156,7 +156,6 @@ namespace DAL
                 else //thêm mới
                 {
                     m = new LichHoc_LopHocPhan();
-                    m.ID_LichHoc_LopHP = x.ID_LichHoc_LopHP;
                     m.ID_LopHocPhan = x.ID_LopHocPhan;
                     m.ID_PhongHoc = x.ID_PhongHoc;
                     m.NgayHoc = x.NgayHoc;
@@ -168,7 +167,7 @@ namespace DAL
                 }
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return 0;
             }
@@ -196,7 +195,6 @@ namespace DAL
                 else
                 {
                     m = new LichHoc_NhomThucHanh();
-                    //m.ID_LichHoc_NhomTH = x.ID_LichHoc_NhomTH;
                     m.ID_NhomThucHanh = x.ID_NhomThucHanh;
                     m.ID_PhongHoc = x.ID_PhongHoc;
                     m.NgayHoc = x.NgayHoc;
@@ -261,6 +259,9 @@ namespace DAL
         }
         public int CreateIDLyThuyet()
         {
+            if (db.LichHoc_NhomThucHanh.Count() == 0)
+                return 0;
+
             return db.LichHoc_NhomThucHanh.Max(x => x.ID_LichHoc_NhomTH) + 1;
         }
     }
