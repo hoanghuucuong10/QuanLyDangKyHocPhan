@@ -64,9 +64,7 @@
             this.mnDX1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnThoat1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnHP1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnDSHP = new System.Windows.Forms.ToolStripMenuItem();
             this.mnLHP1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnDSLHP = new System.Windows.Forms.ToolStripMenuItem();
             this.mnSV1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnDSSV = new System.Windows.Forms.ToolStripMenuItem();
             this.mnDKHP = new System.Windows.Forms.ToolStripMenuItem();
@@ -419,8 +417,6 @@
             // mnHP1
             // 
             this.mnHP1.BackColor = System.Drawing.Color.Transparent;
-            this.mnHP1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnDSHP});
             this.mnHP1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
             this.mnHP1.ForeColor = System.Drawing.Color.Blue;
             this.mnHP1.Image = global::DKHP.Properties.Resources.star__2_;
@@ -429,18 +425,10 @@
             this.mnHP1.Name = "mnHP1";
             this.mnHP1.Size = new System.Drawing.Size(146, 36);
             this.mnHP1.Text = "Học Phần";
-            // 
-            // mnDSHP
-            // 
-            this.mnDSHP.Name = "mnDSHP";
-            this.mnDSHP.Size = new System.Drawing.Size(280, 32);
-            this.mnDSHP.Text = "Danh Sách Học Phần";
-            this.mnDSHP.Click += new System.EventHandler(this.mnDSHP_Click);
+            this.mnHP1.Click += new System.EventHandler(this.mnDSHP_Click);
             // 
             // mnLHP1
             // 
-            this.mnLHP1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnDSLHP});
             this.mnLHP1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
             this.mnLHP1.ForeColor = System.Drawing.Color.Blue;
             this.mnLHP1.Image = global::DKHP.Properties.Resources.star__1_;
@@ -449,13 +437,7 @@
             this.mnLHP1.Name = "mnLHP1";
             this.mnLHP1.Size = new System.Drawing.Size(187, 36);
             this.mnLHP1.Text = "Lớp Học Phần";
-            // 
-            // mnDSLHP
-            // 
-            this.mnDSLHP.Name = "mnDSLHP";
-            this.mnDSLHP.Size = new System.Drawing.Size(321, 32);
-            this.mnDSLHP.Text = "Danh Sách Lớp Học Phần";
-            this.mnDSLHP.Click += new System.EventHandler(this.mnDSLHP_Click);
+            this.mnLHP1.Click += new System.EventHandler(this.mnDSLHP_Click);
             // 
             // mnSV1
             // 
@@ -630,8 +612,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
-        private System.Windows.Forms.ToolStripMenuItem mnDSHP;
-        private System.Windows.Forms.ToolStripMenuItem mnDSLHP;
         private System.Windows.Forms.ToolStripMenuItem mnDSSV;
         private System.Windows.Forms.ToolStripMenuItem mnDSGV;
         private System.Windows.Forms.ToolStripMenuItem xemDanhSáchLớpToolStripMenuItem;

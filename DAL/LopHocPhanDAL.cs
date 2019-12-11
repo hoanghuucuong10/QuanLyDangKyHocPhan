@@ -190,5 +190,15 @@ namespace DAL
             }).FirstOrDefault();
             return lst;
         }
+
+        public string GetTrangThai(string id)
+        {
+            LopHocPhan x = db.LopHocPhans.Where(s => s.ID_LopHocPhan == id).FirstOrDefault();
+            if(x!=null)
+            {
+                return x.TrangThai;
+            }
+            return "";
+        }
     }
 }

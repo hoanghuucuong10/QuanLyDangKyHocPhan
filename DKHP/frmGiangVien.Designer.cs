@@ -113,9 +113,9 @@
             // 
             this.btnSua.BackColor = System.Drawing.Color.White;
             this.btnSua.Image = global::DKHP.Properties.Resources.contract;
-            this.btnSua.Location = new System.Drawing.Point(177, 419);
+            this.btnSua.Location = new System.Drawing.Point(180, 419);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(75, 39);
+            this.btnSua.Size = new System.Drawing.Size(82, 43);
             this.btnSua.TabIndex = 29;
             this.btnSua.Text = "Sửa";
             this.btnSua.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -127,7 +127,7 @@
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Image = global::DKHP.Properties.Resources.book;
-            this.pictureBox1.Location = new System.Drawing.Point(84, 40);
+            this.pictureBox1.Location = new System.Drawing.Point(83, 19);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(102, 95);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -138,9 +138,9 @@
             // 
             this.btnThem.BackColor = System.Drawing.Color.White;
             this.btnThem.Image = global::DKHP.Properties.Resources.add;
-            this.btnThem.Location = new System.Drawing.Point(23, 419);
+            this.btnThem.Location = new System.Drawing.Point(20, 419);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(75, 39);
+            this.btnThem.Size = new System.Drawing.Size(82, 43);
             this.btnThem.TabIndex = 30;
             this.btnThem.Text = "Thêm";
             this.btnThem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -150,9 +150,9 @@
             // 
             // btnChonAnh
             // 
-            this.btnChonAnh.Location = new System.Drawing.Point(98, 141);
+            this.btnChonAnh.Location = new System.Drawing.Point(97, 120);
             this.btnChonAnh.Name = "btnChonAnh";
-            this.btnChonAnh.Size = new System.Drawing.Size(75, 23);
+            this.btnChonAnh.Size = new System.Drawing.Size(75, 26);
             this.btnChonAnh.TabIndex = 31;
             this.btnChonAnh.Text = "Chọn Ảnh";
             this.btnChonAnh.UseVisualStyleBackColor = true;
@@ -176,7 +176,7 @@
             this.btnLuu.Image = global::DKHP.Properties.Resources.check_symbol;
             this.btnLuu.Location = new System.Drawing.Point(180, 419);
             this.btnLuu.Name = "btnLuu";
-            this.btnLuu.Size = new System.Drawing.Size(75, 39);
+            this.btnLuu.Size = new System.Drawing.Size(82, 43);
             this.btnLuu.TabIndex = 28;
             this.btnLuu.Text = "Lưu";
             this.btnLuu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -190,7 +190,7 @@
             this.btnHuy.Image = global::DKHP.Properties.Resources.clear;
             this.btnHuy.Location = new System.Drawing.Point(21, 419);
             this.btnHuy.Name = "btnHuy";
-            this.btnHuy.Size = new System.Drawing.Size(75, 39);
+            this.btnHuy.Size = new System.Drawing.Size(82, 43);
             this.btnHuy.TabIndex = 27;
             this.btnHuy.Text = "Hủy";
             this.btnHuy.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

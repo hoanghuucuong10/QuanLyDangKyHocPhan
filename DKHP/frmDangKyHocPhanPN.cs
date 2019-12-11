@@ -71,11 +71,11 @@ namespace DKHP
             }).ToList();
 
 
-            foreach(DangKyHocPhanViewModels x in lstHocPhanDangKy)
+            foreach (DangKyHocPhanViewModels x in lstHocPhanDangKy)
             {
-                foreach(LopHocPhanViewModels t in lstLopHocPhan)
+                foreach (LopHocPhanViewModels t in lstLopHocPhan)
                 {
-                    if(x.ID_LopHocPhan==t.ID_LopHocPhan)
+                    if (x.ID_LopHocPhan == t.ID_LopHocPhan)
                     {
                         lstLopHocPhan.Remove(t);
                         break;
@@ -90,7 +90,7 @@ namespace DKHP
         {
             LoadDanhSachDaDangKy();
             LoadDSLopHocPhan();
-           
+
             dgvDanhSachLopHP.ClearSelection();
         }
 
@@ -100,7 +100,7 @@ namespace DKHP
             try
             {
                 string idLopHP = dgvDanhSachLopHP.Rows[dgvDanhSachLopHP.CurrentRow.Index].Cells[0].Value.ToString().Trim();
-               
+
                 #region Load danh sách lịch lý thuyết
                 lstLichLyThuyet = new LichHocBLL().GetLichHoc_LopHocPhan(idLopHP).Select(t => new LichHocLTViewModels
                 {
@@ -114,7 +114,7 @@ namespace DKHP
                 lichHocLTViewModelsBindingSource.DataSource = lstLichLyThuyet;
                 dgvLichHocLT.ClearSelection();
                 #endregion
-             
+
                 #region Load danh sách nhóm TH
                 lstNhomThucHanh = new NhomThucHanhBLL().GetNhomByIDLopHocPhan(idLopHP).Select(m => new NhomThucHanhViewModels
                 {
@@ -165,44 +165,56 @@ namespace DKHP
         {
             string idLopHP;
             string idNhomTH;
-            if (dgvDanhSachLopHP.Rows.Count==0) //hoc ky ko co hoc phan dang ky
+            if (dgvDanhSachLopHP.Rows.Count == 0) //hoc ky ko co hoc phan dang ky
             {
                 return;
             }
-            
-            if(dgvDanhSachLopHP.Rows.Count > 0)
+
+            if (dgvDanhSachLopHP.Rows.Count > 0)
             {
-                if(dgvLichHocLT.Rows.Count==0)//Chưa chọn lớp học phần
+                if (dgvLichHocLT.Rows.Count == 0)//Chưa chọn lớp học phần
                 {
-                    MessageBox.Show("Vui lòng chọn lớp học phần muốn đăng ký");
+                    MessageBox.Show("Vui lòng chọn lớp học phần muốn đăng ký", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                     return;
                 }
                 if (dgvDanhSachNhom.Rows.Count == 0)// khong co nhom thuc hanh
                 {
                     idLopHP = dgvDanhSachLopHP.Rows[dgvDanhSachLopHP.CurrentRow.Index].Cells[0].Value.ToString().Trim();
                     idNhomTH = "";
-                }else // co nhom thuc hanh
+                }
+                else // co nhom thuc hanh
                 {
                     if (dgvLichTH.Rows.Count == 0) //chưa chọn nhóm thực hành
                     {
-                        MessageBox.Show("Vui lòng chọn nhóm thực hành");
+                        MessageBox.Show("Vui lòng chọn nhóm thực hành", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     idLopHP = dgvDanhSachLopHP.Rows[dgvDanhSachLopHP.CurrentRow.Index].Cells[0].Value.ToString().Trim();
                     idNhomTH = dgvDanhSachNhom.Rows[dgvDanhSachNhom.CurrentRow.Index].Cells[0].Value.ToString().Trim();
                 }
+                //kt trạng thái lớp học phần
+                string tt = new LopHocPhanBLL().GetTrangThai(idLopHP);
+                if (tt != "Chờ Sinh Viên Đăng Ký")
+                {
+                    MessageBox.Show("Lớp học phần đang trong trạng thái " + tt + " không thể đăng ký", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 //Kiểm tra lịch trùng nếu sai thì thông báo và return
-                bool kt = new LichHocBLL().CheckLichTrung(eSV.ID_SinhVien,idLopHP, idNhomTH, cbHocKiSearch.SelectedItem.ToString().Trim(), int.Parse( cbNamHocSearch.SelectedValue.ToString().Trim()));
+                bool kt = new LichHocBLL().CheckLichTrung(eSV.ID_SinhVien, idLopHP, idNhomTH, cbHocKiSearch.SelectedItem.ToString().Trim(), int.Parse(cbNamHocSearch.SelectedValue.ToString().Trim()));
                 if (kt == true)
                 {
-                    MessageBox.Show("Không thể đăng ký vì bị trùng lịch");
+                    MessageBox.Show("Không thể đăng ký vì bị trùng lịch", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                     return;
-                }else//dang ky hoc phan
+                }
+                else//dang ky hoc phan
                 {
                     bool k = new DangKyHocPhanBLL().DangKy(eSV.ID_SinhVien, idLopHP, idNhomTH);
-                    if(k==true)
+                    if (k == true)
                     {
-                        MessageBox.Show("Đăng Ký Thành Công");
+                        MessageBox.Show("Đăng Ký Thành Công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         new DiemBLL().AddDiem(eSV.ID_SinhVien, idLopHP);
                         LoadDanhSachDaDangKy();
                         LoadDSLopHocPhan();
@@ -213,22 +225,29 @@ namespace DKHP
                     }
                     else
                     {
-                        MessageBox.Show("Đăng Ký Thất Bại");
+                        MessageBox.Show("Đăng Ký Thất Bại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-            }      
+            }
         }
 
         private void btHDK_Click(object sender, EventArgs e)
         {
-            if(dataGridView2.Rows.Count>0)
+            if (dataGridView2.Rows.Count > 0)
             {
                 string idLopHP;
                 idLopHP = dataGridView2.Rows[dataGridView2.CurrentRow.Index].Cells[0].Value.ToString().Trim();
-                bool k = new DangKyHocPhanBLL().HuyDangKy(eSV.ID_SinhVien, idLopHP);
-                if(k==true)
+
+                string tt = new LopHocPhanBLL().GetTrangThai(idLopHP);
+                if (tt != "Đã Mở Lớp")
                 {
-                    MessageBox.Show("Hủy đăng ký thành công");
+                    MessageBox.Show("Lớp học phần đang trong trạng thái " + tt + " không thể hủy", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                bool k = new DangKyHocPhanBLL().HuyDangKy(eSV.ID_SinhVien, idLopHP);
+                if (k == true)
+                {
+                    MessageBox.Show("Hủy Đăng Ký Thành Công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     new DiemBLL().DelDiem(eSV.ID_SinhVien, idLopHP);
                     LoadDanhSachDaDangKy();
                     LoadDSLopHocPhan();
@@ -236,12 +255,13 @@ namespace DKHP
                     lichHocLTViewModelsBindingSource.DataSource = null;
                     nhomThucHanhViewModelsBindingSource.DataSource = null;
                     lichHocTHViewModelsBindingSource.DataSource = null;
-                }else
+                }
+                else
                 {
-                    MessageBox.Show("Hủy đăng ký không thành công");
+                    MessageBox.Show("Hủy đăng ký không thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            
+
         }
     }
 }

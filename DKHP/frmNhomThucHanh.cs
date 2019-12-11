@@ -29,6 +29,10 @@ namespace DKHP
             nhomTH.ID_LopHocPhan = id_LopHP;
             nhomTH.ID_NhomThucHanh = nTH.CreateID();
             nhomTH.LichHoc_NhomThucHanh = new List<eLichHoc_NhomThucHanh>();
+
+            numNhom.Enabled = false;
+           
+
             foreach (eNhomThucHanh x in frmLopHocPhan.instance.lstTH)
             {
                 if (nhomTH.ID_NhomThucHanh == x.ID_NhomThucHanh)
@@ -48,6 +52,22 @@ namespace DKHP
             }
             tbIDTH.Text = nhomTH.ID_NhomThucHanh.Trim();
             tbMaLHP.Text = id_LopHP.Trim();
+
+            int tenNhom = 1;
+
+            foreach (eNhomThucHanh x in frmLopHocPhan.instance.lstTH.OrderBy(t=>t.TenNhom))
+            {
+                if(x.TenNhom.Trim()==tenNhom.ToString())
+                {
+                    tenNhom++;
+                    
+                }else
+                {
+                    break;
+                }
+            }
+            numNhom.Value = tenNhom;
+
         }
 
         //sửa nhóm th
@@ -58,7 +78,7 @@ namespace DKHP
             LoadCBLich();
             this.flag = 0;
             this.nhomTH = n;
-            if(nhomTH.LichHoc_NhomThucHanh==null)
+            if (nhomTH.LichHoc_NhomThucHanh == null)
             {
                 nhomTH.LichHoc_NhomThucHanh = new List<eLichHoc_NhomThucHanh>();
             }
@@ -86,13 +106,13 @@ namespace DKHP
             {
                 btnLuu.Visible = true;
                 btnXoa.Visible = true;
-                cbGiangVien.Enabled = true;
-                cbMaGV.Enabled = true;
+                cbGiangVien.Enabled = false;
+                cbMaGV.Enabled = false;
 
                 numSoTiet.Enabled = true;
-                numNhom.Enabled = true;
-                dateTimePicker1.Enabled = true;
-                dateTimePicker2.Enabled = true;
+                numNhom.Enabled = false;
+                dateTimePicker1.Enabled = false;
+                dateTimePicker2.Enabled = false;
 
                 btnThemLich.Visible = true;
                 btnXoaLich.Visible = true;
@@ -112,7 +132,7 @@ namespace DKHP
 
             LoadDSLichHocNhomTH();
         }
-        
+
         public void LoadCBB()
         {
             GiangVienBLL gv = new GiangVienBLL();
@@ -124,19 +144,26 @@ namespace DKHP
             cbMaGV.DisplayMember = "ID_GiangVien";
             cbMaGV.ValueMember = "HoVaTen";
 
+            cbNgayHoc.Enabled = false;
+            cbPhong.Enabled = false;
+            cbTietHoc.Enabled = false;
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-
             nhomTH.ID_GiangVien = cbGiangVien.SelectedValue.ToString().Trim();
             nhomTH.TenNhom = numNhom.Value.ToString();
             nhomTH.SoTiet = int.Parse(numSoTiet.Value.ToString().Trim());
             nhomTH.SoLuong = new DangKyHocPhanBLL().SoLuongNhomTH(nhomTH.ID_NhomThucHanh);
             nhomTH.NgayBatDau = dateTimePicker1.Value;
             nhomTH.NgayKetThuc = dateTimePicker2.Value;
-            
+
             List<eNhomThucHanh> lst = frmLopHocPhan.instance.lstTH;
+            if(nhomTH.LichHoc_NhomThucHanh.Count()==0)
+            {
+                MessageBox.Show("Vui lòng thêm lịch học cho nhóm thực hành", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             int f = 0;
             //nhóm thực hành đã có trong lst (chỉnh sửa nhóm thực hành)
             foreach (eNhomThucHanh x in lst)
@@ -173,9 +200,9 @@ namespace DKHP
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if(new NhomThucHanhBLL().CheckDelNhomTH(nhomTH.ID_NhomThucHanh.Trim())==false)
+            if (new NhomThucHanhBLL().CheckDelNhomTH(nhomTH.ID_NhomThucHanh.Trim()) == false)
             {
-                MessageBox.Show("Không thể xóa.");
+                MessageBox.Show("Lớp thực hành đã có sinh viên đăng ký, Không thể xóa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             List<eNhomThucHanh> lst = frmLopHocPhan.instance.lstTH;
@@ -199,7 +226,6 @@ namespace DKHP
         {
             if (nhomTH.LichHoc_NhomThucHanh.Count == 0)
             {
-                MessageBox.Show("Không có lịch để xóa");
                 return;
             }
             cbPhong.Enabled = false;
@@ -229,7 +255,6 @@ namespace DKHP
         {
             if (nhomTH.LichHoc_NhomThucHanh.Count == 0)
             {
-                MessageBox.Show("Không có lịch để sửa");
                 return;
             }
             this.flag = 1;
@@ -282,40 +307,65 @@ namespace DKHP
             btnSuaLich.Visible = true;
             btnXoaLich.Visible = true;
 
+            eLichHoc_NhomThucHanh lich = new eLichHoc_NhomThucHanh();
+            lich.ID_PhongHoc = cbPhong.SelectedValue.ToString().Trim();
+            lich.TietHoc = cbTietHoc.SelectedItem.ToString();
+            lich.NgayHoc = cbNgayHoc.SelectedItem.ToString();
+            lich.ID_NhomThucHanh = tbIDTH.Text.Trim();
 
-            //thêm
+            //---------------------------------------------thêm lịch thực hành-------------------------------------------
             if (this.flag == 2)
             {
-                eLichHoc_NhomThucHanh lich = new eLichHoc_NhomThucHanh();
+
 
                 lich.ID_LichHoc_NhomTH = -1;
-           
 
-
-                lich.ID_PhongHoc = cbPhong.SelectedValue.ToString().Trim();
-                lich.TietHoc = cbTietHoc.SelectedItem.ToString();
-                lich.NgayHoc = cbNgayHoc.SelectedItem.ToString();
-                lich.ID_NhomThucHanh = tbIDTH.Text.Trim();
 
                 //kiểm tra lịch trùng trong list lịch 
                 int f = 0;
-                if(nhomTH.LichHoc_NhomThucHanh!=null)
+                if (nhomTH.LichHoc_NhomThucHanh != null)
                 {
-
                     foreach (eLichHoc_NhomThucHanh x in nhomTH.LichHoc_NhomThucHanh)
                     {
-                        if (lich.ID_PhongHoc == x.ID_PhongHoc && lich.NgayHoc == x.NgayHoc && lich.TietHoc == x.TietHoc)
-                        {
-                            f = 1;
+                        if (lich.ID_LichHoc_NhomTH == x.ID_LichHoc_NhomTH)
                             break;
+                        if (x.TietHoc == "1-3" || x.TietHoc == "1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5")
+                        {
+                            if (lich.TietHoc == "1-3" || lich.TietHoc == "1-2" || lich.TietHoc == "2-3" || lich.TietHoc == "1-5")
+                            {
+                                f = 1;
+                                break;
+                            }
+                        }
+                        if (x.TietHoc == "4-6" || x.TietHoc == "5-6" || x.TietHoc == "4-5")
+                        {
+                            if (lich.TietHoc == "4-6" || lich.TietHoc == "4-5" || lich.TietHoc == "5-6" || lich.TietHoc == "1-5")
+                            {
+                                f = 1;
+                                break;
+                            }
+                        }
+                        if (x.TietHoc == "7-9" || x.TietHoc == "7-8" || x.TietHoc == "8-9" || x.TietHoc == "7-12")
+                        {
+                            if (lich.TietHoc == "7-9" || lich.TietHoc == "7-8" || lich.TietHoc == "8-9" || lich.TietHoc == "7-12")
+                            {
+                                f = 1;
+                                break;
+                            }
+                        }
+                        if (x.TietHoc == "10-12" || x.TietHoc == "10-11" || x.TietHoc == "11-12")
+                        {
+                            if (lich.TietHoc == "10-12" || lich.TietHoc == "10-11" || lich.TietHoc == "11-12" || lich.TietHoc == "7-12")
+                            {
+                                f = 1;
+                                break;
+                            }
                         }
                     }
                     if (new LichHocBLL().CheckLichTrungGiangVien(cbGiangVien.SelectedValue.ToString().Trim(), cbNgayHoc.SelectedItem.ToString().Trim(), cbTietHoc.SelectedItem.ToString().Trim(), new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).HocKy.Value, new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).ID_NienKhoa.Value))
                     {
                         f = 1;
                     }
-
-
                 }
                 if (f != 1)
                 {
@@ -323,57 +373,101 @@ namespace DKHP
                 }
                 else
                 {
-                    MessageBox.Show("Lịch bị trùng");
+                    MessageBox.Show("Lịch bị trùng, không thể thêm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 }
                 LoadDSLichHocNhomTH();
-                
             }
-            else if (flag == 1)  // Sửa
+            else if (flag == 1)  // ---------------------------------------------------------Sửa lịch thực hành---------------------------------
             {
                 int index = nhomTH.LichHoc_NhomThucHanh.IndexOf(nhomTH.LichHoc_NhomThucHanh.Where(x => x.ID_LichHoc_NhomTH == int.Parse(dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[3].Value.ToString().Trim())).FirstOrDefault());
                 int fl = 0;
-                if (nhomTH.LichHoc_NhomThucHanh[index].ID_LichHoc_NhomTH == -1)
+                lich.ID_LichHoc_NhomTH = nhomTH.LichHoc_NhomThucHanh[index].ID_LichHoc_NhomTH;
+
+                if (nhomTH.LichHoc_NhomThucHanh != null)
                 {
-                    if (new LichHocBLL().CheckLichTrungGiangVien(cbGiangVien.SelectedValue.ToString().Trim(), cbNgayHoc.SelectedItem.ToString().Trim(), cbTietHoc.SelectedItem.ToString().Trim(), new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).HocKy.Value, new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).ID_NienKhoa.Value))
+                    foreach (eLichHoc_NhomThucHanh x in nhomTH.LichHoc_NhomThucHanh)
                     {
-                        fl = 1;
+                        if (lich.ID_LichHoc_NhomTH != x.ID_LichHoc_NhomTH)
+                        {
+                            if (x.TietHoc == "1-3" || x.TietHoc == "1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5")
+                            {
+                                if (lich.TietHoc == "1-3" || lich.TietHoc == "1-2" || lich.TietHoc == "2-3" || lich.TietHoc == "1-5")
+                                {
+                                    fl = 1;
+                                    break;
+                                }
+                            }
+                            if (x.TietHoc == "4-6" || x.TietHoc == "5-6" || x.TietHoc == "4-5")
+                            {
+                                if (lich.TietHoc == "4-6" || lich.TietHoc == "4-5" || lich.TietHoc == "5-6" || lich.TietHoc == "1-5")
+                                {
+                                    fl = 1;
+                                    break;
+                                }
+                            }
+                            if (x.TietHoc == "7-9" || x.TietHoc == "7-8" || x.TietHoc == "8-9" || x.TietHoc == "7-12")
+                            {
+                                if (lich.TietHoc == "7-9" || lich.TietHoc == "7-8" || lich.TietHoc == "8-9" || lich.TietHoc == "7-12")
+                                {
+                                    fl = 1;
+                                    break;
+                                }
+                            }
+                            if (x.TietHoc == "10-12" || x.TietHoc == "10-11" || x.TietHoc == "11-12")
+                            {
+                                if (lich.TietHoc == "10-12" || lich.TietHoc == "10-11" || lich.TietHoc == "11-12" || lich.TietHoc == "7-12")
+                                {
+                                    fl = 1;
+                                    break;
+                                }
+                            }
+                        }
+                       
                     }
-                }
-                else
-                {
-                    if (new LichHocBLL().CheckLichUpdateGiangVien("TH", int.Parse(nhomTH.LichHoc_NhomThucHanh[index].ID_LichHoc_NhomTH.ToString().Trim()), cbGiangVien.SelectedValue.ToString().Trim(), cbNgayHoc.SelectedItem.ToString().Trim(), cbTietHoc.SelectedItem.ToString().Trim(), new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).HocKy.Value, new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).ID_NienKhoa.Value))
+
+
+
+
+                    if (nhomTH.LichHoc_NhomThucHanh[index].ID_LichHoc_NhomTH == -1)
                     {
-                        fl = 1;
+                        if (new LichHocBLL().CheckLichTrungGiangVien(cbGiangVien.SelectedValue.ToString().Trim(), cbNgayHoc.SelectedItem.ToString().Trim(), cbTietHoc.SelectedItem.ToString().Trim(), new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).HocKy.Value, new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).ID_NienKhoa.Value))
+                        {
+                            fl = 1;
+                        }
                     }
+                    else
+                    {
 
+                        if (new LichHocBLL().CheckLichUpdateGiangVien("TH", int.Parse(nhomTH.LichHoc_NhomThucHanh[index].ID_LichHoc_NhomTH.ToString().Trim()), cbGiangVien.SelectedValue.ToString().Trim(), cbNgayHoc.SelectedItem.ToString().Trim(), cbTietHoc.SelectedItem.ToString().Trim(), new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).HocKy.Value, new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).ID_NienKhoa.Value))
+                        {
+                            fl = 1;
+                        }
+                    }
+                    if (fl == 0)
+                    {
+                        nhomTH.LichHoc_NhomThucHanh[index].NgayHoc = cbNgayHoc.SelectedItem.ToString().Trim();
+                        nhomTH.LichHoc_NhomThucHanh[index].TietHoc = cbTietHoc.SelectedItem.ToString().Trim();
+                        nhomTH.LichHoc_NhomThucHanh[index].ID_PhongHoc = cbPhong.SelectedValue.ToString().Trim();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lịch bị trùng, không thể thêm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    LoadDSLichHocNhomTH();
                 }
-
-                if (fl == 0)
-                {
-                nhomTH.LichHoc_NhomThucHanh[index].NgayHoc = cbNgayHoc.SelectedItem.ToString().Trim();
-                nhomTH.LichHoc_NhomThucHanh[index].TietHoc = cbTietHoc.SelectedItem.ToString().Trim();
-                nhomTH.LichHoc_NhomThucHanh[index].ID_PhongHoc = cbPhong.SelectedValue.ToString().Trim();
-                
-
-                }
-                else
-                {
-                    MessageBox.Show("Lịch bị trùng");
-                }
-
-
-                LoadDSLichHocNhomTH();
             }
         }
         public void LoadDSLichHocNhomTH()
         {
-            List<LichHocTHViewModels> lss = nhomTH.LichHoc_NhomThucHanh.Select(x=>new LichHocTHViewModels {
-                ID_LichHoc_NhomTH=x.ID_LichHoc_NhomTH,
-                ID_NhomThucHanh=x.ID_NhomThucHanh,
-                ID_PhongHoc=x.ID_PhongHoc,
-                NgayHoc=x.NgayHoc,
-                TenPhongHoc=new PhongHocBLL().GetPhongHocByID(x.ID_PhongHoc).TenPhongHoc.ToString().Trim(),
-                TietHoc=x.TietHoc.Trim()
+            List<LichHocTHViewModels> lss = nhomTH.LichHoc_NhomThucHanh.Select(x => new LichHocTHViewModels
+            {
+                ID_LichHoc_NhomTH = x.ID_LichHoc_NhomTH,
+                ID_NhomThucHanh = x.ID_NhomThucHanh,
+                ID_PhongHoc = x.ID_PhongHoc,
+                NgayHoc = x.NgayHoc,
+                TenPhongHoc = new PhongHocBLL().GetPhongHocByID(x.ID_PhongHoc).TenPhongHoc.ToString().Trim(),
+                TietHoc = x.TietHoc.Trim()
             }).ToList();
             lichHocTHViewModelsBindingSource.DataSource = null;
             lichHocTHViewModelsBindingSource.DataSource = lss;
@@ -389,11 +483,6 @@ namespace DKHP
             btnThemLich.Visible = true;
             btnSuaLich.Visible = true;
             btnXoaLich.Visible = true;
-
-
-
-
-
         }
         //load dữ liệu cho combobox lịch học
         public void LoadCBLich()
@@ -442,7 +531,6 @@ namespace DKHP
             //LoadFormThongTinLichLT();
             try
             {
-
                 if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 {
                     cbNgayHoc.SelectedItem = dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString().Trim();
@@ -456,9 +544,77 @@ namespace DKHP
             }
         }
 
-        private void frmNhomThucHanh_Load(object sender, EventArgs e)
+        private void cbMaGV_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                cbGiangVien.SelectedValue = ((eGiangVien)(cbMaGV.SelectedItem)).ID_GiangVien.Trim();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void cbGiangVien_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+            try
+            {
+
+                cbMaGV.SelectedValue = ((eGiangVien)(cbGiangVien.SelectedItem)).HoVaTen.Trim();
+
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void cbMaGV_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (eGiangVien t in cbMaGV.Items)
+                {
+                    if (t.ID_GiangVien.Trim().ToUpper().Contains(cbMaGV.Text.Trim().ToUpper()))
+                    {
+                        cbMaGV.SelectedItem = t;
+                        return;
+                    }
+                }
+
+                MessageBox.Show("Mã giảng viên không tồn tại trong hệ thống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cbMaGV.SelectedItem = cbMaGV.Items[0];
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void cbGiangVien_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (eGiangVien t in cbGiangVien.Items)
+                {
+                    if (t.HoVaTen.Trim().ToUpper().Contains(cbGiangVien.Text.Trim().ToUpper()))
+                    {
+                        cbGiangVien.SelectedItem = t;
+                        return;
+                    }
+                }
+                MessageBox.Show("Tên giảng viên không tồn tại trong hệ thống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cbGiangVien.SelectedItem = cbGiangVien.Items[0];
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

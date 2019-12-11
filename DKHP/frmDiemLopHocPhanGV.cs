@@ -424,9 +424,7 @@ namespace DKHP
         }
 
         private void dgvDiem_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-           
-              
+        {          
             DataGridView d = sender as DataGridView;
             //if (temp != "")
             //{
@@ -438,12 +436,16 @@ namespace DKHP
             if (d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
             {
                 a = d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Trim();
-                if(int.Parse( a)<0 || int.Parse(a) > 10)
+                int s = 0;
+                if(int.TryParse(a,out s))
                 {
-                    MessageBox.Show("Điểm nhập vào không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = temp;
-                    return;
-                }
+                    if (int.Parse(a) < 0 || int.Parse(a) > 10)
+                    {
+                        MessageBox.Show("Điểm nhập vào không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = temp;
+                        return;
+                    }
+                }    
             }
            
 

@@ -64,6 +64,8 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbMaGV = new System.Windows.Forms.ComboBox();
             this.ngayHocDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tietHocDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tenPhongHocDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -71,8 +73,6 @@
             this.iDNhomThucHanhDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iDPhongHocDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lichHocTHViewModelsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label6 = new System.Windows.Forms.Label();
-            this.cbMaGV = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numNhom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSoTiet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -126,6 +126,7 @@
             // 
             // btnLuu
             // 
+            this.btnLuu.BackColor = System.Drawing.Color.White;
             this.btnLuu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLuu.Image = global::DKHP.Properties.Resources.check_symbol;
             this.btnLuu.Location = new System.Drawing.Point(370, 431);
@@ -135,11 +136,12 @@
             this.btnLuu.Text = "Xác Nhận";
             this.btnLuu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLuu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLuu.UseVisualStyleBackColor = true;
+            this.btnLuu.UseVisualStyleBackColor = false;
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // btnXoa
             // 
+            this.btnXoa.BackColor = System.Drawing.Color.White;
             this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoa.Image = global::DKHP.Properties.Resources.delete;
             this.btnXoa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -150,11 +152,12 @@
             this.btnXoa.Text = "Xóa";
             this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.UseVisualStyleBackColor = false;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnThoat
             // 
+            this.btnThoat.BackColor = System.Drawing.Color.White;
             this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThoat.Image = global::DKHP.Properties.Resources.clear;
             this.btnThoat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -165,7 +168,7 @@
             this.btnThoat.Text = "Thoát";
             this.btnThoat.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnThoat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.UseVisualStyleBackColor = false;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // dateTimePicker2
@@ -305,6 +308,8 @@
             this.cbGiangVien.Name = "cbGiangVien";
             this.cbGiangVien.Size = new System.Drawing.Size(145, 21);
             this.cbGiangVien.TabIndex = 41;
+            this.cbGiangVien.SelectedIndexChanged += new System.EventHandler(this.cbGiangVien_SelectedIndexChanged);
+            this.cbGiangVien.Leave += new System.EventHandler(this.cbGiangVien_Leave);
             // 
             // label7
             // 
@@ -455,6 +460,27 @@
             this.label10.TabIndex = 15;
             this.label10.Text = "Ngày Học:";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(82, 121);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(80, 13);
+            this.label6.TabIndex = 38;
+            this.label6.Text = "Mã Giảng Viên:";
+            // 
+            // cbMaGV
+            // 
+            this.cbMaGV.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbMaGV.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbMaGV.FormattingEnabled = true;
+            this.cbMaGV.Location = new System.Drawing.Point(163, 113);
+            this.cbMaGV.Name = "cbMaGV";
+            this.cbMaGV.Size = new System.Drawing.Size(145, 21);
+            this.cbMaGV.TabIndex = 41;
+            this.cbMaGV.SelectedIndexChanged += new System.EventHandler(this.cbMaGV_SelectedIndexChanged);
+            this.cbMaGV.Leave += new System.EventHandler(this.cbMaGV_Leave);
+            // 
             // ngayHocDataGridViewTextBoxColumn
             // 
             this.ngayHocDataGridViewTextBoxColumn.DataPropertyName = "NgayHoc";
@@ -508,25 +534,6 @@
             // 
             this.lichHocTHViewModelsBindingSource.DataSource = typeof(DKHP.ViewModels.LichHocTHViewModels);
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(82, 121);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 13);
-            this.label6.TabIndex = 38;
-            this.label6.Text = "Mã Giảng Viên:";
-            // 
-            // cbMaGV
-            // 
-            this.cbMaGV.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbMaGV.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbMaGV.FormattingEnabled = true;
-            this.cbMaGV.Location = new System.Drawing.Point(163, 113);
-            this.cbMaGV.Name = "cbMaGV";
-            this.cbMaGV.Size = new System.Drawing.Size(145, 21);
-            this.cbMaGV.TabIndex = 41;
-            // 
             // frmNhomThucHanh
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -559,7 +566,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmNhomThucHanh";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.frmNhomThucHanh_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numNhom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSoTiet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();

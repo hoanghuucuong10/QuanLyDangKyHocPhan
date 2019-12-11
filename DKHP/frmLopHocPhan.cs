@@ -183,7 +183,7 @@ namespace DKHP
             btnThem.Visible = false;
             btnSua.Visible = false;
 
-
+            cbTrangThai.SelectedIndex = 0;
 
 
 
@@ -193,17 +193,17 @@ namespace DKHP
             GroupboxThongTin.Text = "Chỉnh Sửa Lớp Học Phần";
 
             txtID.Enabled = false;
-            cbMonHoc.Enabled = true;
+            cbMonHoc.Enabled = false;
             cbGiangVien.Enabled = true;
-            cbMaMH.Enabled = true;
+            cbMaMH.Enabled = false;
             cbMaGV.Enabled = true;
 
-            cbHocKy.Enabled = true;
-            cbNamHoc.Enabled = true;
+            cbHocKy.Enabled = false;
+            cbNamHoc.Enabled = false;
             cbTrangThai.Enabled = true;
             numSoTiet.Enabled = true;
-            timeBD.Enabled = true;
-            timeKT.Enabled = true;
+            timeBD.Enabled = false;
+            timeKT.Enabled = false;
 
             btnHuyLuuLichHoc.Visible = false;
             btnLuuLichHoc.Visible = false;
@@ -213,6 +213,7 @@ namespace DKHP
             cbNgayHoc.Enabled = false;
             cbTietHoc.Enabled = false;
             cbPhong.Enabled = false;
+
 
             btnAddNhomTH.Visible = true;
 
@@ -224,7 +225,11 @@ namespace DKHP
         }
         private void dgvLopHocPhan_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            ShowDataGrid();
+            if (GroupboxThongTin.Text != "Chỉnh Sửa Lớp Học Phần")
+            {
+                ShowDataGrid();
+            }
+
         }
         private void LoadComboBox()
         {
@@ -304,24 +309,7 @@ namespace DKHP
 
             }
         }
-        private void cbGiangVien_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                foreach (eGiangVien t in cbGiangVien.Items)
-                {
-                    if (t.HoVaTen.Trim().ToUpper().Contains(cbGiangVien.Text.Trim().ToUpper()))
-                    {
-                        cbGiangVien.SelectedItem = t;
-                        return;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
 
-            }
-        }
 
 
         //xem, chỉnh sửa thông tin nhóm thực hành
@@ -379,6 +367,18 @@ namespace DKHP
             lopHP.NgayBatDau = timeBD.Value;
             lopHP.NgayKetThuc = timeKT.Value;
             lopHP.SoTiet = int.Parse(numSoTiet.Value.ToString().Trim());
+            if(lopHP.NgayBatDau>lopHP.NgayKetThuc)
+            {
+                MessageBox.Show("Ngày bắt đầu và ngày kết thúc không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (dgvLichLT.Rows.Count == 0)
+            {
+                MessageBox.Show("Vui lòng thêm lịch học lý thuyết", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
 
 
             if (GroupboxThongTin.Text == "Thêm Lớp Học Phần")
@@ -397,14 +397,51 @@ namespace DKHP
                 {
                     int k = new LichHocBLL().AddLichLT(n);
                 }
-                MessageBox.Show("Thêm Thành Công");
-
+                MessageBox.Show("Thêm Thành Công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LoadDanhSachLopHocPhan(new LopHocPhanBLL().GetAllLopHocPhan());
                 this.XemThongTin();
                 ShowDataGrid();
             }
-            else //chỉnh sửa lớp học phần
+            else //------------------------------chỉnh sửa lớp học phần----------------------------------------------
             {
+
+                if (GroupboxThongTin.Text == "Chỉnh Sửa Lớp Học Phần")
+                {
+                    string trangThai = LHP.GetTrangThai(txtID.Text.Trim()).Trim();
+                    switch (trangThai)
+                    {
+                        case "":
+                            {
+                                break;
+                            }
+                        case "Chờ Sinh Viên Đăng Ký":
+                            {
+                                break;
+                            }
+                        case "Đã Mở Lớp":
+                            {
+                                if (cbTrangThai.SelectedItem.ToString() != "Đã Mở Lớp")
+                                {
+                                    MessageBox.Show("Lớp học phần đã mở không thể chỉnh sửa trạng thái", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    cbTrangThai.SelectedItem = "Đã Mở Lớp";
+                                    return;
+                                }
+                                break;
+
+                            }
+                        case "Đã Hủy":
+                            {
+
+                                if (cbTrangThai.SelectedItem.ToString() != "Đã Hủy")
+                                {
+                                    MessageBox.Show("Lớp học phần đã hủy không thể chỉnh sửa trạng thái", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    cbTrangThai.SelectedItem = "Đã Hủy";
+                                    return;
+                                }
+                                break;
+                            }
+                    }
+                }
                 new LopHocPhanBLL().EditLopHocPhan(lopHP);
 
                 foreach (eNhomThucHanh m in lstTH) //thêm nhóm thực hành
@@ -432,15 +469,15 @@ namespace DKHP
                 {
                     if (a != -1)
                         new LichHocBLL().DelLichLT(a);
-        
+
                 }
                 foreach (int a in lstDelLichTH)
                 {
                     if (a != -1)
                         new LichHocBLL().DelLichTH(a);
-                   
+
                 }
-                foreach(string a in lstDelNhomTH)
+                foreach (string a in lstDelNhomTH)
                 {
                     new NhomThucHanhBLL().DelNhomTH(a);
                 }
@@ -575,10 +612,17 @@ namespace DKHP
             btnThemLich.Visible = true;
             btnSuaLich.Visible = true;
             btnXoaLich.Visible = true;
+
+            eLichHoc_LopHocPhan lich = new eLichHoc_LopHocPhan();
+            lich.ID_PhongHoc = cbPhong.SelectedValue.ToString().Trim();
+            lich.TietHoc = cbTietHoc.SelectedItem.ToString();
+            lich.NgayHoc = cbNgayHoc.SelectedItem.ToString();
+            lich.ID_LopHocPhan = txtID.Text.Trim();
+
             //thêm lịch
             if (this.flag == 2)
             {
-                eLichHoc_LopHocPhan lich = new eLichHoc_LopHocPhan();
+
 
                 lich.ID_LichHoc_LopHP = -1;
 
@@ -590,20 +634,49 @@ namespace DKHP
                     }
                 }
 
-                lich.ID_PhongHoc = cbPhong.SelectedValue.ToString().Trim();
-                lich.TietHoc = cbTietHoc.SelectedItem.ToString();
-                lich.NgayHoc = cbNgayHoc.SelectedItem.ToString();
-                lich.ID_LopHocPhan = txtID.Text.Trim();
-
-                //kiểm tra lịch trùng trong list lịch lý thuyết 
-                #region kt lich trung trong list lich ly thuyet
+                #region kt lich trung 
                 int f = 0;
+                //kiểm tra lịch trùng trong list lịch lý thuyết 
                 foreach (eLichHoc_LopHocPhan x in lstLichLT)
                 {
                     if (lich.ID_PhongHoc == x.ID_PhongHoc && lich.NgayHoc == x.NgayHoc && lich.TietHoc == x.TietHoc)
                     {
                         f = 1;
                         break;
+                    }
+                    if (lich.ID_LichHoc_LopHP == x.ID_LichHoc_LopHP)
+                        break;
+                    if (x.TietHoc == "1-3" || x.TietHoc == "1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5")
+                    {
+                        if (lich.TietHoc == "1-3" || lich.TietHoc == "1-2" || lich.TietHoc == "2-3" || lich.TietHoc == "1-5")
+                        {
+                            f = 1;
+                            break;
+                        }
+                    }
+                    if (x.TietHoc == "4-6" || x.TietHoc == "5-6" || x.TietHoc == "4-5")
+                    {
+                        if (lich.TietHoc == "4-6" || lich.TietHoc == "4-5" || lich.TietHoc == "5-6" || lich.TietHoc == "1-5")
+                        {
+                            f = 1;
+                            break;
+                        }
+                    }
+                    if (x.TietHoc == "7-9" || x.TietHoc == "7-8" || x.TietHoc == "8-9" || x.TietHoc == "7-12")
+                    {
+                        if (lich.TietHoc == "7-9" || lich.TietHoc == "7-8" || lich.TietHoc == "8-9" || lich.TietHoc == "7-12")
+                        {
+                            f = 1;
+                            break;
+                        }
+                    }
+                    if (x.TietHoc == "10-12" || x.TietHoc == "10-11" || x.TietHoc == "11-12")
+                    {
+                        if (lich.TietHoc == "10-12" || lich.TietHoc == "10-11" || lich.TietHoc == "11-12" || lich.TietHoc == "7-12")
+                        {
+                            f = 1;
+                            break;
+                        }
                     }
                 }
                 //kiểm tra lịch trùng giảng viên
@@ -635,10 +708,51 @@ namespace DKHP
 
                 }
             }
-            else if (flag == 1)  // Sửa lịch
+            else if (flag == 1)  // -----------------------------Sửa lịch-------------------------------------------
             {
                 int index = lstLichLT.IndexOf(lstLichLT.Where(x => x.ID_LichHoc_LopHP == int.Parse(dgvLichLT.Rows[dgvLichLT.CurrentRow.Index].Cells[3].Value.ToString().Trim())).FirstOrDefault());
                 int fl = 0;
+
+                foreach (eLichHoc_LopHocPhan x in lstLichLT)
+                {
+                    if (lich.ID_LichHoc_LopHP != x.ID_LichHoc_LopHP)
+                    {
+                        if (x.TietHoc == "1-3" || x.TietHoc == "1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5")
+                        {
+                            if (lich.TietHoc == "1-3" || lich.TietHoc == "1-2" || lich.TietHoc == "2-3" || lich.TietHoc == "1-5")
+                            {
+                                fl = 1;
+                                break;
+                            }
+                        }
+                        if (x.TietHoc == "4-6" || x.TietHoc == "5-6" || x.TietHoc == "4-5")
+                        {
+                            if (lich.TietHoc == "4-6" || lich.TietHoc == "4-5" || lich.TietHoc == "5-6" || lich.TietHoc == "1-5")
+                            {
+                                fl = 1;
+                                break;
+                            }
+                        }
+                        if (x.TietHoc == "7-9" || x.TietHoc == "7-8" || x.TietHoc == "8-9" || x.TietHoc == "7-12")
+                        {
+                            if (lich.TietHoc == "7-9" || lich.TietHoc == "7-8" || lich.TietHoc == "8-9" || lich.TietHoc == "7-12")
+                            {
+                                fl = 1;
+                                break;
+                            }
+                        }
+                        if (x.TietHoc == "10-12" || x.TietHoc == "10-11" || x.TietHoc == "11-12")
+                        {
+                            if (lich.TietHoc == "10-12" || lich.TietHoc == "10-11" || lich.TietHoc == "11-12" || lich.TietHoc == "7-12")
+                            {
+                                fl = 1;
+                                break;
+                            }
+                        }
+                    }
+
+                }
+
                 if (lstLichLT[index].ID_LichHoc_LopHP == -1)
                 {
                     if (new LichHocBLL().CheckLichTrungGiangVien(cbGiangVien.SelectedValue.ToString().Trim(), cbNgayHoc.SelectedItem.ToString().Trim(), cbTietHoc.SelectedItem.ToString().Trim(), int.Parse(cbHocKy.SelectedItem.ToString().Trim()), int.Parse(cbNamHoc.SelectedValue.ToString().Trim())))
@@ -744,7 +858,10 @@ namespace DKHP
         {
             try
             {
+
                 cbMaGV.SelectedValue = ((eGiangVien)(cbGiangVien.SelectedItem)).HoVaTen.Trim();
+
+
             }
             catch (Exception)
             {
@@ -784,6 +901,97 @@ namespace DKHP
         }
 
         private void cbNamHoc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbGiangVien_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (eGiangVien t in cbGiangVien.Items)
+                {
+                    if (t.HoVaTen.Trim().ToUpper().Contains(cbGiangVien.Text.Trim().ToUpper()))
+                    {
+                        cbGiangVien.SelectedItem = t;
+                        return;
+                    }
+                }
+                MessageBox.Show("Tên giảng viên không tồn tại trong hệ thống");
+                cbGiangVien.SelectedItem = cbGiangVien.Items[0];
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void cbMonHoc_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (eHocPhan t in cbMonHoc.Items)
+                {
+                    if (t.TenMonHoc.Trim().ToUpper().Contains(cbMonHoc.Text.Trim().ToUpper()))
+                    {
+                        cbMonHoc.SelectedItem = t;
+                        return;
+                    }
+                }
+                MessageBox.Show("Tên môn học không tồn tại trong hệ thống");
+                cbMonHoc.SelectedItem = cbMonHoc.Items[0];
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void cbMaMH_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (eHocPhan t in cbMaMH.Items)
+                {
+                    if (t.ID_HocPhan.Trim().ToUpper().Contains(cbMaMH.Text.Trim().ToUpper()))
+                    {
+                        cbMaMH.SelectedItem = t;
+                        return;
+                    }
+                }
+                MessageBox.Show("Tên môn học không tồn tại trong hệ thống");
+                cbMaMH.SelectedItem = cbMonHoc.Items[0];
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void cbMaGV_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (eGiangVien t in cbMaGV.Items)
+                {
+                    if (t.ID_GiangVien.Trim().ToUpper().Contains(cbMaGV.Text.Trim().ToUpper()))
+                    {
+                        cbMaGV.SelectedItem = t;
+                        return;
+                    }
+                }
+                MessageBox.Show("Mã giảng viên không tồn tại trong hệ thống");
+                cbMaGV.SelectedItem = cbMaGV.Items[0];
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void cbTrangThai_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

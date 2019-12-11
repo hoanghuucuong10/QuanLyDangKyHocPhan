@@ -143,8 +143,8 @@ namespace DKHP
         private void mnDSLHP_Click(object sender, EventArgs e)
         {
             ShowPNMain(frmLopHocPhan.instance);
+            frmLopHocPhan.instance.LoadDanhSachLopHocPhan(new LopHocPhanBLL().SearchLopHocPhan("", "", "", ""));
             frmLopHocPhan.instance.XemThongTin();
-
         }
 
         private void mnThemLHP_Click(object sender, EventArgs e)
@@ -255,6 +255,9 @@ namespace DKHP
             ShowPNMain(frm);
         }
 
+        private void mnHP1_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

@@ -547,12 +547,13 @@
             // 
             // btDK
             // 
+            this.btDK.BackColor = System.Drawing.Color.White;
             this.btDK.Location = new System.Drawing.Point(315, 530);
             this.btDK.Name = "btDK";
             this.btDK.Size = new System.Drawing.Size(100, 45);
             this.btDK.TabIndex = 33;
             this.btDK.Text = "Đăng Ký";
-            this.btDK.UseVisualStyleBackColor = true;
+            this.btDK.UseVisualStyleBackColor = false;
             this.btDK.Click += new System.EventHandler(this.btDK_Click);
             // 
             // btnSearch
@@ -848,7 +849,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(16, 64);
+            this.label2.Location = new System.Drawing.Point(31, 64);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(246, 22);
             this.label2.TabIndex = 32;
@@ -877,12 +878,13 @@
             // 
             // btHDK
             // 
+            this.btHDK.BackColor = System.Drawing.Color.White;
             this.btHDK.Location = new System.Drawing.Point(546, 530);
             this.btHDK.Name = "btHDK";
             this.btHDK.Size = new System.Drawing.Size(100, 45);
             this.btHDK.TabIndex = 34;
             this.btHDK.Text = "Hủy Đăng Ký";
-            this.btHDK.UseVisualStyleBackColor = true;
+            this.btHDK.UseVisualStyleBackColor = false;
             this.btHDK.Click += new System.EventHandler(this.btHDK_Click);
             // 
             // label4

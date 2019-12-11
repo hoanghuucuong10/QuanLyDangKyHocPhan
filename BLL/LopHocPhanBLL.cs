@@ -53,6 +53,9 @@ namespace BLL
         {
             return LHP.GetAllLopHocPhanSinhVien(idSV, hocKy, namHoc);
         }
-
+        public string GetTrangThai(string id)
+        {
+            return LHP.GetTrangThai(id);
+        }
     }
 }

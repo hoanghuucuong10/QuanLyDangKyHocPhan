@@ -61,7 +61,7 @@ namespace DKHP
         //cập nhật dữ liệu cho datagridview
         public void LoadDatagridView(List<eSinhVien> lst)
         {
-            sinhVienViewModelsBindingSource.DataSource=null;
+            sinhVienViewModelsBindingSource.DataSource = null;
             List<SinhVienViewModels> lstView = lst.Select(t => new SinhVienViewModels(t)).ToList();
             sinhVienViewModelsBindingSource.DataSource = lstView;
             dgvSinhVien.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -69,11 +69,12 @@ namespace DKHP
             dgvSinhVien.BackgroundColor = Color.White;
             dgvSinhVien.ReadOnly = true;
 
-           
+
         }
 
         public void XemThongTin()
         {
+            err.Clear();
             btnChonAnh.Visible = false;
             groupBox1.Text = "Thông Tin Sinh Viên";
             instance.txtID.ReadOnly = true;
@@ -82,6 +83,7 @@ namespace DKHP
             instance.txtPhone.ReadOnly = true;
             instance.txtMail.ReadOnly = true;
             instance.txtAddress.ReadOnly = true;
+            txtMK.ReadOnly = true;
             instance.btnLuu.Visible = false;
             instance.btnHuy.Visible = false;
             instance.btnSua.Visible = true;
@@ -90,6 +92,7 @@ namespace DKHP
         }
         public void Them()
         {
+            err.Clear();
             btnChonAnh.Visible = true;
             groupBox1.Text = "Thêm Sinh Viên";
             instance.txtID.ReadOnly = true;
@@ -98,6 +101,7 @@ namespace DKHP
             instance.txtPhone.ReadOnly = false;
             instance.txtMail.ReadOnly = false;
             instance.txtAddress.ReadOnly = false;
+            txtMK.ReadOnly = true;
             instance.btnLuu.Visible = true;
             instance.btnHuy.Visible = true;
             instance.btnSua.Visible = false;
@@ -106,6 +110,7 @@ namespace DKHP
         }
         public void ChinhSua()
         {
+            err.Clear();
             btnChonAnh.Visible = true;
             groupBox1.Text = "Chỉnh Sửa Sinh Viên";
             instance.txtID.ReadOnly = true;
@@ -114,6 +119,7 @@ namespace DKHP
             instance.txtPhone.ReadOnly = false;
             instance.txtMail.ReadOnly = false;
             instance.txtAddress.ReadOnly = false;
+            txtMK.ReadOnly = false;
             instance.btnLuu.Visible = true;
             instance.btnHuy.Visible = true;
             instance.btnSua.Visible = false;
@@ -123,7 +129,7 @@ namespace DKHP
 
         private void ShowDataGrid()
         {
-           if(dgvSinhVien.CurrentRow!=null)
+            if (dgvSinhVien.CurrentRow != null)
             {
 
                 if (groupBox1.Text != "Thêm Sinh Viên")
@@ -147,7 +153,8 @@ namespace DKHP
         }
         private void dgvSinhVien_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            ShowDataGrid();
+            if (groupBox1.Text != "Chỉnh Sửa Sinh Viên")
+                ShowDataGrid();
         }
         private void btnHuy_Click(object sender, EventArgs e)
         {
@@ -177,7 +184,7 @@ namespace DKHP
                 }
                 else
                 {
-                    MessageBox.Show("Khong phai file Hinh anh");
+                    MessageBox.Show("Vui lòng chọn file hình ảnh");
                     pictureBox1.Image = Resources.book;
 
                 }
@@ -228,7 +235,7 @@ namespace DKHP
             }
             else
             {
-                if (!Regex.IsMatch(txtTen.Text, @"^[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]*(\s[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]*)+$"))
+                if (!Regex.IsMatch(txtTen.Text, @"^[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]*(\s[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]*)*$"))
                 {
                     err.SetError(txtTen, "Tên không hợp lệ");
                 }
@@ -264,16 +271,8 @@ namespace DKHP
             }
             else
             {
-                if (!Regex.IsMatch(txtAddress.Text, "aa"))
-                {
-
-                    err.SetError(txtAddress, "Địa chỉ không hợp lệ");
-                }
-                else
-                {
-                    err.SetError(txtAddress, "");
-                    kt++;
-                }
+                err.SetError(txtAddress, "");
+                kt++;
             }
             //email
             if (string.IsNullOrEmpty(txtMail.Text))
@@ -282,7 +281,7 @@ namespace DKHP
             }
             else
             {
-                if (!Regex.IsMatch(txtMail.Text, ""))
+                if (!Regex.IsMatch(txtMail.Text, @"^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"))
                 {
 
                     err.SetError(txtMail, "Email không hợp lệ");
@@ -293,9 +292,28 @@ namespace DKHP
                     kt++;
                 }
             }
+            //Mật khẩu
+            if (string.IsNullOrEmpty(txtMK.Text))
+            {
+                err.SetError(btnHide, "Không được để trống");
+            }
+            else
+            {
+                if (!Regex.IsMatch(txtMK.Text,"[0-9a-zA-Z]+"))
+                {
+                    err.SetError(btnHide, "Mật khẩu hiện tại không chính xác");
+                }
+                else
+                {
+                    err.SetError(btnHide, "");
+                    kt++;
+                }
+            }
+
+
             #endregion
 
-            if (kt == 4)
+            if (kt == 5)
             {
                 eSinhVien sv = new eSinhVien();
                 sv.HinhAnh = byteImage;

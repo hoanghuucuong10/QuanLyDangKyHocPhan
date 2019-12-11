@@ -124,7 +124,7 @@ namespace DKHP
 
             if (groupBox1.Text != "Thêm Học Phần")
             {
-                eHocPhan hp = hocPhanBLL.GetHocPhanByID(dgvHocPhan.Rows[rowSelected].Cells[0].Value.ToString());
+                eHocPhan hp = hocPhanBLL.GetHocPhanByID(dgvHocPhan.Rows[rowSelected].Cells[0].Value.ToString()); 
                 tbxID.Text = hp.ID_HocPhan;
                 tbxTenMonHoc.Text = hp.TenMonHoc;
                 numSoTC.Value = hp.SoTC.Value;
@@ -247,34 +247,38 @@ namespace DKHP
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            int rowSelected = dgvHocPhan.CurrentRow.Index;
-            int a = hocPhanBLL.DelHocPhan(dgvHocPhan.Rows[rowSelected].Cells[0].Value.ToString());
-            switch (a)
+            if(MessageBox.Show("Bạn muốn xóa lớp học phần này?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.Yes)
             {
-                case 0:
-                    {
-                        MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        instance.XemThongTin();
-                        LoadDatagridView(hocPhanBLL.GetALLHocPhan(), dgvHocPhan);
-                        ShowDataGrid();
-                        break;
-                    }
-                case 1:
-                    {
-                        MessageBox.Show("Không tìm thấy học phần muốn xóa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    }
-                case 2:
-                    {
-                        MessageBox.Show("Học phần đã có lớp học phần, Không thể xóa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                int rowSelected = dgvHocPhan.CurrentRow.Index;
+                int a = hocPhanBLL.DelHocPhan(dgvHocPhan.Rows[rowSelected].Cells[0].Value.ToString());
+                switch (a)
+                {
+                    case 0:
+                        {
+                            MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        break;
-                    }
-                case 3:
-                    {
-                        MessageBox.Show("Gặp lỗi trong khi xóa, vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    }
+                            LoadDatagridView(hocPhanBLL.GetALLHocPhan(), dgvHocPhan);
+                            instance.XemThongTin();
+                            ShowDataGrid();
+                            break;
+                        }
+                    case 1:
+                        {
+                            MessageBox.Show("Không tìm thấy học phần muốn xóa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        }
+                    case 2:
+                        {
+                            MessageBox.Show("Học phần đã có lớp học phần, Không thể xóa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                            break;
+                        }
+                    case 3:
+                        {
+                            MessageBox.Show("Gặp lỗi trong khi xóa, vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        }
+                }
             }
         }
     }
