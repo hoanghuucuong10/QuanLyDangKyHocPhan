@@ -13,5 +13,6 @@ namespace Entities
         public Nullable<int> SoTC { get; set; }
         public virtual List<eLopHocPhan> _LstLopHocPhans { get; set; }
 
+ 
     }
 }

@@ -14,8 +14,8 @@ namespace DAL
         {
             List<eHocPhan> lst = db.HocPhans.Select(x => new eHocPhan
             {
-                ID_HocPhan = x.ID_HocPhan,
-                TenMonHoc = x.TenMonHoc,
+                ID_HocPhan = x.ID_HocPhan.Trim(),
+                TenMonHoc = x.TenMonHoc.Trim(),
                 SoTC = x.SoTC.Value
             }).ToList();
 
@@ -25,8 +25,8 @@ namespace DAL
         {
             List<eHocPhan> lst = db.HocPhans.Where(s=>s.ID_HocPhan.Contains(id)&&s.TenMonHoc.ToUpper().Contains(name)).Select(x => new eHocPhan
             {
-                ID_HocPhan = x.ID_HocPhan,
-                TenMonHoc = x.TenMonHoc,
+                ID_HocPhan = x.ID_HocPhan.Trim(),
+                TenMonHoc = x.TenMonHoc.Trim(),
                 SoTC = x.SoTC.Value
             }).ToList();
 
@@ -95,6 +95,34 @@ namespace DAL
             }
             numStr = "hp" + numStr;
             return numStr;
+        }
+        public int DelHocPhan(string id)
+        {
+            try
+            {
+                HocPhan x = db.HocPhans.Where(s => s.ID_HocPhan.Trim() == id.Trim()).FirstOrDefault();
+                if (x == null)
+                {
+                    return 1; // không tìm thấy học phần
+                }
+                else
+                {
+                    if (db.LopHocPhans.Where(s => s.ID_HocPhan.Trim() == id.Trim()).Count() > 0)
+                    {
+                        return 2; //có lớp học phần ko thể xóa
+                    }
+                    else
+                    {
+                        db.HocPhans.Remove(x);
+                        db.SaveChanges();
+                        return 0; //Xóa thành công;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return 3;//lỗi
+            }
         }
     }
 }

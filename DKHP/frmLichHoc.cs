@@ -19,7 +19,10 @@ namespace DKHP
         {
             InitializeComponent();
             this.eSV = sV;
-            btnSearch.Visible = false;
+            btnSearchSV.Visible = false;
+            txtID.ReadOnly = true;
+            txtID.Text = eSV.ID_SinhVien.Trim();
+            txtTen.Text = eSV.HoVaTen.Trim();
             cbNamHocSearch.DataSource = new NienKhoaBLL().GetAllNienKhoa();
             cbNamHocSearch.ValueMember = "ID_NienKhoa";
             cbNamHocSearch.DisplayMember = "NienKhoa1";
@@ -44,6 +47,8 @@ namespace DKHP
                 this.eSV = x;
                 txtTen.Text = x.HoVaTen.Trim();
             }
+            else
+                MessageBox.Show("Sai mã sinh viên");
         }
 
         public void ClearPN()

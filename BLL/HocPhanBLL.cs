@@ -24,15 +24,19 @@ namespace BLL
         }
         public eHocPhan EditHocPhan(string id, eHocPhan hp)
         {
-            return hocPhanDAL.EditHocPhan(id,hp);
+            return hocPhanDAL.EditHocPhan(id, hp);
         }
         public eHocPhan GetHocPhanByID(string id)
-        {        
+        {
             return hocPhanDAL.GetHocPhanByID(id);
         }
         public string CreateID()
         {
-            return hocPhanDAL.CreateID(); ;
+            return hocPhanDAL.CreateID();
+        }
+        public int DelHocPhan(string id)
+        {
+            return hocPhanDAL.DelHocPhan(id);
         }
     }
 }

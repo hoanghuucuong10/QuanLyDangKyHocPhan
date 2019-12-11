@@ -155,6 +155,28 @@ namespace DAL
             numStr = "sv" + numStr;
             return numStr;
         }
+
+        public bool DoiMatKhau(eSinhVien tk, string mkMoi)
+        {
+            try
+            {
+                SinhVien x = db.SinhViens.Where(m => m.ID_SinhVien == tk.ID_SinhVien).FirstOrDefault();
+                if (x == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    x.MatKhau = mkMoi;
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
 

@@ -48,7 +48,6 @@ namespace DKHP
             }
             tbIDTH.Text = nhomTH.ID_NhomThucHanh.Trim();
             tbMaLHP.Text = id_LopHP.Trim();
-
         }
 
         //sửa nhóm th
@@ -69,21 +68,37 @@ namespace DKHP
             {
                 btnLuu.Visible = false;
                 btnXoa.Visible = false;
-                cbGiangVien.Enabled = true;
-                numSoTiet.Enabled = true;
-                numNhom.Enabled = true;
+                cbGiangVien.Enabled = false;
+                cbMaGV.Enabled = false;
+
+                numSoTiet.Enabled = false;
+                numNhom.Enabled = false;
                 dateTimePicker1.Enabled = false;
                 dateTimePicker2.Enabled = false;
+
+                btnThemLich.Visible = false;
+                btnXoaLich.Visible = false;
+                btnSuaLich.Visible = false;
+                btnHuyLuuLichHoc.Visible = false;
+                btnLuuLichHoc.Visible = false;
             }
             else
             {
                 btnLuu.Visible = true;
                 btnXoa.Visible = true;
-                cbGiangVien.Enabled = false;
-                numSoTiet.Enabled = false;
-                numNhom.Enabled = false;
+                cbGiangVien.Enabled = true;
+                cbMaGV.Enabled = true;
+
+                numSoTiet.Enabled = true;
+                numNhom.Enabled = true;
                 dateTimePicker1.Enabled = true;
                 dateTimePicker2.Enabled = true;
+
+                btnThemLich.Visible = true;
+                btnXoaLich.Visible = true;
+                btnSuaLich.Visible = true;
+                btnHuyLuuLichHoc.Visible = false;
+                btnLuuLichHoc.Visible = false;
             }
             tbIDTH.Text = n.ID_NhomThucHanh.Trim();
             tbMaLHP.Text = n.ID_LopHocPhan.Trim();
@@ -104,6 +119,11 @@ namespace DKHP
             cbGiangVien.DataSource = gv.GetAllGiangVien();
             cbGiangVien.DisplayMember = "HoVaTen";
             cbGiangVien.ValueMember = "ID_GiangVien";
+
+            cbMaGV.DataSource = gv.GetAllGiangVien();
+            cbMaGV.DisplayMember = "ID_GiangVien";
+            cbMaGV.ValueMember = "HoVaTen";
+
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
@@ -153,12 +173,18 @@ namespace DKHP
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            if(new NhomThucHanhBLL().CheckDelNhomTH(nhomTH.ID_NhomThucHanh.Trim())==false)
+            {
+                MessageBox.Show("Không thể xóa.");
+                return;
+            }
             List<eNhomThucHanh> lst = frmLopHocPhan.instance.lstTH;
             foreach (eNhomThucHanh t in lst)
             {
                 if (t.ID_NhomThucHanh == nhomTH.ID_NhomThucHanh)
                 {
                     lst.Remove(t);
+                    frmLopHocPhan.instance.lstDelNhomTH.Add(t.ID_NhomThucHanh);
                     break;
                 }
             }
@@ -191,6 +217,7 @@ namespace DKHP
                 if (x.ID_LichHoc_NhomTH == int.Parse(dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[3].Value.ToString().Trim()))
                 {
                     nhomTH.LichHoc_NhomThucHanh.Remove(x);
+                    frmLopHocPhan.instance.lstDelLichTH.Add(x.ID_LichHoc_NhomTH);
                     break;
                 }
             }
@@ -283,6 +310,12 @@ namespace DKHP
                             break;
                         }
                     }
+                    if (new LichHocBLL().CheckLichTrungGiangVien(cbGiangVien.SelectedValue.ToString().Trim(), cbNgayHoc.SelectedItem.ToString().Trim(), cbTietHoc.SelectedItem.ToString().Trim(), new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).HocKy.Value, new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).ID_NienKhoa.Value))
+                    {
+                        f = 1;
+                    }
+
+
                 }
                 if (f != 1)
                 {
@@ -298,9 +331,37 @@ namespace DKHP
             else if (flag == 1)  // Sửa
             {
                 int index = nhomTH.LichHoc_NhomThucHanh.IndexOf(nhomTH.LichHoc_NhomThucHanh.Where(x => x.ID_LichHoc_NhomTH == int.Parse(dataGridView3.Rows[dataGridView3.CurrentRow.Index].Cells[3].Value.ToString().Trim())).FirstOrDefault());
+                int fl = 0;
+                if (nhomTH.LichHoc_NhomThucHanh[index].ID_LichHoc_NhomTH == -1)
+                {
+                    if (new LichHocBLL().CheckLichTrungGiangVien(cbGiangVien.SelectedValue.ToString().Trim(), cbNgayHoc.SelectedItem.ToString().Trim(), cbTietHoc.SelectedItem.ToString().Trim(), new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).HocKy.Value, new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).ID_NienKhoa.Value))
+                    {
+                        fl = 1;
+                    }
+                }
+                else
+                {
+                    if (new LichHocBLL().CheckLichUpdateGiangVien("TH", int.Parse(nhomTH.LichHoc_NhomThucHanh[index].ID_LichHoc_NhomTH.ToString().Trim()), cbGiangVien.SelectedValue.ToString().Trim(), cbNgayHoc.SelectedItem.ToString().Trim(), cbTietHoc.SelectedItem.ToString().Trim(), new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).HocKy.Value, new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).ID_NienKhoa.Value))
+                    {
+                        fl = 1;
+                    }
+
+                }
+
+                if (fl == 0)
+                {
                 nhomTH.LichHoc_NhomThucHanh[index].NgayHoc = cbNgayHoc.SelectedItem.ToString().Trim();
                 nhomTH.LichHoc_NhomThucHanh[index].TietHoc = cbTietHoc.SelectedItem.ToString().Trim();
                 nhomTH.LichHoc_NhomThucHanh[index].ID_PhongHoc = cbPhong.SelectedValue.ToString().Trim();
+                
+
+                }
+                else
+                {
+                    MessageBox.Show("Lịch bị trùng");
+                }
+
+
                 LoadDSLichHocNhomTH();
             }
         }

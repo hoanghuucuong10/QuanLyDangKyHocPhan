@@ -31,19 +31,24 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDiemLopHocPhanGV));
             this.pnMain = new System.Windows.Forms.Panel();
-            this.lbSoTC = new System.Windows.Forms.Label();
-            this.lbHocKi = new System.Windows.Forms.Label();
-            this.lbIDLHP = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lbTenMonHoc = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnLuu = new System.Windows.Forms.Button();
+            this.btnHuy = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.lbTenMH = new System.Windows.Forms.Label();
+            this.lbSoTC = new System.Windows.Forms.Label();
+            this.lbHocKy = new System.Windows.Forms.Label();
+            this.lbIDLopHP = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.treeLopHocPhan = new System.Windows.Forms.TreeView();
             this.dgvDiem = new System.Windows.Forms.DataGridView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtIDLopHP = new System.Windows.Forms.TextBox();
+            this.treeLopHocPhan = new System.Windows.Forms.TreeView();
             this.imgList = new System.Windows.Forms.ImageList(this.components);
             this.iDSinhVienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hoVaTenDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,8 +62,12 @@
             this.tongKetDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.xepLoaiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.diemLopHocPhanViewModelsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.printDoc = new System.Drawing.Printing.PrintDocument();
+            this.printPreView = new System.Windows.Forms.PrintPreviewDialog();
             this.pnMain.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiem)).BeginInit();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diemLopHocPhanViewModelsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,90 +77,92 @@
             this.pnMain.BackColor = System.Drawing.Color.White;
             this.pnMain.BackgroundImage = global::DKHP.Properties.Resources.istockphoto_995719694_612x612;
             this.pnMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnMain.Controls.Add(this.lbSoTC);
-            this.pnMain.Controls.Add(this.lbHocKi);
-            this.pnMain.Controls.Add(this.lbIDLHP);
-            this.pnMain.Controls.Add(this.label7);
-            this.pnMain.Controls.Add(this.lbTenMonHoc);
-            this.pnMain.Controls.Add(this.label5);
-            this.pnMain.Controls.Add(this.label4);
-            this.pnMain.Controls.Add(this.label3);
-            this.pnMain.Controls.Add(this.label2);
-            this.pnMain.Controls.Add(this.label6);
-            this.pnMain.Controls.Add(this.label1);
-            this.pnMain.Controls.Add(this.treeLopHocPhan);
-            this.pnMain.Controls.Add(this.dgvDiem);
+            this.pnMain.Controls.Add(this.groupBox2);
+            this.pnMain.Controls.Add(this.groupBox1);
             this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnMain.Location = new System.Drawing.Point(0, 0);
             this.pnMain.Name = "pnMain";
-            this.pnMain.Size = new System.Drawing.Size(1218, 534);
+            this.pnMain.Size = new System.Drawing.Size(1202, 468);
             this.pnMain.TabIndex = 0;
             this.pnMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnMain_Paint);
             // 
-            // lbSoTC
+            // groupBox2
             // 
-            this.lbSoTC.AutoSize = true;
-            this.lbSoTC.BackColor = System.Drawing.Color.Transparent;
-            this.lbSoTC.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSoTC.Location = new System.Drawing.Point(1349, 79);
-            this.lbSoTC.Name = "lbSoTC";
-            this.lbSoTC.Size = new System.Drawing.Size(27, 24);
-            this.lbSoTC.TabIndex = 45;
-            this.lbSoTC.Text = "lb";
+            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.btnLuu);
+            this.groupBox2.Controls.Add(this.btnHuy);
+            this.groupBox2.Controls.Add(this.btnPrint);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.lbTenMH);
+            this.groupBox2.Controls.Add(this.lbSoTC);
+            this.groupBox2.Controls.Add(this.lbHocKy);
+            this.groupBox2.Controls.Add(this.lbIDLopHP);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.dgvDiem);
+            this.groupBox2.Location = new System.Drawing.Point(476, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(1192, 506);
+            this.groupBox2.TabIndex = 49;
+            this.groupBox2.TabStop = false;
             // 
-            // lbHocKi
+            // btnLuu
             // 
-            this.lbHocKi.AutoSize = true;
-            this.lbHocKi.BackColor = System.Drawing.Color.Transparent;
-            this.lbHocKi.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHocKi.Location = new System.Drawing.Point(1349, 108);
-            this.lbHocKi.Name = "lbHocKi";
-            this.lbHocKi.Size = new System.Drawing.Size(27, 24);
-            this.lbHocKi.TabIndex = 46;
-            this.lbHocKi.Text = "lb";
+            this.btnLuu.BackColor = System.Drawing.Color.White;
+            this.btnLuu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLuu.Image = ((System.Drawing.Image)(resources.GetObject("btnLuu.Image")));
+            this.btnLuu.Location = new System.Drawing.Point(924, 449);
+            this.btnLuu.Name = "btnLuu";
+            this.btnLuu.Size = new System.Drawing.Size(80, 45);
+            this.btnLuu.TabIndex = 52;
+            this.btnLuu.Text = "Lưu";
+            this.btnLuu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLuu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLuu.UseVisualStyleBackColor = false;
+            this.btnLuu.Visible = false;
+            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
-            // lbIDLHP
+            // btnHuy
             // 
-            this.lbIDLHP.AutoSize = true;
-            this.lbIDLHP.BackColor = System.Drawing.Color.Transparent;
-            this.lbIDLHP.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbIDLHP.Location = new System.Drawing.Point(922, 79);
-            this.lbIDLHP.Name = "lbIDLHP";
-            this.lbIDLHP.Size = new System.Drawing.Size(27, 24);
-            this.lbIDLHP.TabIndex = 47;
-            this.lbIDLHP.Text = "lb";
+            this.btnHuy.BackColor = System.Drawing.Color.White;
+            this.btnHuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHuy.Image = ((System.Drawing.Image)(resources.GetObject("btnHuy.Image")));
+            this.btnHuy.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnHuy.Location = new System.Drawing.Point(811, 450);
+            this.btnHuy.Name = "btnHuy";
+            this.btnHuy.Size = new System.Drawing.Size(80, 45);
+            this.btnHuy.TabIndex = 53;
+            this.btnHuy.Text = "Hủy";
+            this.btnHuy.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnHuy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnHuy.UseVisualStyleBackColor = false;
+            this.btnHuy.Visible = false;
+            this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // 
-            // label7
+            // btnPrint
             // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(927, 79);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(27, 24);
-            this.label7.TabIndex = 47;
-            this.label7.Text = "lb";
-            // 
-            // lbTenMonHoc
-            // 
-            this.lbTenMonHoc.AutoSize = true;
-            this.lbTenMonHoc.BackColor = System.Drawing.Color.Transparent;
-            this.lbTenMonHoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTenMonHoc.Location = new System.Drawing.Point(922, 108);
-            this.lbTenMonHoc.Name = "lbTenMonHoc";
-            this.lbTenMonHoc.Size = new System.Drawing.Size(27, 24);
-            this.lbTenMonHoc.TabIndex = 47;
-            this.lbTenMonHoc.Text = "lb";
+            this.btnPrint.BackColor = System.Drawing.Color.White;
+            this.btnPrint.BackgroundImage = global::DKHP.Properties.Resources.printer;
+            this.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnPrint.Location = new System.Drawing.Point(1034, 450);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(80, 45);
+            this.btnPrint.TabIndex = 51;
+            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.Visible = false;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(1229, 79);
+            this.label5.Location = new System.Drawing.Point(761, 66);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(114, 24);
-            this.label5.TabIndex = 42;
+            this.label5.TabIndex = 48;
             this.label5.Text = "Số Tín Chỉ:";
             // 
             // label4
@@ -159,21 +170,61 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(1260, 108);
+            this.label4.Location = new System.Drawing.Point(792, 95);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 24);
-            this.label4.TabIndex = 43;
+            this.label4.TabIndex = 49;
             this.label4.Text = "Học Kỳ:";
+            // 
+            // lbTenMH
+            // 
+            this.lbTenMH.AutoSize = true;
+            this.lbTenMH.BackColor = System.Drawing.Color.Transparent;
+            this.lbTenMH.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTenMH.Location = new System.Drawing.Point(454, 95);
+            this.lbTenMH.Name = "lbTenMH";
+            this.lbTenMH.Size = new System.Drawing.Size(0, 24);
+            this.lbTenMH.TabIndex = 47;
+            // 
+            // lbSoTC
+            // 
+            this.lbSoTC.AutoSize = true;
+            this.lbSoTC.BackColor = System.Drawing.Color.Transparent;
+            this.lbSoTC.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbSoTC.Location = new System.Drawing.Point(878, 66);
+            this.lbSoTC.Name = "lbSoTC";
+            this.lbSoTC.Size = new System.Drawing.Size(0, 24);
+            this.lbSoTC.TabIndex = 47;
+            // 
+            // lbHocKy
+            // 
+            this.lbHocKy.AutoSize = true;
+            this.lbHocKy.BackColor = System.Drawing.Color.Transparent;
+            this.lbHocKy.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbHocKy.Location = new System.Drawing.Point(878, 95);
+            this.lbHocKy.Name = "lbHocKy";
+            this.lbHocKy.Size = new System.Drawing.Size(0, 24);
+            this.lbHocKy.TabIndex = 47;
+            // 
+            // lbIDLopHP
+            // 
+            this.lbIDLopHP.AutoSize = true;
+            this.lbIDLopHP.BackColor = System.Drawing.Color.Transparent;
+            this.lbIDLopHP.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbIDLopHP.Location = new System.Drawing.Point(454, 66);
+            this.lbIDLopHP.Name = "lbIDLopHP";
+            this.lbIDLopHP.Size = new System.Drawing.Size(0, 24);
+            this.lbIDLopHP.TabIndex = 47;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(772, 108);
+            this.label3.Location = new System.Drawing.Point(304, 95);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(144, 24);
-            this.label3.TabIndex = 44;
+            this.label3.TabIndex = 50;
             this.label3.Text = "Tên Môn Học:";
             // 
             // label2
@@ -181,10 +232,10 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(733, 79);
+            this.label2.Location = new System.Drawing.Point(265, 66);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(183, 24);
-            this.label2.TabIndex = 41;
+            this.label2.TabIndex = 47;
             this.label2.Text = "Mã Lớp Học Phần:";
             // 
             // label6
@@ -192,33 +243,11 @@
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Blue;
-            this.label6.Location = new System.Drawing.Point(944, 9);
+            this.label6.Location = new System.Drawing.Point(476, -4);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(339, 49);
-            this.label6.TabIndex = 40;
+            this.label6.TabIndex = 46;
             this.label6.Text = "Danh Sách Điểm";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1698, 37);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 13);
-            this.label1.TabIndex = 39;
-            // 
-            // treeLopHocPhan
-            // 
-            this.treeLopHocPhan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.treeLopHocPhan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treeLopHocPhan.ImageKey = "next (1).png";
-            this.treeLopHocPhan.ImageList = this.imgList;
-            this.treeLopHocPhan.Location = new System.Drawing.Point(53, 26);
-            this.treeLopHocPhan.Name = "treeLopHocPhan";
-            this.treeLopHocPhan.SelectedImageIndex = 0;
-            this.treeLopHocPhan.ShowLines = false;
-            this.treeLopHocPhan.Size = new System.Drawing.Size(416, 470);
-            this.treeLopHocPhan.TabIndex = 38;
-            this.treeLopHocPhan.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeLopHocPhan_AfterSelect);
             // 
             // dgvDiem
             // 
@@ -242,12 +271,65 @@
             this.tongKetDataGridViewTextBoxColumn,
             this.xepLoaiDataGridViewTextBoxColumn});
             this.dgvDiem.DataSource = this.diemLopHocPhanViewModelsBindingSource;
-            this.dgvDiem.Location = new System.Drawing.Point(526, 147);
+            this.dgvDiem.Location = new System.Drawing.Point(20, 134);
             this.dgvDiem.MultiSelect = false;
             this.dgvDiem.Name = "dgvDiem";
             this.dgvDiem.RowHeadersVisible = false;
-            this.dgvDiem.Size = new System.Drawing.Size(1150, 349);
-            this.dgvDiem.TabIndex = 37;
+            this.dgvDiem.Size = new System.Drawing.Size(1150, 309);
+            this.dgvDiem.TabIndex = 45;
+            this.dgvDiem.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvDiem_CellBeginEdit);
+            this.dgvDiem.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDiem_CellEndEdit);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.btnSearch);
+            this.groupBox1.Controls.Add(this.txtIDLopHP);
+            this.groupBox1.Controls.Add(this.treeLopHocPhan);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(449, 501);
+            this.groupBox1.TabIndex = 48;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Lớp Học Phần";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.White;
+            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.Location = new System.Drawing.Point(358, 30);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(65, 30);
+            this.btnSearch.TabIndex = 40;
+            this.btnSearch.Text = "Xem";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtIDLopHP
+            // 
+            this.txtIDLopHP.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIDLopHP.ForeColor = System.Drawing.Color.Silver;
+            this.txtIDLopHP.Location = new System.Drawing.Point(28, 31);
+            this.txtIDLopHP.Name = "txtIDLopHP";
+            this.txtIDLopHP.Size = new System.Drawing.Size(324, 29);
+            this.txtIDLopHP.TabIndex = 39;
+            this.txtIDLopHP.Text = "Mã Lớp Học Phần";
+            this.txtIDLopHP.Enter += new System.EventHandler(this.txtIDLopHP_Enter);
+            this.txtIDLopHP.Leave += new System.EventHandler(this.txtIDLopHP_Leave);
+            // 
+            // treeLopHocPhan
+            // 
+            this.treeLopHocPhan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.treeLopHocPhan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeLopHocPhan.ImageKey = "next (1).png";
+            this.treeLopHocPhan.ImageList = this.imgList;
+            this.treeLopHocPhan.Location = new System.Drawing.Point(28, 66);
+            this.treeLopHocPhan.Name = "treeLopHocPhan";
+            this.treeLopHocPhan.SelectedImageIndex = 0;
+            this.treeLopHocPhan.ShowLines = false;
+            this.treeLopHocPhan.Size = new System.Drawing.Size(395, 419);
+            this.treeLopHocPhan.TabIndex = 38;
+            this.treeLopHocPhan.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeLopHocPhan_AfterSelect);
             // 
             // imgList
             // 
@@ -342,18 +424,35 @@
             // 
             this.diemLopHocPhanViewModelsBindingSource.DataSource = typeof(DKHP.ViewModels.DiemLopHocPhanViewModels);
             // 
+            // printDoc
+            // 
+            this.printDoc.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDoc_PrintPage);
+            // 
+            // printPreView
+            // 
+            this.printPreView.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreView.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreView.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreView.Enabled = true;
+            this.printPreView.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreView.Icon")));
+            this.printPreView.Name = "printPreView";
+            this.printPreView.Visible = false;
+            // 
             // frmDiemLopHocPhanGV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1218, 534);
+            this.ClientSize = new System.Drawing.Size(1202, 468);
             this.Controls.Add(this.pnMain);
             this.Name = "frmDiemLopHocPhanGV";
             this.Text = "DiemLopHocPhanGV";
             this.pnMain.ResumeLayout(false);
-            this.pnMain.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiem)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diemLopHocPhanViewModelsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -362,21 +461,18 @@
         #endregion
 
         private System.Windows.Forms.Panel pnMain;
-        private System.Windows.Forms.DataGridView dgvDiem;
         private System.Windows.Forms.TreeView treeLopHocPhan;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lbSoTC;
-        private System.Windows.Forms.Label lbHocKi;
-        private System.Windows.Forms.Label lbIDLHP;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label lbTenMonHoc;
+        private System.Windows.Forms.Label lbIDLopHP;
+        private System.Windows.Forms.Label lbHocKy;
+        private System.Windows.Forms.BindingSource diemLopHocPhanViewModelsBindingSource;
+        private System.Windows.Forms.ImageList imgList;
+        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.BindingSource diemLopHocPhanViewModelsBindingSource;
-        private System.Windows.Forms.ImageList imgList;
+        private System.Windows.Forms.DataGridView dgvDiem;
         private System.Windows.Forms.DataGridViewTextBoxColumn iDSinhVienDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn hoVaTenDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tenLopNienCheDataGridViewTextBoxColumn;
@@ -388,5 +484,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cKDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tongKetDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn xepLoaiDataGridViewTextBoxColumn;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lbTenMH;
+        private System.Windows.Forms.Label lbSoTC;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtIDLopHP;
+        private System.Windows.Forms.Button btnLuu;
+        private System.Windows.Forms.Button btnHuy;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Drawing.Printing.PrintDocument printDoc;
+        private System.Windows.Forms.PrintPreviewDialog printPreView;
     }
 }

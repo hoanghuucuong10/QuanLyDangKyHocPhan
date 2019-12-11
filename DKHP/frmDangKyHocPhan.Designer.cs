@@ -50,6 +50,7 @@
             // 
             // groupBoxSV
             // 
+            this.groupBoxSV.BackColor = System.Drawing.Color.Transparent;
             this.groupBoxSV.Controls.Add(this.label6);
             this.groupBoxSV.Controls.Add(this.txtLopNC);
             this.groupBoxSV.Controls.Add(this.txtMail);
@@ -197,6 +198,7 @@
             // 
             // panel
             // 
+            this.panel.BackColor = System.Drawing.Color.Transparent;
             this.panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel.Location = new System.Drawing.Point(281, 12);
             this.panel.Name = "panel";
@@ -208,6 +210,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImage = global::DKHP.Properties.Resources.istockphoto_995719694_612x612;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1218, 507);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.groupBoxSV);

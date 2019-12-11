@@ -1,6 +1,6 @@
 ﻿namespace DKHP
 {
-    partial class frmLogin
+    partial class frmDangNhap
     {
         /// <summary>
         /// Required designer variable.
@@ -35,6 +35,7 @@
             this.tbxUserName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,6 +43,7 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.BackgroundImage = global::DKHP.Properties.Resources.istockphoto_995719694_612x612;
+            this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.tbxPW);
@@ -59,7 +61,7 @@
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(88, 241);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(76, 25);
+            this.button2.Size = new System.Drawing.Size(76, 36);
             this.button2.TabIndex = 11;
             this.button2.Text = "Thoát";
             this.button2.UseVisualStyleBackColor = true;
@@ -70,7 +72,7 @@
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(220, 241);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 25);
+            this.button1.Size = new System.Drawing.Size(88, 36);
             this.button1.TabIndex = 11;
             this.button1.Text = "Đăng Nhập";
             this.button1.UseVisualStyleBackColor = true;
@@ -117,6 +119,16 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Tên tài khoản:";
             // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Blue;
+            this.label3.Location = new System.Drawing.Point(114, 71);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(208, 41);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Đăng Nhập";
+            // 
             // frmLogin
             // 
             this.AllowDrop = true;
@@ -150,5 +162,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label3;
     }
 }

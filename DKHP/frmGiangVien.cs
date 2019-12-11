@@ -122,7 +122,7 @@ namespace DKHP
             groupBoxThongTinGiangVien.Text = "Thông Tin Giảng Viên";
             instance.tbxID.ReadOnly = true;
             instance.tbxTen.ReadOnly = true;
-            instance.tbTrinhDo.Enabled = false;
+            instance.tbTrinhDo.ReadOnly = true;
             instance.tbxPhone.ReadOnly = true;
             instance.tbxMail.ReadOnly = true;
             instance.tbxAddress.ReadOnly = true;
@@ -140,7 +140,7 @@ namespace DKHP
             groupBoxThongTinGiangVien.Text = "Thêm Giảng Viên";
             instance.tbxID.ReadOnly = true;
             instance.tbxTen.ReadOnly = false;
-            instance.tbTrinhDo.Enabled = true;
+            instance.tbTrinhDo.ReadOnly = false;
             instance.tbxPhone.ReadOnly = false;
             instance.tbxMail.ReadOnly = false;
             instance.tbxAddress.ReadOnly = false;
@@ -156,7 +156,7 @@ namespace DKHP
             groupBoxThongTinGiangVien.Text = "Chỉnh Sửa Giảng Viên";
             instance.tbxID.ReadOnly = true;
             instance.tbxTen.ReadOnly = false;
-            instance.tbTrinhDo.Enabled = true;
+            instance.tbTrinhDo.ReadOnly = false;
             instance.tbxPhone.ReadOnly = false;
             instance.tbxMail.ReadOnly = false;
             instance.tbxAddress.ReadOnly = false;
@@ -245,7 +245,7 @@ namespace DKHP
                 }
                 else
                 {
-                    err.SetError(tbxTen, "");
+                    err.SetError(tbTrinhDo, "");
                     kt++;
                 }
             }

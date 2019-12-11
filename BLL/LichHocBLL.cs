@@ -70,5 +70,26 @@ namespace BLL
 
             return lichHoc.GetLichHocThucHanh_SinhVien(id_SV, hocKy, idNienKhoa);
         }
+
+        public int DelLichLT(int id)
+        {
+            return lichHoc.DelLichLT(id);
+
+        }
+        public int DelLichTH(int id)
+        {
+            return lichHoc.DelLichTH(id);
+        }
+
+        public bool CheckLichTrungGiangVien(string idGV, string ngayHoc, string tietHoc, int hocKy, int idNamHoc)
+        {
+            return lichHoc.CheckLichTrungGiangVien(idGV, ngayHoc, tietHoc, hocKy, idNamHoc);
+        }
+
+
+        public bool CheckLichUpdateGiangVien(string s, int idLich, string idGV, string ngayHoc, string tietHoc, int hocKy, int idNamHoc)
+        {
+            return lichHoc.CheckLichUpdateGiangVien(s, idLich, idGV, ngayHoc, tietHoc, hocKy, idNamHoc); ;
+        }
     }
 }

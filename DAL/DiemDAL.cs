@@ -43,7 +43,6 @@ namespace DAL
             {
                 return false;
             }
-
         }
         public List<eDiem> GetDiemSV(string idSV)
         {
@@ -59,6 +58,38 @@ namespace DAL
             }).ToList();
             return lst;
         }
+        public bool EditDiemSV(eDiem d)
+        {
+            Diem s = db.Diems.Where(x => x.ID_LopHocPhan == d.ID_LopHocPhan && x.ID_SinhVien == d.ID_SinhVien).FirstOrDefault();
+            if(s!=null)
+            {
+                s.TK1 = d.TK1;
+                s.TK2 = d.TK2;
+                s.TK3 = d.TK3;
+                s.CK = d.CK;
+                s.GK = d.GK;
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        public bool EditDiemLopHP(eDiem d)
+        {
+            Diem s = db.Diems.Where(x => x.ID_LopHocPhan == d.ID_LopHocPhan && x.ID_SinhVien == d.ID_SinhVien).FirstOrDefault();
+            if (s != null)
+            {
+                s.TK1 = d.TK1;
+                s.TK2 = d.TK2;
+                s.TK3 = d.TK3;
+                s.CK = d.CK;
+                s.GK = d.GK;
+                db.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
         public List<eDiem> GetDiemLopHocPhan(string id_LopHP)
         {
             List<eDiem> lst = db.Diems.Where(x => x.ID_LopHocPhan == id_LopHP).Select(t => new eDiem

@@ -26,5 +26,13 @@ namespace BLL
         {
             return diemDal.DelDiem(idSV, idLopHP);
         }
+        public bool EditDiemSV(eDiem d)
+        {
+            return diemDal.EditDiemSV(d);
+        }
+        public bool EditDiemLopHP(eDiem d)
+        {
+            return diemDal.EditDiemLopHP(d);
+        }
     }
 }

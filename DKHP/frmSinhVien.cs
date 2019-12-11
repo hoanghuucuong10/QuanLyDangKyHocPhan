@@ -45,7 +45,7 @@ namespace DKHP
         public frmSinhVien()
         {
             InitializeComponent();
-            LoadDatagridView(svBLL.SearchAllSinhVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()), dgvSinhVien);
+            LoadDatagridView(svBLL.SearchAllSinhVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()));
 
             LoadComboBox();
             byteImage = ImageToByteArray(pictureBox1.Image);
@@ -59,16 +59,17 @@ namespace DKHP
             cbLop.DropDownStyle = ComboBoxStyle.DropDownList;
         }
         //cập nhật dữ liệu cho datagridview
-        public void LoadDatagridView(List<eSinhVien> lst, DataGridView dgv)
+        public void LoadDatagridView(List<eSinhVien> lst)
         {
+            sinhVienViewModelsBindingSource.DataSource=null;
             List<SinhVienViewModels> lstView = lst.Select(t => new SinhVienViewModels(t)).ToList();
-            dgv.DataSource = lstView;
-            dgv.ReadOnly = true;
+            sinhVienViewModelsBindingSource.DataSource = lstView;
+            dgvSinhVien.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvSinhVien.MultiSelect = false;
+            dgvSinhVien.BackgroundColor = Color.White;
+            dgvSinhVien.ReadOnly = true;
 
-
-            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv.MultiSelect = false;
-            dgv.BackgroundColor = Color.White;
+           
         }
 
         public void XemThongTin()
@@ -263,10 +264,10 @@ namespace DKHP
             }
             else
             {
-                if (!Regex.IsMatch(txtAddress.Text, @"^[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ1-9][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ1-9]*(\s[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ1-9][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ1-9]*)+$"))
+                if (!Regex.IsMatch(txtAddress.Text, "aa"))
                 {
 
-                    err.SetError(txtAddress, "Tên không hợp lệ");
+                    err.SetError(txtAddress, "Địa chỉ không hợp lệ");
                 }
                 else
                 {
@@ -316,8 +317,9 @@ namespace DKHP
                     {
                         MessageBox.Show("Thêm Thành Công");
                         kt = 0;
-                        LoadDatagridView(svBLL.SearchAllSinhVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()), dgvSinhVien);
+                        LoadDatagridView(svBLL.SearchAllSinhVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()));
                         ShowDataGrid();
+                        instance.XemThongTin();
                         pictureBox1.Image = Resources.book;
                     }
                 }
@@ -331,7 +333,8 @@ namespace DKHP
                     {
                         MessageBox.Show("Chỉnh Sửa Thành Công");
                         kt = 0;
-                        LoadDatagridView(svBLL.SearchAllSinhVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()), dgvSinhVien);
+                        instance.XemThongTin();
+                        LoadDatagridView(svBLL.SearchAllSinhVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()));
                         ShowDataGrid();
                     }
                 }
@@ -346,12 +349,12 @@ namespace DKHP
         //btnSearch
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadDatagridView(svBLL.SearchAllSinhVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()), dgvSinhVien);
+            LoadDatagridView(svBLL.SearchAllSinhVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()));
         }
 
         private void tbxSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadDatagridView(svBLL.SearchAllSinhVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()), dgvSinhVien);
+            LoadDatagridView(svBLL.SearchAllSinhVien(txtIDSearch.Text.Trim(), txtTenSearch.Text.Trim()));
         }
 
         private void btnThem_Click(object sender, EventArgs e)

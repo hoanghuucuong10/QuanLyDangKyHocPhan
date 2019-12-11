@@ -34,7 +34,6 @@ namespace DKHP
 
                 eSinhVien sv = (eSinhVien)tk;
                 txtID.Text = sv.ID_SinhVien;
-              //  tbxLopNC.Text = sv.LopNienChe.;
                 txtTen.Text = sv.HoVaTen;
                 txtAddress.Text = sv.DiaChi;
                 txtMail.Text = sv.Mail;
@@ -72,9 +71,7 @@ namespace DKHP
             eSinhVien sv = new eSinhVien();
             sv = svBLL.GetSinhVienByID(txtID.Text.Trim());
             if (sv != null)
-            {
-               
-             //   tbxLopNC.Text = sv.LopNienChe.TenLop;   
+            {  
                 txtTen.Text = sv.HoVaTen;
                 txtAddress.Text = sv.DiaChi;
                 txtMail.Text = sv.Mail;
@@ -84,12 +81,13 @@ namespace DKHP
                 {
                     picHinhAnh.Image = ByteToImg(Convert.ToBase64String(sv.HinhAnh));
                 }
-
                 frmDangKyHocPhanPN frm = new frmDangKyHocPhanPN(sv);
                 frm.TopLevel = false;
                 frm.Visible = true;
                 frm.FormBorderStyle = FormBorderStyle.None;
                 frm.Dock = DockStyle.Fill;
+      
+
                 panel.Controls.Clear();
                 panel.Controls.Add(frm);
             }

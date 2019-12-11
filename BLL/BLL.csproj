@@ -54,7 +54,7 @@
     <Compile Include="GiangVienBLL.cs" />
     <Compile Include="HocPhanBLL.cs" />
     <Compile Include="LichHocBLL.cs" />
-    <Compile Include="LoginBLL.cs" />
+    <Compile Include="TaiKhoanBLL.cs" />
     <Compile Include="LopHocPhanBLL.cs" />
     <Compile Include="LopNienCheBLL.cs" />
     <Compile Include="NhanVienBLL.cs" />

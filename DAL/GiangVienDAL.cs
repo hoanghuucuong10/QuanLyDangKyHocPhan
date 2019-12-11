@@ -164,8 +164,29 @@ namespace DAL
             //    return 1;
             //}
             //else
-                //ko trùng lịch
-                return 0;
+            //ko trùng lịch
+            return 0;
+        }
+        public bool DoiMatKhau(eGiangVien tk, string mkMoi)
+        {
+            try
+            {
+                GiangVien x = db.GiangViens.Where(m => m.ID_GiangVien == tk.ID_GiangVien).FirstOrDefault();
+                if (x == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    x.MatKhau = mkMoi;
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

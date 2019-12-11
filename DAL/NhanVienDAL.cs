@@ -72,5 +72,26 @@ namespace DAL
                 return 1;
             }
         }
+        public bool DoiMatKhau(eNhanVienPDT tk, string mkMoi)
+        {
+            try
+            {
+                NhanVienPDT x = db.NhanVienPDTs.Where(m => m.ID_NhanVienPDT == tk.ID_NhanVienPDT).FirstOrDefault();
+                if (x == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    x.MatKhau = mkMoi;
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

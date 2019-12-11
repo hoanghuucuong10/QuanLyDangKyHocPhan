@@ -12,6 +12,7 @@ using Entities;
 using System.IO;
 using DKHP.ViewModels;
 using DGVPrinterHelper;
+using System.Text.RegularExpressions;
 
 namespace DKHP
 {
@@ -99,7 +100,7 @@ namespace DKHP
                     {
                         picHinhAnh.Image = ByteToImg(Convert.ToBase64String(eSV.HinhAnh));
                     }
-                    LoadDiem(sv.ID_SinhVien.Trim());
+                    LoadDiem(eSV.ID_SinhVien.Trim());
                     btnPrint.Visible = true;
                 }
                 else
@@ -128,12 +129,13 @@ namespace DKHP
         {
             Search();
         }
-        List<DiemSinhVienViewModels> lstDiem;
-        List<string> lstHocKy = new List<string>();
-        List<DiemSinhVienViewModels> lst = new List<DiemSinhVienViewModels>();
+        private List<DiemSinhVienViewModels> lstDiem;
+        private List<string> lstHocKy = new List<string>();
+        private List<DiemSinhVienViewModels> lst = new List<DiemSinhVienViewModels>();
+        private List<DiemSinhVienViewModels> lstEdit = new List<DiemSinhVienViewModels>();
         public void LoadDiem(string id)
         {
-
+            lstEdit = new List<DiemSinhVienViewModels>();
             pnDiemSV.Controls.Clear();
             lst = new DiemBLL().GetDiemSV(id).Select(x => new DiemSinhVienViewModels
             {
@@ -172,7 +174,7 @@ namespace DKHP
                     x.XepLoai = "";
                     x.TongKet = "";
                 }
-               
+
                 int kt = 0;
                 foreach (string t in lstHocKy)
                 {
@@ -196,7 +198,7 @@ namespace DKHP
                 {
                     if (a == "HK" + diem.HocKy.ToString().Trim() + "(" + diem.NamHoc.Trim() + ")")
                     {
-                        lstDiem.Add(diem);
+                            lstDiem.Add(diem);
                     }
                 }
 
@@ -212,13 +214,147 @@ namespace DKHP
 
                     pnDiemSV.Controls.Add(labelHK);
                     DataGridView d = new DataGridView();
+                    d.CellEndEdit += datagridview_CellEndEdit;
+                    d.CellBeginEdit += datagridview_CellBeginEdit;
                     LoadDgv(d);
                     #endregion
                 }
 
             }
         }
-     
+        string temp = "";
+        private void datagridview_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            DataGridView d = sender as DataGridView;
+            temp = d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+        }
+
+        private void datagridview_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView d = sender as DataGridView;
+            string a = "";
+            if (d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                a = d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Trim();
+            }
+            double x = 0;
+
+
+
+            if (double.TryParse(a, out x) || a == "")
+            {
+                string idLopHP = "";
+                string tk1 = "";
+                string tk2 = "";
+                string tk3 = "";
+                string gk = "";
+                string ck = "";
+                string tongKet = "";
+                string xepLoai = "";
+                if (d.Rows[e.RowIndex].Cells[0].Value != null)
+                {
+                    idLopHP = d.Rows[e.RowIndex].Cells[0].Value.ToString().Trim();
+                }
+                if (d.Rows[e.RowIndex].Cells[4].Value != null)
+                {
+                    tk1 = d.Rows[e.RowIndex].Cells[4].Value.ToString().Trim();
+                }
+                if (d.Rows[e.RowIndex].Cells[5].Value != null)
+                {
+                    tk2 = d.Rows[e.RowIndex].Cells[5].Value.ToString().Trim();
+                }
+                if (d.Rows[e.RowIndex].Cells[6].Value != null)
+                {
+                    tk3 = d.Rows[e.RowIndex].Cells[6].Value.ToString().Trim();
+                }
+                if (d.Rows[e.RowIndex].Cells[7].Value != null)
+                {
+                    gk = d.Rows[e.RowIndex].Cells[7].Value.ToString().Trim();
+                }
+                if (d.Rows[e.RowIndex].Cells[8].Value != null)
+                {
+                    ck = d.Rows[e.RowIndex].Cells[8].Value.ToString().Trim();
+                }
+                if (d.Rows[e.RowIndex].Cells[9].Value != null)
+                {
+                    tongKet = d.Rows[e.RowIndex].Cells[9].Value.ToString().Trim();
+                }
+                if (d.Rows[e.RowIndex].Cells[10].Value != null)
+                {
+                    xepLoai = d.Rows[e.RowIndex].Cells[10].Value.ToString().Trim();
+                }
+
+
+                DiemSinhVienViewModels diemEdit = new DiemSinhVienViewModels
+                {
+                    ID_LopHocPhan = idLopHP,
+                    TK1 = tk1,
+                    TK2 = tk2,
+                    TK3 = tk3,
+                    GK = gk,
+                    CK = ck,
+                    TongKet = tongKet,
+                    XepLoai = xepLoai,
+                };
+
+                if (diemEdit.TK1 != "" && diemEdit.TK2 != "" && diemEdit.TK3 != "" && diemEdit.GK != "" && diemEdit.CK != "")
+                {
+                    diemEdit.TongKet = (((float.Parse(diemEdit.TK1.Trim()) + float.Parse(diemEdit.TK2.Trim()) + float.Parse(diemEdit.TK3.Trim()))/3 * 2 + float.Parse(diemEdit.GK.Trim()) * 3 + float.Parse(diemEdit.CK.Trim()) * 5) * 0.1).ToString();
+                    if (float.Parse(diemEdit.TongKet.Trim()) <= 3)
+                        diemEdit.XepLoai = "E";
+                    else if (float.Parse(diemEdit.TongKet.Trim()) < 5)
+                        diemEdit.XepLoai = "D";
+                    else if (float.Parse(diemEdit.TongKet.Trim()) < 6.5)
+                        diemEdit.XepLoai = "C";
+                    else if (float.Parse(diemEdit.TongKet.Trim()) < 8)
+                        diemEdit.XepLoai = "B";
+                    else if (float.Parse(diemEdit.TongKet.Trim()) <= 10)
+                        diemEdit.XepLoai = "A";
+                    else
+                        diemEdit.XepLoai = "";
+                }
+                else
+                {
+                    diemEdit.XepLoai = "";
+                    diemEdit.TongKet = "";
+                }
+
+                d.Rows[e.RowIndex].Cells[9].Value = diemEdit.TongKet;
+                d.Rows[e.RowIndex].Cells[10].Value = diemEdit.XepLoai;
+
+                btnLuu.Visible = true;
+                btnHuy.Visible = true;
+                int flag = 0;
+                foreach (DiemSinhVienViewModels t in lstEdit)
+                {
+                    flag = 0;
+                    if (t.ID_LopHocPhan == diemEdit.ID_LopHocPhan)
+                    {
+                        t.TK1 = diemEdit.TK1;
+                        t.TK2 = diemEdit.TK2;
+                        t.TK3 = diemEdit.TK3;
+                        t.GK = diemEdit.GK;
+                        t.CK = diemEdit.CK;
+                        t.TongKet = diemEdit.TongKet;
+                        t.XepLoai = diemEdit.XepLoai;
+                        flag = 1;
+                        break;
+                    }
+                }
+                if (flag == 0)
+                {
+                    lstEdit.Add(diemEdit);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nhập sai");
+                d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = temp;
+            }
+        }
+
+
+
         public void LoadDgv(DataGridView d)
         {
             d.BorderStyle = BorderStyle.FixedSingle;
@@ -232,13 +368,13 @@ namespace DKHP
             d.AllowUserToAddRows = false;
             d.AllowUserToDeleteRows = false;
 
-            d.DataSource = lstDiem;
-            d.Visible = true;
 
             pnDiemSV.Controls.Add(d);
+            d.DataSource = lstDiem;
             int daa = d.Rows.Count;
             #region chỉnh kích thước cột
-            int sss = d.Columns.Count;
+
+
 
             d.Height = lstDiem.Count() * d.Rows[0].Height;
             d.Columns["HocKy"].Visible = false;
@@ -260,6 +396,8 @@ namespace DKHP
 
             #endregion
         }
+
+        #region Print
         Bitmap bm;
         int height = 0;
         private void printDoc_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
@@ -380,6 +518,51 @@ namespace DKHP
             {
                 printDoc.Print();
             }
+        }
+
+
+
+        #endregion
+
+        private void btnLuu_Click(object sender, EventArgs e)
+        {
+            foreach (DiemSinhVienViewModels d in lstEdit)
+            {
+                eDiem diem = new eDiem();
+                diem.ID_LopHocPhan = d.ID_LopHocPhan;
+                diem.ID_SinhVien = eSV.ID_SinhVien;
+                if (d.TK1 != "")
+                {
+                    diem.TK1 = double.Parse(d.TK1.Trim());
+                }
+                if (d.TK2 != "")
+                {
+                    diem.TK2 = double.Parse(d.TK2.Trim());
+                }
+                if (d.TK3 != "")
+                {
+                    diem.TK3 = double.Parse(d.TK3.Trim());
+                }
+                if (d.GK != "")
+                {
+                    diem.GK = double.Parse(d.GK.Trim());
+                }
+                if (d.CK != "")
+                {
+                    diem.CK = double.Parse(d.CK.Trim());
+                }
+                new DiemBLL().EditDiemSV(diem);
+            }
+            MessageBox.Show("Đã Lưu");
+            btnLuu.Visible = false;
+            btnHuy.Visible = false;
+            lstEdit = new List<DiemSinhVienViewModels>();
+        }
+
+        private void btnHuy_Click(object sender, EventArgs e)
+        {
+            Search();
+            lstEdit = new List<DiemSinhVienViewModels>();
         }
     }
 }

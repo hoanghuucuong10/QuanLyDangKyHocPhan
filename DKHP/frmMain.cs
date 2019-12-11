@@ -55,6 +55,7 @@ namespace DKHP
         public frmMain()
         {
             InitializeComponent();
+          
             if (Tk is eSinhVien)
             {
                 menuStripGV.Visible = false;
@@ -92,7 +93,7 @@ namespace DKHP
         private void toolStripMenuItem7_Click(object sender, EventArgs e)
         {
             this.Close();
-            frmLogin.Instance.Close();
+            frmDangNhap.Instance.Close();
             Application.Exit();
         }
 
@@ -100,7 +101,7 @@ namespace DKHP
         private void toolStripMenuItem6_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmLogin.Instance.Show();
+            frmDangNhap.Instance.Show();
         }
         #endregion
         #region Thông tin tài khoản, đổi mật khẩu
@@ -113,7 +114,8 @@ namespace DKHP
         //Dổi Mật Khẩu
         private void mnDMK2_Click(object sender, EventArgs e)
         {
-
+            frmDoiMatKhau frm = new frmDoiMatKhau(tk);
+            frm.ShowDialog();
         }
         //--------------------------------------------------------------------------------------//
         #endregion
@@ -163,6 +165,7 @@ namespace DKHP
         {
             frmSinhVien.instance.XemThongTin();
             ShowPNMain(frmSinhVien.instance);
+     
         }
 
         private void mnDKHP_Click(object sender, EventArgs e)
@@ -226,7 +229,8 @@ namespace DKHP
         //Xem lịch học
         private void mnLichHoc_Click(object sender, EventArgs e)
         {
-
+            frmLichHoc frm = new frmLichHoc((eSinhVien)tk);
+            ShowPNMain(frm);
         }
         //Xem kết quả học tập
         private void mnKQHT_Click(object sender, EventArgs e)
@@ -250,5 +254,7 @@ namespace DKHP
             frmLichHoc frm = new frmLichHoc();
             ShowPNMain(frm);
         }
+
+
     }
 }

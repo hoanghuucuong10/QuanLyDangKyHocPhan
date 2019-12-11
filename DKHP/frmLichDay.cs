@@ -20,7 +20,10 @@ namespace DKHP
         {
             InitializeComponent();
             this.eGV = gV;
-            btnSearch.Visible = false;
+            btnSearchGV.Visible = false;
+            txtID.Text = eGV.ID_GiangVien;
+            txtTen.Text = eGV.HoVaTen.Trim();
+
             cbNamHocSearch.DataSource = new NienKhoaBLL().GetAllNienKhoa();
             cbNamHocSearch.ValueMember = "ID_NienKhoa";
             cbNamHocSearch.DisplayMember = "NienKhoa1";
@@ -39,11 +42,13 @@ namespace DKHP
         private void btnSearchGV_Click(object sender, EventArgs e)
         {
             eGiangVien x = new GiangVienBLL().GetGiangVienByID(txtID.Text.Trim());
-            if (x!=null)
+            if (x != null)
             {
-                this.eGV = x;           
+                this.eGV = x;
                 txtTen.Text = x.HoVaTen.Trim();
             }
+            else
+                MessageBox.Show("Sai mã số giảng viên");
         }
         public void ClearPN()
         {

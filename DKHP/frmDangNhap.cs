@@ -12,13 +12,13 @@ using Entities;
 namespace DKHP
 {
 
-    public partial class frmLogin : Form
+    public partial class frmDangNhap : Form
     {
-        private static frmLogin _instance;
-        LoginBLL loginBLL = new LoginBLL();
+        private static frmDangNhap _instance;
+        TaiKhoanBLL loginBLL = new TaiKhoanBLL();
 
 
-        public static frmLogin Instance
+        public static frmDangNhap Instance
         {
             // Uses lazy initialization.
 
@@ -27,16 +27,18 @@ namespace DKHP
             {
                 if (_instance == null)
                 {
-                    _instance = new frmLogin();
+                    _instance = new frmDangNhap();
                 }
 
                 return _instance;
             }
 
         }
-        public frmLogin()
+        public frmDangNhap()
         {
             InitializeComponent();
+
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -68,7 +70,6 @@ namespace DKHP
                     frmMain.Instance.menuStripNV.Visible = false;
                     frmMain.Instance.pnMain.Controls.Clear();
                     frmMain.Instance.Show();
-
                 }
                 else if (kq is eNhanVienPDT)
                 {
@@ -80,14 +81,10 @@ namespace DKHP
                     frmMain.Instance.Show();
 
                 }
-
-
             }
             else
             {
-                MessageBox.Show("Sai ten dang nhap hoac mat khau!!!");
-
-              //  MessageBox.Show("Bạn có thích lập trình không?", "IceTea Việt", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                MessageBox.Show("Sai tên đăng nhập hoặc mât khẩu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

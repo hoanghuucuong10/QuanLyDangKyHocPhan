@@ -48,5 +48,9 @@ namespace BLL
         {
             return nth.GetNhomSV(idLopHP,  idSV);
         }
+        public bool CheckDelNhomTH(string id)
+        {
+            return nth.CheckDelNhomTH(id);
+        }
     }
 }

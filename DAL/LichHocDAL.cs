@@ -53,7 +53,7 @@ namespace DAL
         }
         public List<eLichHoc_NhomThucHanh> GetLichHocThucHanh_SinhVien(string id_SV, int hocKy, int idNienKhoa)
         {
-            List<eLichHoc_NhomThucHanh> lst = db.LichHoc_NhomThucHanh.Where(x => x.NhomThucHanh.LopHocPhan.DangKyHocPhans.Any(s => s.ID_SinhVien == id_SV && s.ID_NhomThucHanh==x.ID_NhomThucHanh) && x.NhomThucHanh.LopHocPhan.HocKy == hocKy && x.NhomThucHanh.LopHocPhan.ID_NienKhoa == idNienKhoa).Select(t => new eLichHoc_NhomThucHanh
+            List<eLichHoc_NhomThucHanh> lst = db.LichHoc_NhomThucHanh.Where(x => x.NhomThucHanh.LopHocPhan.DangKyHocPhans.Any(s => s.ID_SinhVien == id_SV && s.ID_NhomThucHanh == x.ID_NhomThucHanh) && x.NhomThucHanh.LopHocPhan.HocKy == hocKy && x.NhomThucHanh.LopHocPhan.ID_NienKhoa == idNienKhoa).Select(t => new eLichHoc_NhomThucHanh
             {
                 ID_LichHoc_NhomTH = t.ID_LichHoc_NhomTH,
                 ID_NhomThucHanh = t.ID_NhomThucHanh,
@@ -255,14 +255,191 @@ namespace DAL
 
         public int CreateIDThucHanh()
         {
+            if (db.LichHoc_NhomThucHanh.Count() == 0)
+                return 0;
             return db.LichHoc_NhomThucHanh.Max(x => x.ID_LichHoc_NhomTH) + 1;
         }
         public int CreateIDLyThuyet()
         {
-            if (db.LichHoc_NhomThucHanh.Count() == 0)
+            if (db.LichHoc_LopHocPhan.Count() == 0)
                 return 0;
 
-            return db.LichHoc_NhomThucHanh.Max(x => x.ID_LichHoc_NhomTH) + 1;
+            return db.LichHoc_LopHocPhan.Max(x => x.ID_LichHoc_LopHP) + 1;
+        }
+
+        public int DelLichLT(int id)
+        {
+            try
+            {
+                LichHoc_LopHocPhan lich = db.LichHoc_LopHocPhan.Where(x => x.ID_LichHoc_LopHP == id).FirstOrDefault();
+                if (lich == null)
+                {
+                    return 2;
+                }
+                else
+                {
+                    db.LichHoc_LopHocPhan.Remove(lich);
+                    db.SaveChanges();
+                    return 1;
+                }
+            }
+            catch (Exception)
+            {
+
+                return 0;
+            }
+
+        }
+        public int DelLichTH(int id)
+        {
+            try
+            {
+                LichHoc_NhomThucHanh lich = db.LichHoc_NhomThucHanh.Where(x => x.ID_LichHoc_NhomTH == id).FirstOrDefault();
+                if (lich == null)
+                {
+                    return 2;
+                }
+                else
+                {
+                    db.LichHoc_NhomThucHanh.Remove(lich);
+                    db.SaveChanges();
+                    return 1;
+                }
+            }
+            catch (Exception)
+            {
+
+                return 0;
+            }
+        }
+
+        public bool CheckLichTrungGiangVien(string idGV, string ngayHoc, string tietHoc, int hocKy, int idNamHoc)
+        {      
+            if(tietHoc=="1-3"|| tietHoc == "1-2" || tietHoc == "2-3"||tietHoc == "1-5")
+            {
+                LichHoc_LopHocPhan lichLT = db.LichHoc_LopHocPhan.Where(x => x.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc &&( x.TietHoc.Trim() == "1-3"|| x.TietHoc.Trim() == "1-2" || x.TietHoc.Trim() == "2-3" || x.TietHoc.Trim() == "1-5" ) && x.LopHocPhan.ID_NienKhoa == idNamHoc && x.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                if (lichLT != null)
+                    return true;
+                LichHoc_NhomThucHanh lichTH = db.LichHoc_NhomThucHanh.Where(x => x.NhomThucHanh.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "1-3" || x.TietHoc.Trim() == "1-2" || x.TietHoc.Trim() == "2-3" || x.TietHoc.Trim() == "1-5") && x.NhomThucHanh.LopHocPhan.ID_NienKhoa == idNamHoc && x.NhomThucHanh.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                if (lichTH != null)
+                    return true;
+            }
+            if (tietHoc == "4-6" || tietHoc == "5-6" || tietHoc == "4-5")
+            {
+                LichHoc_LopHocPhan lichLT = db.LichHoc_LopHocPhan.Where(x => x.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "4-6" || x.TietHoc.Trim() == "5-6" || x.TietHoc.Trim() == "4-5" || x.TietHoc.Trim() == "1-5") && x.LopHocPhan.ID_NienKhoa == idNamHoc && x.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                if (lichLT != null)
+                    return true;
+                LichHoc_NhomThucHanh lichTH = db.LichHoc_NhomThucHanh.Where(x => x.NhomThucHanh.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "4-6" || x.TietHoc.Trim() == "5-6" || x.TietHoc.Trim() == "4-5" || x.TietHoc.Trim() == "1-5") && x.NhomThucHanh.LopHocPhan.ID_NienKhoa == idNamHoc && x.NhomThucHanh.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                if (lichTH != null)
+                    return true;
+            }
+            if (tietHoc == "7-9" || tietHoc == "7-8" || tietHoc == "8-9" ||tietHoc == "7-12")
+            {
+                LichHoc_LopHocPhan lichLT = db.LichHoc_LopHocPhan.Where(x => x.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "7-9" || x.TietHoc.Trim() == "7-8" || x.TietHoc.Trim() == "8-9" || x.TietHoc.Trim() == "7-12") && x.LopHocPhan.ID_NienKhoa == idNamHoc && x.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                if (lichLT != null)
+                    return true;
+                LichHoc_NhomThucHanh lichTH = db.LichHoc_NhomThucHanh.Where(x => x.NhomThucHanh.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "7-9" || x.TietHoc.Trim() == "7-8" || x.TietHoc.Trim() == "8-9" || x.TietHoc.Trim() == "7-12") && x.NhomThucHanh.LopHocPhan.ID_NienKhoa == idNamHoc && x.NhomThucHanh.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                if (lichTH != null)
+                    return true;
+            }
+            if (tietHoc == "10-12" || tietHoc == "10-11" || tietHoc == "11-12")
+            {
+                LichHoc_LopHocPhan lichLT = db.LichHoc_LopHocPhan.Where(x => x.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "10-12" || x.TietHoc.Trim() == "10-11" || x.TietHoc.Trim() == "11-12" || x.TietHoc.Trim() == "7-12") && x.LopHocPhan.ID_NienKhoa == idNamHoc && x.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                if (lichLT != null)
+                    return true;
+                LichHoc_NhomThucHanh lichTH = db.LichHoc_NhomThucHanh.Where(x => x.NhomThucHanh.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "10-12" || x.TietHoc.Trim() == "10-11" || x.TietHoc.Trim() == "11-12" || x.TietHoc.Trim() == "7-12") && x.NhomThucHanh.LopHocPhan.ID_NienKhoa == idNamHoc && x.NhomThucHanh.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                if (lichTH != null)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public bool CheckLichUpdateGiangVien(string s, int idLich, string idGV, string ngayHoc, string tietHoc, int hocKy, int idNamHoc)
+        {
+        
+            if(s=="LT")
+            {
+                if (tietHoc == "1-3" || tietHoc == "1-2" || tietHoc == "2-3" || tietHoc == "1-5")
+                {
+                    LichHoc_LopHocPhan lichLT = db.LichHoc_LopHocPhan.Where(x => x.ID_LichHoc_LopHP != idLich && x.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "1-3" || x.TietHoc.Trim() == "1-2" || x.TietHoc.Trim() == "2-3" || x.TietHoc.Trim() == "1-5") && x.LopHocPhan.ID_NienKhoa == idNamHoc && x.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                    if (lichLT != null)
+                        return true;
+                    LichHoc_NhomThucHanh lichTH = db.LichHoc_NhomThucHanh.Where(x => x.NhomThucHanh.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "1-3" || x.TietHoc.Trim() == "1-2" || x.TietHoc.Trim() == "2-3" || x.TietHoc.Trim() == "1-5") && x.NhomThucHanh.LopHocPhan.ID_NienKhoa == idNamHoc && x.NhomThucHanh.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                    if (lichTH != null)
+                        return true;
+                }
+                if (tietHoc == "4-6" || tietHoc == "5-6" || tietHoc == "4-5")
+                {
+                    LichHoc_LopHocPhan lichLT = db.LichHoc_LopHocPhan.Where(x => x.ID_LichHoc_LopHP != idLich && x.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "4-6" || x.TietHoc.Trim() == "5-6" || x.TietHoc.Trim() == "4-5" || x.TietHoc.Trim() == "1-5") && x.LopHocPhan.ID_NienKhoa == idNamHoc && x.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                    if (lichLT != null)
+                        return true;
+                    LichHoc_NhomThucHanh lichTH = db.LichHoc_NhomThucHanh.Where(x => x.NhomThucHanh.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "4-6" || x.TietHoc.Trim() == "5-6" || x.TietHoc.Trim() == "4-5" || x.TietHoc.Trim() == "1-5") && x.NhomThucHanh.LopHocPhan.ID_NienKhoa == idNamHoc && x.NhomThucHanh.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                    if (lichTH != null)
+                        return true;
+                }
+                if (tietHoc == "7-9" || tietHoc == "7-8" || tietHoc == "8-9" || tietHoc == "7-12")
+                {
+                    LichHoc_LopHocPhan lichLT = db.LichHoc_LopHocPhan.Where(x => x.ID_LichHoc_LopHP != idLich && x.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "7-9" || x.TietHoc.Trim() == "7-8" || x.TietHoc.Trim() == "8-9" || x.TietHoc.Trim() == "7-12") && x.LopHocPhan.ID_NienKhoa == idNamHoc && x.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                    if (lichLT != null)
+                        return true;
+                    LichHoc_NhomThucHanh lichTH = db.LichHoc_NhomThucHanh.Where(x => x.NhomThucHanh.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "7-9" || x.TietHoc.Trim() == "7-8" || x.TietHoc.Trim() == "8-9" || x.TietHoc.Trim() == "7-12") && x.NhomThucHanh.LopHocPhan.ID_NienKhoa == idNamHoc && x.NhomThucHanh.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                    if (lichTH != null)
+                        return true;
+                }
+                if (tietHoc == "10-12" || tietHoc == "10-11" || tietHoc == "11-12")
+                {
+                    LichHoc_LopHocPhan lichLT = db.LichHoc_LopHocPhan.Where(x => x.ID_LichHoc_LopHP != idLich && x.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "10-12" || x.TietHoc.Trim() == "10-11" || x.TietHoc.Trim() == "11-12" || x.TietHoc.Trim() == "7-12") && x.LopHocPhan.ID_NienKhoa == idNamHoc && x.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                    if (lichLT != null)
+                        return true;
+                    LichHoc_NhomThucHanh lichTH = db.LichHoc_NhomThucHanh.Where(x => x.NhomThucHanh.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "10-12" || x.TietHoc.Trim() == "10-11" || x.TietHoc.Trim() == "11-12" || x.TietHoc.Trim() == "7-12") && x.NhomThucHanh.LopHocPhan.ID_NienKhoa == idNamHoc && x.NhomThucHanh.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                    if (lichTH != null)
+                        return true;
+                }
+
+                return false;
+            }
+            else
+            {
+                if (tietHoc == "1-3" || tietHoc == "1-2" || tietHoc == "2-3" || tietHoc == "1-5")
+                {
+                    LichHoc_LopHocPhan lichLT = db.LichHoc_LopHocPhan.Where(x => x.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "1-3" || x.TietHoc.Trim() == "1-2" || x.TietHoc.Trim() == "2-3" || x.TietHoc.Trim() == "1-5") && x.LopHocPhan.ID_NienKhoa == idNamHoc && x.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                    if (lichLT != null)
+                        return true;
+                    LichHoc_NhomThucHanh lichTH = db.LichHoc_NhomThucHanh.Where(x => x.ID_LichHoc_NhomTH != idLich && x.NhomThucHanh.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "1-3" || x.TietHoc.Trim() == "1-2" || x.TietHoc.Trim() == "2-3" || x.TietHoc.Trim() == "1-5") && x.NhomThucHanh.LopHocPhan.ID_NienKhoa == idNamHoc && x.NhomThucHanh.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                    if (lichTH != null)
+                        return true;
+                }
+                if (tietHoc == "4-6" || tietHoc == "5-6" || tietHoc == "4-5")
+                {
+                    LichHoc_LopHocPhan lichLT = db.LichHoc_LopHocPhan.Where(x => x.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "4-6" || x.TietHoc.Trim() == "5-6" || x.TietHoc.Trim() == "4-5" || x.TietHoc.Trim() == "1-5") && x.LopHocPhan.ID_NienKhoa == idNamHoc && x.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                    if (lichLT != null)
+                        return true;
+                    LichHoc_NhomThucHanh lichTH = db.LichHoc_NhomThucHanh.Where(x => x.ID_LichHoc_NhomTH != idLich && x.NhomThucHanh.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "4-6" || x.TietHoc.Trim() == "5-6" || x.TietHoc.Trim() == "4-5" || x.TietHoc.Trim() == "1-5") && x.NhomThucHanh.LopHocPhan.ID_NienKhoa == idNamHoc && x.NhomThucHanh.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                    if (lichTH != null)
+                        return true;
+                }
+                if (tietHoc == "7-9" || tietHoc == "7-8" || tietHoc == "8-9" || tietHoc == "7-12")
+                {
+                    LichHoc_LopHocPhan lichLT = db.LichHoc_LopHocPhan.Where(x => x.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "7-9" || x.TietHoc.Trim() == "7-8" || x.TietHoc.Trim() == "8-9" || x.TietHoc.Trim() == "7-12") && x.LopHocPhan.ID_NienKhoa == idNamHoc && x.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                    if (lichLT != null)
+                        return true;
+                    LichHoc_NhomThucHanh lichTH = db.LichHoc_NhomThucHanh.Where(x => x.ID_LichHoc_NhomTH != idLich && x.NhomThucHanh.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "7-9" || x.TietHoc.Trim() == "7-8" || x.TietHoc.Trim() == "8-9" || x.TietHoc.Trim() == "7-12") && x.NhomThucHanh.LopHocPhan.ID_NienKhoa == idNamHoc && x.NhomThucHanh.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                    if (lichTH != null)
+                        return true;
+                }
+                if (tietHoc == "10-12" || tietHoc == "10-11" || tietHoc == "11-12")
+                {
+                    LichHoc_LopHocPhan lichLT = db.LichHoc_LopHocPhan.Where(x => x.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "10-12" || x.TietHoc.Trim() == "10-11" || x.TietHoc.Trim() == "11-12" || x.TietHoc.Trim() == "7-12") && x.LopHocPhan.ID_NienKhoa == idNamHoc && x.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                    if (lichLT != null)
+                        return true;
+                    LichHoc_NhomThucHanh lichTH = db.LichHoc_NhomThucHanh.Where(x => x.ID_LichHoc_NhomTH != idLich && x.NhomThucHanh.LopHocPhan.ID_GiangVien.Trim() == idGV.Trim() && x.NgayHoc.Trim() == ngayHoc && (x.TietHoc.Trim() == "10-12" || x.TietHoc.Trim() == "10-11" || x.TietHoc.Trim() == "11-12" || x.TietHoc.Trim() == "7-12") && x.NhomThucHanh.LopHocPhan.ID_NienKhoa == idNamHoc && x.NhomThucHanh.LopHocPhan.HocKy == hocKy).FirstOrDefault();
+                    if (lichTH != null)
+                        return true;
+                }
+                return false;
+            }
+           
         }
     }
 }

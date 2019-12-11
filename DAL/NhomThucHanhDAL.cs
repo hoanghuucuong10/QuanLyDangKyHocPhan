@@ -119,7 +119,7 @@ namespace DAL
 
                 return 0;
             }
-           
+
         }
         public int AddNewNhomThucHanh(eNhomThucHanh a)
         {
@@ -146,33 +146,45 @@ namespace DAL
 
         public int DelNhomTH(string id)
         {
-            if (db.DangKyHocPhans.Where(x => x.ID_NhomThucHanh == id).FirstOrDefault() != null)
-                return 0;
-            else
+            try
             {
-                NhomThucHanh z = db.NhomThucHanhs.Where(x => x.ID_NhomThucHanh == id).FirstOrDefault();
-                if (z != null)
+                if (CheckDelNhomTH(id) == false)
+                    return 0;
+                else
                 {
-                    foreach (LichHoc_NhomThucHanh t in db.LichHoc_NhomThucHanh.Where(x => x.ID_NhomThucHanh == id).ToList())
-                    {
-                        db.LichHoc_NhomThucHanh.Remove(t);
-                    }
-                    db.NhomThucHanhs.Remove(z);
-                    db.SaveChanges();
-                    return 1;
-                }
-                return 2;
+                    if (db.DangKyHocPhans.Where(s => s.ID_NhomThucHanh == id).Count() > 0)
+                        return 0;
 
+                    NhomThucHanh z = db.NhomThucHanhs.Where(x => x.ID_NhomThucHanh == id).FirstOrDefault();
+                    if (z != null)
+                    {
+                        foreach (LichHoc_NhomThucHanh t in db.LichHoc_NhomThucHanh.Where(x => x.ID_NhomThucHanh == id).ToList())
+                        {
+                            db.LichHoc_NhomThucHanh.Remove(t);
+                        }
+                        db.NhomThucHanhs.Remove(z);
+                        db.SaveChanges();
+                        return 1;
+                    }
+                    return 2;
+
+                }
             }
+            catch (Exception e)
+            {
+
+                return 12;
+            }
+
         }
         public string CreateID()
         {
-            string id="th00000001";
-            if (db.NhomThucHanhs.Count()!=0)
+            string id = "th00000001";
+            if (db.NhomThucHanhs.Count() != 0)
             {
                 id = db.NhomThucHanhs.Max(x => x.ID_NhomThucHanh);
             }
-            
+
             string numStr = id.Substring(2);
             int num = int.Parse(numStr) + 1;
 
@@ -194,6 +206,13 @@ namespace DAL
             }
             else
                 return "";
+        }
+
+        public bool CheckDelNhomTH(string id)
+        {
+            if (db.DangKyHocPhans.Where(x => x.ID_NhomThucHanh == id).FirstOrDefault() == null)
+                return false;
+            return true;
         }
     }
 }

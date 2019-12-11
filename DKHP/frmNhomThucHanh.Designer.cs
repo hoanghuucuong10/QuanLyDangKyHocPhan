@@ -50,7 +50,6 @@
             this.numSoTiet = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.lichHocTHViewModelsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cbGiangVien = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -71,16 +70,19 @@
             this.iDLichHocNhomTHDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iDNhomThucHanhDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iDPhongHocDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lichHocTHViewModelsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbMaGV = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numNhom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSoTiet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lichHocTHViewModelsBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lichHocTHViewModelsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tbMaLHP
             // 
-            this.tbMaLHP.Location = new System.Drawing.Point(166, 83);
+            this.tbMaLHP.Location = new System.Drawing.Point(163, 85);
             this.tbMaLHP.Name = "tbMaLHP";
             this.tbMaLHP.ReadOnly = true;
             this.tbMaLHP.Size = new System.Drawing.Size(114, 20);
@@ -89,7 +91,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(63, 90);
+            this.label1.Location = new System.Drawing.Point(65, 92);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 1;
@@ -98,7 +100,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(98, 121);
+            this.label4.Location = new System.Drawing.Point(102, 176);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 13);
             this.label4.TabIndex = 1;
@@ -117,7 +119,7 @@
             // 
             // numNhom
             // 
-            this.numNhom.Location = new System.Drawing.Point(166, 114);
+            this.numNhom.Location = new System.Drawing.Point(163, 171);
             this.numNhom.Name = "numNhom";
             this.numNhom.Size = new System.Drawing.Size(47, 20);
             this.numNhom.TabIndex = 30;
@@ -169,7 +171,7 @@
             // dateTimePicker2
             // 
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker2.Location = new System.Drawing.Point(384, 146);
+            this.dateTimePicker2.Location = new System.Drawing.Point(381, 198);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(118, 20);
             this.dateTimePicker2.TabIndex = 33;
@@ -177,7 +179,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(166, 145);
+            this.dateTimePicker1.Location = new System.Drawing.Point(163, 199);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(118, 20);
             this.dateTimePicker1.TabIndex = 34;
@@ -185,7 +187,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(300, 151);
+            this.label16.Location = new System.Drawing.Point(293, 204);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(82, 13);
             this.label16.TabIndex = 31;
@@ -194,7 +196,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(87, 152);
+            this.label15.Location = new System.Drawing.Point(85, 204);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(77, 13);
             this.label15.TabIndex = 32;
@@ -202,7 +204,7 @@
             // 
             // tbIDTH
             // 
-            this.tbIDTH.Location = new System.Drawing.Point(166, 57);
+            this.tbIDTH.Location = new System.Drawing.Point(163, 57);
             this.tbIDTH.Name = "tbIDTH";
             this.tbIDTH.ReadOnly = true;
             this.tbIDTH.Size = new System.Drawing.Size(114, 20);
@@ -211,7 +213,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(45, 64);
+            this.label2.Location = new System.Drawing.Point(49, 64);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 13);
             this.label2.TabIndex = 1;
@@ -220,7 +222,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(241, 121);
+            this.label3.Location = new System.Drawing.Point(237, 177);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 13);
             this.label3.TabIndex = 1;
@@ -228,7 +230,7 @@
             // 
             // numSoTiet
             // 
-            this.numSoTiet.Location = new System.Drawing.Point(313, 114);
+            this.numSoTiet.Location = new System.Drawing.Point(310, 170);
             this.numSoTiet.Name = "numSoTiet";
             this.numSoTiet.Size = new System.Drawing.Size(47, 20);
             this.numSoTiet.TabIndex = 30;
@@ -237,7 +239,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(39, 192);
+            this.label5.Location = new System.Drawing.Point(40, 234);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(62, 13);
             this.label5.TabIndex = 36;
@@ -276,7 +278,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView3.Location = new System.Drawing.Point(42, 208);
+            this.dataGridView3.Location = new System.Drawing.Point(43, 250);
             this.dataGridView3.MultiSelect = false;
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
@@ -294,16 +296,12 @@
             this.dataGridView3.TabIndex = 35;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
             // 
-            // lichHocTHViewModelsBindingSource
-            // 
-            this.lichHocTHViewModelsBindingSource.DataSource = typeof(DKHP.ViewModels.LichHocTHViewModels);
-            // 
             // cbGiangVien
             // 
             this.cbGiangVien.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbGiangVien.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbGiangVien.FormattingEnabled = true;
-            this.cbGiangVien.Location = new System.Drawing.Point(370, 82);
+            this.cbGiangVien.Location = new System.Drawing.Point(163, 142);
             this.cbGiangVien.Name = "cbGiangVien";
             this.cbGiangVien.Size = new System.Drawing.Size(145, 21);
             this.cbGiangVien.TabIndex = 41;
@@ -311,7 +309,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(307, 90);
+            this.label7.Location = new System.Drawing.Point(100, 148);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(62, 13);
             this.label7.TabIndex = 38;
@@ -330,7 +328,7 @@
             this.groupBox1.Controls.Add(this.label17);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Location = new System.Drawing.Point(330, 208);
+            this.groupBox1.Location = new System.Drawing.Point(331, 250);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(184, 145);
             this.groupBox1.TabIndex = 42;
@@ -403,10 +401,6 @@
             // 
             this.cbNgayHoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbNgayHoc.FormattingEnabled = true;
-            this.cbNgayHoc.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3"});
             this.cbNgayHoc.Location = new System.Drawing.Point(58, 21);
             this.cbNgayHoc.Name = "cbNgayHoc";
             this.cbNgayHoc.Size = new System.Drawing.Size(108, 21);
@@ -510,6 +504,29 @@
             this.iDPhongHocDataGridViewTextBoxColumn.ReadOnly = true;
             this.iDPhongHocDataGridViewTextBoxColumn.Visible = false;
             // 
+            // lichHocTHViewModelsBindingSource
+            // 
+            this.lichHocTHViewModelsBindingSource.DataSource = typeof(DKHP.ViewModels.LichHocTHViewModels);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(82, 121);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(80, 13);
+            this.label6.TabIndex = 38;
+            this.label6.Text = "Mã Giảng Viên:";
+            // 
+            // cbMaGV
+            // 
+            this.cbMaGV.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbMaGV.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbMaGV.FormattingEnabled = true;
+            this.cbMaGV.Location = new System.Drawing.Point(163, 113);
+            this.cbMaGV.Name = "cbMaGV";
+            this.cbMaGV.Size = new System.Drawing.Size(145, 21);
+            this.cbMaGV.TabIndex = 41;
+            // 
             // frmNhomThucHanh
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -517,6 +534,8 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(564, 516);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.cbMaGV);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.cbGiangVien);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
@@ -544,9 +563,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numNhom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSoTiet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lichHocTHViewModelsBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lichHocTHViewModelsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -593,5 +612,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn iDLichHocNhomTHDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn iDNhomThucHanhDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn iDPhongHocDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cbMaGV;
     }
 }
