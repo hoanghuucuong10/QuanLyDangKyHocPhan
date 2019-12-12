@@ -194,7 +194,7 @@ namespace DKHP
                     idNhomTH = dgvDanhSachNhom.Rows[dgvDanhSachNhom.CurrentRow.Index].Cells[0].Value.ToString().Trim();
                 }
                 //kt trạng thái lớp học phần
-                string tt = new LopHocPhanBLL().GetTrangThai(idLopHP);
+                string tt = new LopHocPhanBLL().GetTrangThai(idLopHP).Trim();
                 if (tt != "Chờ Sinh Viên Đăng Ký")
                 {
                     MessageBox.Show("Lớp học phần đang trong trạng thái " + tt + " không thể đăng ký", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -239,7 +239,7 @@ namespace DKHP
                 idLopHP = dataGridView2.Rows[dataGridView2.CurrentRow.Index].Cells[0].Value.ToString().Trim();
 
                 string tt = new LopHocPhanBLL().GetTrangThai(idLopHP);
-                if (tt != "Đã Mở Lớp")
+                if (tt == "Đã Mở Lớp")
                 {
                     MessageBox.Show("Lớp học phần đang trong trạng thái " + tt + " không thể hủy", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;

@@ -120,7 +120,7 @@ namespace DKHP
                 }
                 if (lst != null)
                 {
-                    diemLopHocPhanViewModelsBindingSource.DataSource = lst;
+                    diemLopHocPhanViewModelsBindingSource.DataSource = lst.OrderBy(x=>x.ID_SinhVien);
                     btnPrint.Visible = true;
                 }
 

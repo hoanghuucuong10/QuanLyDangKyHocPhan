@@ -199,10 +199,10 @@ namespace DAL
 
         public string GetNhomSV(string idLopHP, string idSV)
         {
-            NhomThucHanh a = db.NhomThucHanhs.Where(x => x.ID_LopHocPhan == idLopHP && x.DangKyHocPhans.Any(f => f.ID_SinhVien == idSV)).FirstOrDefault();
-            if (a != null)
+            DangKyHocPhan s = db.DangKyHocPhans.Where(x => x.ID_SinhVien == idSV && x.ID_LopHocPhan == idLopHP).FirstOrDefault();
+            if(s.NhomThucHanh!=null)
             {
-                return a.TenNhom.Trim();
+                return s.NhomThucHanh.TenNhom.Trim();
             }
             else
                 return "";

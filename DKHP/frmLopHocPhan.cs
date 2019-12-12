@@ -223,7 +223,7 @@ namespace DKHP
             btnThem.Visible = false;
             btnSua.Visible = false;
 
-            if (cbTrangThai.SelectedItem.ToString() != "Lên Kế Hoạch") 
+            if (cbTrangThai.SelectedItem.ToString() != "Lên Kế Hoạch" && cbTrangThai.SelectedItem.ToString()!="Đã Hủy") 
             {
                 btnHuyLuuLichHoc.Visible = false;
                 btnLuuLichHoc.Visible = false;
@@ -383,7 +383,7 @@ namespace DKHP
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            if(cbTrangThai.SelectedItem.ToString()=="Đã Mở Lớp" || cbTrangThai.SelectedItem.ToString() == "Đã Hủy")
+            if(cbTrangThai.SelectedItem.ToString()=="Đã Mở Lớp" )
             {
                 MessageBox.Show("Lớp học phần đang trong trạng thái "+ cbTrangThai.SelectedItem.ToString().Trim()+" không thể chỉnh sửa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -499,9 +499,9 @@ namespace DKHP
                         case "Đã Hủy":
                             {
 
-                                if (cbTrangThai.SelectedItem.ToString() != "Đã Hủy")
+                                if (cbTrangThai.SelectedItem.ToString() != "Đã Hủy" && cbTrangThai.SelectedItem.ToString()!="Lên Kế Hoạch")
                                 {
-                                    MessageBox.Show("Lớp học phần đã hủy không thể chỉnh sửa trạng thái", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show("Lớp học phần đã hủy không thể chỉnh sửa sang trạng thái "+ cbTrangThai.SelectedItem.ToString(), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     cbTrangThai.SelectedItem = "Đã Hủy";
                                     return;
                                 }
