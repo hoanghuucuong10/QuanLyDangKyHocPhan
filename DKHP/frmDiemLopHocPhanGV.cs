@@ -426,12 +426,6 @@ namespace DKHP
         private void dgvDiem_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {          
             DataGridView d = sender as DataGridView;
-            //if (temp != "")
-            //{
-            //    MessageBox.Show("Không thể sửa điểm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = temp;
-            //    return;
-            //}
             string a = "";
             if (d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
             {

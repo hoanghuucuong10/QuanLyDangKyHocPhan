@@ -194,6 +194,20 @@ namespace DKHP
             if (d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
             {
                 a = d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Trim();
+                int s = 0;
+                if (int.TryParse(a, out s))
+                {
+                    if (int.Parse(a) < 0 || int.Parse(a) > 10)
+                    {
+                        MessageBox.Show("Điểm nhập vào không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = temp;
+                        return;
+                    }
+                }
+            }
+            if (d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                a = d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Trim();
             }
             double x = 0;
 
@@ -303,7 +317,7 @@ namespace DKHP
             }
             else
             {
-                MessageBox.Show("Nhập sai");
+                MessageBox.Show("Điểm nhập vào không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = temp;
             }
         }

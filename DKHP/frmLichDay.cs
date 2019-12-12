@@ -23,6 +23,7 @@ namespace DKHP
             btnSearchGV.Visible = false;
             txtID.Text = eGV.ID_GiangVien;
             txtTen.Text = eGV.HoVaTen.Trim();
+            txtID.ReadOnly = true;
 
             cbNamHocSearch.DataSource = new NienKhoaBLL().GetAllNienKhoa();
             cbNamHocSearch.ValueMember = "ID_NienKhoa";

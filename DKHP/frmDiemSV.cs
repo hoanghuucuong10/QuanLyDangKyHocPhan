@@ -216,6 +216,8 @@ namespace DKHP
                     DataGridView d = new DataGridView();
                     d.CellEndEdit += datagridview_CellEndEdit;
                     d.CellBeginEdit += datagridview_CellBeginEdit;
+                    if (pKT == 0)
+                        d.ReadOnly = true;
                     LoadDgv(d);
                     #endregion
                 }
@@ -233,6 +235,21 @@ namespace DKHP
         {
             DataGridView d = sender as DataGridView;
             string a = "";
+            if (d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                a = d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Trim();
+                int s = 0;
+                if (int.TryParse(a, out s))
+                {
+                    if (int.Parse(a) < 0 || int.Parse(a) > 10)
+                    {
+                        MessageBox.Show("Điểm nhập vào không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = temp;
+                        return;
+                    }
+                }
+            }
+
             if (d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
             {
                 a = d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Trim();
@@ -348,7 +365,7 @@ namespace DKHP
             }
             else
             {
-                MessageBox.Show("Nhập sai");
+                MessageBox.Show("Điểm nhập vào không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 d.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = temp;
             }
         }
@@ -553,7 +570,7 @@ namespace DKHP
                 }
                 new DiemBLL().EditDiemSV(diem);
             }
-            MessageBox.Show("Đã Lưu");
+            MessageBox.Show("Đã Lưu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             btnLuu.Visible = false;
             btnHuy.Visible = false;
             lstEdit = new List<DiemSinhVienViewModels>();

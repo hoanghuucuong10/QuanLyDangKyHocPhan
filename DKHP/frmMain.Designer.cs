@@ -38,7 +38,6 @@
             this.mnThoat = new System.Windows.Forms.ToolStripMenuItem();
             this.mnLichDay = new System.Windows.Forms.ToolStripMenuItem();
             this.mnLopHP = new System.Windows.Forms.ToolStripMenuItem();
-            this.xemDanhSáchLớpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnNhapDiem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripSV = new System.Windows.Forms.MenuStrip();
             this.mnND = new System.Windows.Forms.ToolStripMenuItem();
@@ -175,7 +174,6 @@
             // mnLopHP
             // 
             this.mnLopHP.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.xemDanhSáchLớpToolStripMenuItem,
             this.mnNhapDiem});
             this.mnLopHP.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
             this.mnLopHP.ForeColor = System.Drawing.Color.Blue;
@@ -186,17 +184,10 @@
             this.mnLopHP.Size = new System.Drawing.Size(187, 36);
             this.mnLopHP.Text = "Lớp Học Phần";
             // 
-            // xemDanhSáchLớpToolStripMenuItem
-            // 
-            this.xemDanhSáchLớpToolStripMenuItem.Name = "xemDanhSáchLớpToolStripMenuItem";
-            this.xemDanhSáchLớpToolStripMenuItem.Size = new System.Drawing.Size(273, 32);
-            this.xemDanhSáchLớpToolStripMenuItem.Text = "Xem Danh Sách Lớp";
-            this.xemDanhSáchLớpToolStripMenuItem.Click += new System.EventHandler(this.xemDanhSáchLớpToolStripMenuItem_Click);
-            // 
             // mnNhapDiem
             // 
             this.mnNhapDiem.Name = "mnNhapDiem";
-            this.mnNhapDiem.Size = new System.Drawing.Size(273, 32);
+            this.mnNhapDiem.Size = new System.Drawing.Size(191, 32);
             this.mnNhapDiem.Text = "Nhập Điểm";
             this.mnNhapDiem.Click += new System.EventHandler(this.mnNhapDiem_Click);
             // 
@@ -614,7 +605,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem mnDSSV;
         private System.Windows.Forms.ToolStripMenuItem mnDSGV;
-        private System.Windows.Forms.ToolStripMenuItem xemDanhSáchLớpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem mnNVXemLichHoc;
         private System.Windows.Forms.ToolStripMenuItem mnNVXemLichDay;

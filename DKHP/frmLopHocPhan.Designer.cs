@@ -1229,7 +1229,7 @@
         private System.Windows.Forms.Button btnLuu;
         private System.Windows.Forms.Button btnHuy;
         public System.Windows.Forms.ComboBox cbTrangThai;
-        private System.Windows.Forms.ComboBox cbHocKy;
+        public System.Windows.Forms.ComboBox cbHocKy;
         public System.Windows.Forms.ComboBox cbMonHoc;
         private System.Windows.Forms.ComboBox cbGiangVien;
         private System.Windows.Forms.Label label13;
@@ -1298,7 +1298,7 @@
         private System.Windows.Forms.ComboBox cbMaGV;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.ComboBox cbNamHoc;
+        public System.Windows.Forms.ComboBox cbNamHoc;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnXoa;
     }

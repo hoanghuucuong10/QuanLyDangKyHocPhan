@@ -87,76 +87,70 @@ namespace DKHP
                 return ms.ToArray();
             }
         }
-
+       
         private void btnLuu_Click(object sender, EventArgs e)
         {
+            kt = 0;
             if (string.IsNullOrEmpty(tbxTen.Text))
             {
                 err.SetError(tbxTen, "Không được để trống");
-                kt = 0;
             }
             else
             {
-                if (!Regex.IsMatch(tbxTen.Text, @"^[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]*(\s[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸa-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]*)*$"))
+                if (!Regex.IsMatch(tbxTen.Text, @"^[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]*(\s[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸ][a-zàáâãèéếêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]*)*$"))
                 {
-
                     err.SetError(tbxTen, "Tên không hợp lệ");
-                    kt = 0;
                 }
                 else
                 {
                     err.SetError(tbxTen, "");
-                    kt = 1;
+                    kt++;
                 }
             }
 
+
             if (string.IsNullOrEmpty(tbxPhone.Text))
             {
-
                 err.SetError(tbxPhone, "Không được để trống");
-                kt = 0;
             }
             else
             {
                 if (!Regex.IsMatch(tbxPhone.Text, @"^[0][1-9][0-9]+$"))
                 {
-
                     err.SetError(tbxPhone, "Số điện thoại không hợp lệ");
-                    kt = 0;
                 }
                 else
                 {
                     err.SetError(tbxPhone, "");
-                    kt = 1;
+                    kt ++;
                 }
             }
+
             if (string.IsNullOrEmpty(tbxAddress.Text))
             {
                 err.SetError(tbxTen, "Không được để trống");
-                kt = 0;
+     
             }
             else
             {
                     err.SetError(tbxAddress, "");
-                    kt = 1;
+                    kt ++;
             }
+
              if (string.IsNullOrEmpty(tbxMail.Text))
             {
                 err.SetError(tbxTen, "Không được để trống");
-                kt = 0;
             }
             else
             {
                 if (!Regex.IsMatch(tbxMail.Text, @"^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"))
                 {
-
                     err.SetError(tbxMail, "Email không hợp lệ");
-                    kt = 0;
                 }
                 else
                 {
                     err.SetError(tbxMail, "");
-                    kt = 1;
+                    kt++;
                 }
             }
 
@@ -164,7 +158,7 @@ namespace DKHP
 
 
 
-            if (kt==1)
+            if (kt==4)
             {
                 if (taiKhoan is eSinhVien)
                 {
@@ -237,6 +231,7 @@ namespace DKHP
         private void btnHuy_Click(object sender, EventArgs e)
         {
             Loadform();
+            err.Clear();
         }
         string fileName = "";
         byte[] byteImage = { };

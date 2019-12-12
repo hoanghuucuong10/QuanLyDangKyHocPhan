@@ -327,7 +327,7 @@ namespace DKHP
                 {
                     foreach (eLichHoc_NhomThucHanh x in nhomTH.LichHoc_NhomThucHanh)
                     {
-                        if (lich.ID_LichHoc_NhomTH == x.ID_LichHoc_NhomTH)
+                        if (lich.ID_LichHoc_NhomTH == x.ID_LichHoc_NhomTH && lich.ID_LichHoc_NhomTH!=-1)
                             break;
                         if (x.TietHoc == "1-3" || x.TietHoc == "1-2" || x.TietHoc == "2-3" || x.TietHoc == "1-5")
                         {
@@ -362,7 +362,7 @@ namespace DKHP
                             }
                         }
                     }
-                    if (new LichHocBLL().CheckLichTrungGiangVien(cbGiangVien.SelectedValue.ToString().Trim(), cbNgayHoc.SelectedItem.ToString().Trim(), cbTietHoc.SelectedItem.ToString().Trim(), new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).HocKy.Value, new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).ID_NienKhoa.Value))
+                    if (new LichHocBLL().CheckLichTrungGiangVien(cbGiangVien.SelectedValue.ToString().Trim(), cbNgayHoc.SelectedItem.ToString().Trim(), cbTietHoc.SelectedItem.ToString().Trim(),int.Parse( frmLopHocPhan.instance.cbHocKy.SelectedItem.ToString()),int.Parse( frmLopHocPhan.instance.cbNamHoc.SelectedValue.ToString().Trim())))
                     {
                         f = 1;
                     }
@@ -431,7 +431,7 @@ namespace DKHP
 
                     if (nhomTH.LichHoc_NhomThucHanh[index].ID_LichHoc_NhomTH == -1)
                     {
-                        if (new LichHocBLL().CheckLichTrungGiangVien(cbGiangVien.SelectedValue.ToString().Trim(), cbNgayHoc.SelectedItem.ToString().Trim(), cbTietHoc.SelectedItem.ToString().Trim(), new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).HocKy.Value, new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).ID_NienKhoa.Value))
+                        if (new LichHocBLL().CheckLichTrungGiangVien(cbGiangVien.SelectedValue.ToString().Trim(), cbNgayHoc.SelectedItem.ToString().Trim(), cbTietHoc.SelectedItem.ToString().Trim(), int.Parse(frmLopHocPhan.instance.cbHocKy.SelectedItem.ToString()), int.Parse(frmLopHocPhan.instance.cbNamHoc.SelectedValue.ToString().Trim())))
                         {
                             fl = 1;
                         }
@@ -439,7 +439,7 @@ namespace DKHP
                     else
                     {
 
-                        if (new LichHocBLL().CheckLichUpdateGiangVien("TH", int.Parse(nhomTH.LichHoc_NhomThucHanh[index].ID_LichHoc_NhomTH.ToString().Trim()), cbGiangVien.SelectedValue.ToString().Trim(), cbNgayHoc.SelectedItem.ToString().Trim(), cbTietHoc.SelectedItem.ToString().Trim(), new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).HocKy.Value, new LopHocPhanBLL().GetLopHocPhanbyID(nhomTH.ID_LopHocPhan).ID_NienKhoa.Value))
+                        if (new LichHocBLL().CheckLichUpdateGiangVien("TH", int.Parse(nhomTH.LichHoc_NhomThucHanh[index].ID_LichHoc_NhomTH.ToString().Trim()), cbGiangVien.SelectedValue.ToString().Trim(), cbNgayHoc.SelectedItem.ToString().Trim(), cbTietHoc.SelectedItem.ToString().Trim(), int.Parse(frmLopHocPhan.instance.cbHocKy.SelectedItem.ToString()), int.Parse(frmLopHocPhan.instance.cbNamHoc.SelectedValue.ToString().Trim())))
                         {
                             fl = 1;
                         }
