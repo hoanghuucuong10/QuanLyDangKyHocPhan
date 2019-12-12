@@ -84,7 +84,7 @@ namespace DKHP
             }
 
             numNhom.Enabled = false;
-            if (frmLopHocPhan.instance.GroupboxThongTin.Text == "Thông Tin Lớp Học Phần")
+            if (frmLopHocPhan.instance.GroupboxThongTin.Text == "Thông Tin Lớp Học Phần" ||(frmLopHocPhan.instance.GroupboxThongTin.Text != "Thông Tin Lớp Học Phần" && frmLopHocPhan.instance.cbTrangThai.SelectedItem.ToString().Trim() != "Lên Kế Hoạch"))
             {
                 btnLuu.Visible = false;
                 btnXoa.Visible = false;

@@ -162,7 +162,7 @@ namespace DKHP
 
             cbHocKy.Enabled = true;
             cbNamHoc.Enabled = true;
-            cbTrangThai.Enabled = true;
+            cbTrangThai.Enabled = false;
             numSoTiet.Enabled = true;
             timeBD.Enabled = true;
             timeKT.Enabled = true;
@@ -193,17 +193,18 @@ namespace DKHP
             GroupboxThongTin.Text = "Chỉnh Sửa Lớp Học Phần";
 
             txtID.Enabled = false;
-            cbMonHoc.Enabled = false;
+
+            cbMonHoc.Enabled = true;
             cbGiangVien.Enabled = true;
-            cbMaMH.Enabled = false;
+            cbMaMH.Enabled = true;
             cbMaGV.Enabled = true;
 
-            cbHocKy.Enabled = false;
-            cbNamHoc.Enabled = false;
+            cbHocKy.Enabled = true;
+            cbNamHoc.Enabled = true;
             cbTrangThai.Enabled = true;
             numSoTiet.Enabled = true;
-            timeBD.Enabled = false;
-            timeKT.Enabled = false;
+            timeBD.Enabled = true;
+            timeKT.Enabled = true;
 
             btnHuyLuuLichHoc.Visible = false;
             btnLuuLichHoc.Visible = false;
@@ -221,6 +222,28 @@ namespace DKHP
             btnLuu.Visible = true;
             btnThem.Visible = false;
             btnSua.Visible = false;
+
+            if (cbTrangThai.SelectedItem.ToString() != "Lên Kế Hoạch") 
+            {
+                btnHuyLuuLichHoc.Visible = false;
+                btnLuuLichHoc.Visible = false;
+                btnThemLich.Visible = false;
+                btnSuaLich.Visible = false;
+                btnXoaLich.Visible = false;
+                btnAddNhomTH.Visible = false;
+                cbGiangVien.Enabled = false;
+                cbMaGV.Enabled = false;
+                numSoTiet.Enabled = false;
+                cbMaMH.Enabled = false;
+                cbMonHoc.Enabled = false;
+                cbHocKy.Enabled = false;
+                cbNamHoc.Enabled = false;
+                timeBD.Enabled = false;
+                timeKT.Enabled = false;
+
+
+            }
+
 
         }
         private void dgvLopHocPhan_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -315,22 +338,30 @@ namespace DKHP
         //xem, chỉnh sửa thông tin nhóm thực hành
         private void dgvNhomTH_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int rowSelected = dgvNhomTH.CurrentRow.Index;
-            eNhomThucHanh n = new eNhomThucHanh();
-            foreach (eNhomThucHanh x in lstTH)
+            try
             {
-                if (x.ID_NhomThucHanh == dgvNhomTH.Rows[rowSelected].Cells[0].Value.ToString().Trim())
+                int rowSelected = dgvNhomTH.CurrentRow.Index;
+                eNhomThucHanh n = new eNhomThucHanh();
+                foreach (eNhomThucHanh x in lstTH)
                 {
-                    n = x;
-                    break;
+                    if (x.ID_NhomThucHanh == dgvNhomTH.Rows[rowSelected].Cells[0].Value.ToString().Trim())
+                    {
+                        n = x;
+                        break;
+                    }
                 }
+                if (n.LichHoc_NhomThucHanh == null)
+                {
+                    n.LichHoc_NhomThucHanh = new LichHocBLL().GetLichHoc_NhomThucHanh(n.ID_NhomThucHanh);
+                }
+                frmNhomThucHanh frm = new frmNhomThucHanh(n);
+                frm.ShowDialog();
             }
-            if (n.LichHoc_NhomThucHanh == null)
+            catch (Exception)
             {
-                n.LichHoc_NhomThucHanh = new LichHocBLL().GetLichHoc_NhomThucHanh(n.ID_NhomThucHanh);
-            }
-            frmNhomThucHanh frm = new frmNhomThucHanh(n);
-            frm.ShowDialog();
+
+                throw;
+            } 
         }
 
         private void btnAddNhomTH_Click(object sender, EventArgs e)
@@ -352,6 +383,11 @@ namespace DKHP
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+            if(cbTrangThai.SelectedItem.ToString()=="Đã Mở Lớp" || cbTrangThai.SelectedItem.ToString() == "Đã Hủy")
+            {
+                MessageBox.Show("Lớp học phần đang trong trạng thái "+ cbTrangThai.SelectedItem.ToString().Trim()+" không thể chỉnh sửa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             instance.ChinhSua();
         }
         private void btnLuu_Click(object sender, EventArgs e)
@@ -408,17 +444,49 @@ namespace DKHP
                 if (GroupboxThongTin.Text == "Chỉnh Sửa Lớp Học Phần")
                 {
                     string trangThai = LHP.GetTrangThai(txtID.Text.Trim()).Trim();
+                    if(trangThai=="Đã Hủy")
+                    {
+                        bool kq = new LopHocPhanBLL().HuyLopHP(txtID.Text.Trim());
+                    }
                     switch (trangThai)
                     {
                         case "":
                             {
-                                break;
+                                MessageBox.Show("Vui lòng chọn trạng thái", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
                             }
                         case "Chờ Sinh Viên Đăng Ký":
                             {
+                                int soLuongDK = new DangKyHocPhanBLL().SoLuong(txtID.Text.Trim());
+                                if (soLuongDK > 0) // đã có sinh viên đăng ký chỉ có thể chuyển sang trạng thái đã mở lớp
+                                {
+                                    if (cbTrangThai.SelectedItem.ToString() == "Đã Mở Lớp")
+                                    {
+                                        if(soLuongDK<30)
+                                        {
+                                            MessageBox.Show("Lớp học phần không đủ số lượng đăng ký, không thể mở lớp", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            cbTrangThai.SelectedItem = "Chờ Sinh Viên Đăng Ký";
+                                            return;
+                                        }
+                                    }else if(cbTrangThai.SelectedItem.ToString()!="Chờ Sinh Viên Đăng Ký")
+                                    {
+                                        MessageBox.Show("Lớp học phần đã có sinh viên đăng ký, không thể chuyển sang trạng thái "+ cbTrangThai.SelectedItem.ToString(), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        cbTrangThai.SelectedItem = "Chờ Sinh Viên Đăng Ký";
+                                        return;
+                                    }
+                                }
+                                else //chưa có sinh viên đăng ký, có thể chuyển trạng thái (không thể chuyển sang đã mở lớp)
+                                {
+                                    if(cbTrangThai.SelectedItem.ToString() == "Đã Mở Lớp")
+                                    {
+                                        MessageBox.Show("Lớp học phần không đủ số lượng đăng ký, không thể mở lớp", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        cbTrangThai.SelectedItem = "Chờ Sinh Viên Đăng Ký";
+                                        return;
+                                    }
+                                }
                                 break;
                             }
-                        case "Đã Mở Lớp":
+                        case "Đã Mở Lớp"://đã mở lớp không thể hủy, không thể chuyển trạng thái
                             {
                                 if (cbTrangThai.SelectedItem.ToString() != "Đã Mở Lớp")
                                 {
@@ -427,7 +495,6 @@ namespace DKHP
                                     return;
                                 }
                                 break;
-
                             }
                         case "Đã Hủy":
                             {
@@ -440,8 +507,23 @@ namespace DKHP
                                 }
                                 break;
                             }
+
+                        case "Lên Kế Hoạch":
+                            {
+                                if (cbTrangThai.SelectedItem.ToString() == "Đã Mở Lớp")
+                                {
+                                    MessageBox.Show("Lớp học phần đang lên kế hoạch không thể chuyển sang trạng thái "+ cbTrangThai.SelectedItem.ToString(), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    cbTrangThai.SelectedItem = "Lên Kế Hoạch";
+                                    return;
+                                }
+                                break;
+                            }
                     }
                 }
+                
+
+
+
                 new LopHocPhanBLL().EditLopHocPhan(lopHP);
 
                 foreach (eNhomThucHanh m in lstTH) //thêm nhóm thực hành
@@ -994,6 +1076,32 @@ namespace DKHP
         private void cbTrangThai_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void cbMaGV_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            if(cbTrangThai.SelectedItem.ToString().Trim()=="Lên Kế Hoạch"|| cbTrangThai.SelectedItem.ToString().Trim() == "Đã Hủy")
+            {
+                bool kq = new LopHocPhanBLL().XoaLopHocPhan(txtID.Text.Trim());
+                if(kq==true)
+                {
+                    MessageBox.Show("Xóa thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadDanhSachLopHocPhan(new LopHocPhanBLL().GetAllLopHocPhan());
+                    this.XemThongTin();
+                }
+                else
+                {
+                    MessageBox.Show("Xóa không thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }else
+            {
+                MessageBox.Show("Lớp học phần trong trạng thái "+cbTrangThai.SelectedItem.ToString()+" không thể xóa", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

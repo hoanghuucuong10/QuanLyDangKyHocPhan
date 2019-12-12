@@ -65,7 +65,25 @@ namespace DAL
             }).OrderBy(gs => gs.ID_LopHocPhan).ToList();
             return lst;
         }
+        public List<eLopHocPhan> SearchLopHocPhanDK(string maLopHocPhan, string tenMonHoc, string hocKy, string namHoc)
+        {
+            List<eLopHocPhan> lst = db.LopHocPhans.Where(f => f.ID_LopHocPhan.Contains(maLopHocPhan) && f.HocPhan.TenMonHoc.Contains(tenMonHoc) && f.HocKy.ToString().Contains(hocKy) && f.NienKhoa.NienKhoa1.Contains(namHoc) && f.TrangThai == "Chờ Sinh Viên Đăng Ký").Select(x => new eLopHocPhan
+            {
+                ID_LopHocPhan = x.ID_LopHocPhan,
+                ID_HocPhan = x.ID_HocPhan,
+                ID_NhanVienPDT = x.ID_NhanVienPDT,
+                ID_GiangVien = x.ID_GiangVien,
+                HocKy = x.HocKy.Value,
+                ID_NienKhoa = x.ID_NienKhoa,
+                SoTiet = x.SoTiet,
+                TrangThai = x.TrangThai,
+                NgayBatDau = x.NgayBatDau,
+                NgayKetThuc = x.NgayKetThuc,
+                SoLuong = db.DangKyHocPhans.Where(t => t.ID_LopHocPhan == x.ID_LopHocPhan).Count(),
 
+            }).OrderBy(gs => gs.ID_LopHocPhan).ToList();
+            return lst;
+        }
         public int EditLopHocPhan( eLopHocPhan x)
         {
             try
@@ -199,6 +217,55 @@ namespace DAL
                 return x.TrangThai;
             }
             return "";
+        }
+        public bool HuyLopHP(string idLHP)
+        {
+           
+            try
+            {
+                List<Diem> lstDiem = db.Diems.Where(x => x.ID_LopHocPhan == idLHP).ToList();
+                List<DangKyHocPhan> lstDK = db.DangKyHocPhans.Where(x => x.ID_LopHocPhan == idLHP).ToList();
+
+                db.Diems.RemoveRange(lstDiem);
+                db.DangKyHocPhans.RemoveRange(lstDK);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
+        public bool XoaLopHocPhan(string idLHP)
+        {
+            try
+            {
+                List<Diem> lstDiem = db.Diems.Where(x => x.ID_LopHocPhan == idLHP).ToList();
+                List<DangKyHocPhan> lstDK = db.DangKyHocPhans.Where(x => x.ID_LopHocPhan == idLHP).ToList();
+                List<LichHoc_LopHocPhan> lstLichLT = db.LichHoc_LopHocPhan.Where(x => x.ID_LopHocPhan == idLHP).ToList();
+                List<NhomThucHanh> lstNhomTH = db.NhomThucHanhs.Where(x => x.ID_LopHocPhan == idLHP).ToList();
+                foreach(NhomThucHanh t in lstNhomTH)
+                {
+                    List<LichHoc_NhomThucHanh> lstLichTH = db.LichHoc_NhomThucHanh.Where(x => x.ID_NhomThucHanh == t.ID_NhomThucHanh).ToList();
+                    db.LichHoc_NhomThucHanh.RemoveRange(lstLichTH);
+                }
+
+                db.Diems.RemoveRange(lstDiem);
+                db.DangKyHocPhans.RemoveRange(lstDK);
+                db.LichHoc_LopHocPhan.RemoveRange(lstLichLT);
+                db.NhomThucHanhs.RemoveRange(lstNhomTH);
+
+                LopHocPhan s = db.LopHocPhans.Where(c => c.ID_LopHocPhan == idLHP).FirstOrDefault();
+                db.LopHocPhans.Remove(s);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
         }
     }
 }

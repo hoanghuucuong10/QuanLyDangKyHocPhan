@@ -52,7 +52,7 @@ namespace DKHP
         }
         public void LoadDSLopHocPhan()
         {
-            lstLopHocPhan = new LopHocPhanBLL().SearchLopHocPhan("", "", cbHocKiSearch.SelectedItem.ToString().Trim(), cbNamHocSearch.Text.ToString().Trim()).Select(t => new LopHocPhanViewModels
+            lstLopHocPhan = new LopHocPhanBLL().SearchLopHocPhanDK("", "", cbHocKiSearch.SelectedItem.ToString().Trim(), cbNamHocSearch.Text.ToString().Trim()).Select(t => new LopHocPhanViewModels
             {
                 HocKy = t.HocKy,
                 ID_GiangVien = t.ID_GiangVien.Trim(),

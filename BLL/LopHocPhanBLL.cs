@@ -7,7 +7,7 @@ using DAL;
 using Entities;
 namespace BLL
 {
-   public class LopHocPhanBLL
+    public class LopHocPhanBLL
     {
         LopHocPhanDAL LHP = new LopHocPhanDAL();
         public List<eLopHocPhan> GetAllLopHocPhan()
@@ -22,20 +22,20 @@ namespace BLL
         {
             return LHP.GetLopHocPhanByIDNhomTH(id);
         }
-        public List<eLopHocPhan> GetAllLopHocPhanGiangVien(string idGV, int hocKy,string namHoc)
+        public List<eLopHocPhan> GetAllLopHocPhanGiangVien(string idGV, int hocKy, string namHoc)
         {
             return LHP.GetAllLopHocPhanGiangVien(idGV, hocKy, namHoc);
         }
 
         public int EditLopHocPhan(eLopHocPhan x)
         {
-            
+
             return LHP.EditLopHocPhan(x);
         }
-        public int AddLopHocPhan( eLopHocPhan x)
+        public int AddLopHocPhan(eLopHocPhan x)
         {
 
-            return LHP.AddLopHocPhan( x);
+            return LHP.AddLopHocPhan(x);
         }
 
         public string CreateID()
@@ -46,8 +46,13 @@ namespace BLL
 
         public List<eLopHocPhan> SearchLopHocPhan(string maLopHocPhan, string tenMonHoc, string hocKy, string namHoc)
         {
-           
-            return LHP.SearchLopHocPhan(maLopHocPhan,tenMonHoc,hocKy,namHoc);
+
+            return LHP.SearchLopHocPhan(maLopHocPhan, tenMonHoc, hocKy, namHoc);
+        }
+        public List<eLopHocPhan> SearchLopHocPhanDK(string maLopHocPhan, string tenMonHoc, string hocKy, string namHoc)
+        {
+
+            return LHP.SearchLopHocPhanDK(maLopHocPhan, tenMonHoc, hocKy, namHoc);
         }
         public List<eLopHocPhan> GetAllLopHocPhanSinhVien(string idSV, int hocKy, string namHoc)
         {
@@ -56,6 +61,14 @@ namespace BLL
         public string GetTrangThai(string id)
         {
             return LHP.GetTrangThai(id);
+        }
+        public bool HuyLopHP(string idLHP)
+        {
+            return LHP.HuyLopHP(idLHP);
+        }
+        public bool XoaLopHocPhan(string idLHP)
+        {
+            return LHP.XoaLopHocPhan(idLHP);
         }
     }
 }
